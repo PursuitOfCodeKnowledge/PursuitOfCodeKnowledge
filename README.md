@@ -1,1 +1,1 @@
-About Terminal Linux
+About game for Terminal Linux
