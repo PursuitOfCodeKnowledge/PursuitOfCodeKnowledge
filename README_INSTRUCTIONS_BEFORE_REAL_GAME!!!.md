@@ -17,6 +17,21 @@
  Вперед, к непознанным вершинам и увлекательным открытиям! Каждый матч — это новая возможность не просто одержать победу, но и научиться чему-то новому, погружаясь в удивительный мир возможностей,
  который предлагает терминал Linux.
 
+Да и забыл сказать, когда откроешь терминал в первый раз проверь что у тебя с правами на учётку, потому что тебе нужно будет запускать с sudo:
+команда whoami покажет как у тебя учетка называется например:
+whoami
+sergey
+Значит учётка у тебя sergey называется, дальше введи команду groups чтобы посмотреть в каких группах состоишь, должна быть группа sudo там:
+groups sergey
+после этой команды у тебя появятся разные группы и посмотри если есть sudo, если нет sudo,
+ то выполни команду su и введи пароль от root(своей учётки sergey, если пароли не делал разными для root и sergey) и не забудь в терминале не отображаются пароли, когда будешь вводить их:
+ su
+После того как зайдёшь под root, выполни команду чтобы добавить пользователя своего sergey в группу sudo:
+sudo usermod -aG sudo sergey
+Затем перезагрузи компьютер или ноутбук, или просто выйди из учетки и заново зайди и после этого открой терминал и введи команду sudo whoami, должно отобразиться root:
+sudo whoami
+root
+
 А теперь открывай терминал, и установи p7zip-full (если он еще не установлен) в терминале:
 sudo apt update
 sudo apt install p7zip-full
@@ -43,6 +58,22 @@ Never underestimate the power of a game that brings together not only technology
 So, may the power come with us — the power of knowledge, creativity and, of course, mind games! Dare to challenge both yourself and your opponents in this amazing code chase. 
  Forward to unknown peaks and exciting discoveries! Each match is a new opportunity not only to win, but also to learn something new, immersing yourself in an amazing world of possibilities., 
  which offers a Linux terminal.
+
+And I forgot to tell you, when you open the terminal for the first time, check that you have account rights, because you will need to run with sudo.:
+the whoami command will show you what your account is called, for example:
+whoami
+sergey
+So your account is called sergey, then enter the groups command to see which groups you belong to, there should be a sudo group there.:
+groups sergey
+after this command, you will have different groups and see if there is sudo, if there is no sudo,
+ then run the su command and enter the password from root (your sergey account, if you did not make the passwords different for root and sergey)
+ and do not forget that passwords are not displayed in the terminal when you enter them:
+su
+After you log in as root, run the command to add your sergey user to the sudo group:
+sudo usermod -aG sudo sergey
+Then restart your computer or laptop, or just log out and log in again, and after that open the terminal and enter the command sudo whoami, root should be displayed:
+sudo whoami
+root
 
 Now open the terminal and install p7zip-full (if it is not already installed) in the terminal:
 sudo apt update
