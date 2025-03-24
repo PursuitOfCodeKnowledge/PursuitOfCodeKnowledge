@@ -1,0 +1,38 @@
+Чтобы выполнить задание:
+Первое нужно посмотреть где ты находишься, используй команду pwd:
+pwd
+К примеру она тебе покажет путь /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Black1, получается ты сейчас находишься в Black1, 
+тебе нужно вернуться назад используй команду cd ..:
+cd ..
+После этого набери команду ls или ls -a и посмотри что находится вокруг тебя какие файлы и директории:
+ls
+или
+ls -a
+Затем набери команду mkdir чтобы создать директорию Black:
+mkdir Black
+Затем перейди директорию в Black1:
+cd Black1
+Потом перенеси файл BLACK1.txt в директорию Black:
+mv BLACK1.txt ../Black/
+После скопируй файл файл BLACK1_ANSWER.txt в директорию Black:
+cp BLACK1_ANSWER.txt ../Black/
+Затем проверь что скопировал файл BLACK1_ANSWER.txt в директорию Black при помощи команды ls:
+ls ../Black/BLACK1_ANSWER.txt
+Потом удали файл BLACK1_ANSWER.txt при помощи команды rm:
+rm BLACK1_ANSWER.txt
+или
+rm -i BLACK1_ANSWER.txt
+или
+rm -f BLACK1_ANSWER.txt
+После выйди из этой директории Black1:
+cd ..
+Затем удали директорию Black1:
+rm -r Black1
+После убедись что удалил директорию:
+ls 
+или
+ls -a
+Потом дальше иследуй другую директорию, например Black2
+cd Black2
+
+
