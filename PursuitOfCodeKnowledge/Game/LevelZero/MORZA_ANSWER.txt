@@ -22,7 +22,16 @@ nano LawOfGod_decrypt.txt
 cd Universe1
 И дальше смотрим какие здесь есть директории в Universe1 при помощи команды:
 ls
-
+MilkyWayGalaxy
+cd MilkyWayGalaxy
+ls
+PlanetEarth
+cd PlanetEarth 
+ls
+SifirisLumoscifr
+cd SifirisLumoscifr
+или
+cd MilkyWayGalaxy/PlanetEarth/SifirisLumoscifr
 
 To decrypt the file, first you need to install Python:
 sudo apt update
@@ -48,3 +57,13 @@ After unpacking the archive, the Universe1 directory will appear, go to this dir
 cd Univere1
 And then we look at what directories are here in Universe1 using the command:
 ls
+MilkyWayGalaxy                             
+cd MilkyWayGalaxy                             
+ls
+PlanetEarth                 
+cd PlanetEarth                  
+ls
+SifirisLumoscifr
+cd SifirisLumoscifr
+or
+cd MilkyWayGalaxy/PlanetEarth/SifirisLumoscifr
