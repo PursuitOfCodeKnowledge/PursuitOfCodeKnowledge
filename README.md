@@ -1,3 +1,4 @@
+## Реальная Игра Погоня За Кодовым Знанием для Реального Терминала Линукс в качестве примера Debian 12 и других систем Линукс в будущем!
 ## Real Game PursuitOfCodeKnowledge for Real Terminal Linux as example Debian 12 and other Linux system in the future! 
 
 <!--
