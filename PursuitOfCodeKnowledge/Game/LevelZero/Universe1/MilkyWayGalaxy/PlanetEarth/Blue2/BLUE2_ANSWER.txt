@@ -1,0 +1,335 @@
+Чтобы выполнить задание:
+Первое нужно посмотреть где ты находишься, используй команду pwd:
+pwd
+К примеру она тебе покажет путь /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Blue2, получается ты сейчас находишься в Blue2, 
+тебе нужно вернуться назад используй команду cd ..:
+cd ..
+После этого набери команду ls или ls -a и посмотри что находится вокруг тебя какие файлы и директории:
+ls
+или
+ls -a
+Затем набери команду mkdir чтобы создать директорию Blue (в том случае если ещё не создавал директорию Blue):
+mkdir Blue
+Затем перейди директорию в Blue2:
+cd Blue2
+Потом скопируй файл BLUE2.txt в директорию Blue:
+cp BLUE2.txt ../Blue/
+Затем проверь что скопировал файл BLUE2.txt в директорию Blue при помощи команды ls:
+ls ../Blue/BLUE2.txt
+После перенеси  файл файл BLUE2_ANSWER.txt в директорию Blue:
+mv BLUE2_ANSWER.txt ../Blue/
+Потом удали файл BLUE2.txt при помощи команды rm:
+rm BLUE2.txt
+или
+rm -i BLUE2.txt
+или
+rm -f BLUE2.txt
+После выйди из этой директории Blue2:
+cd ..
+Затем удали директорию Blue2:
+rm -r Blue2
+После убедись что удалил директорию:
+ls 
+или
+ls -a
+
+Если исследовал уже директорию Blue1, то подключаемся к postgres: 
+sudo -u postgres psql postgres
+
+Вводим пароль от пользователя postgres, который мы создавали до этого
+
+Теперь посмотрим какие базы данных при помощи команды \l:
+\l
+
+Видим demo и переходим в неё при помощи команды \c:
+\c demo
+
+Потом можно посмотреть какие таблицы в базе данных demo:
+\dt
+
+Затем можно посмотреть подробнее о таблице, например bookings(столбцы и ключи):
+\d bookings
+
+Потом можно посмотреть подробнее о таблице, например tickets(столбцы и ключи):
+\d tickets
+
+Затем выполняем выборку данных из двух таблиц bookings и tickets из базы данных demo:
+1) Количество билетов, купленных по каждому бронированию из таблицы tickets.:
+SELECT book_ref, COUNT(*) AS "Количество билетов"
+FROM tickets
+GROUP BY book_ref
+ORDER BY "Количество билетов" DESC;
+Да и незабудь Старина список большой используй стрелки вверх,вниз, page up, page down, home или end
+ и чтобы выйти из списка нажми клавишу q(только Старина не забудь на английской раскладке  должна быть клавиатура).
+
+2) Сумма всех бронирований за каждый день из таблицы bookings.:
+SELECT DATE(book_date) AS day, SUM(total_amount) AS "Сумма всех бронирований за день"
+FROM bookings
+GROUP BY day
+ORDER BY day DESC;
+Да и незабудь Старина список большой используй стрелки вверх,вниз, page up, page down, home или end 
+ и чтобы выйти из списка нажми клавишу q(только Старина не забудь на английской раскладке  должна быть клавиатура).
+
+3) Количество бронирований с суммой выше 500000 из таблицы bookings.
+SELECT COUNT(*) AS "Количество бронирований"
+FROM bookings
+WHERE total_amount > 500000;
+
+4) День с наибольшим числом выписанных билетов из таблиц bookings и tickets.
+SELECT DATE(b.book_date) AS day, COUNT(t.ticket_no) AS "Количество выписанных билетов"
+FROM bookings b
+JOIN tickets t ON b.book_ref = t.book_ref
+GROUP BY day
+ORDER BY "Количество выписанных билетов" DESC
+LIMIT 1;
+
+5) Список имен пассажиров, оформивших больше одного билета из таблицы tickets.
+SELECT passenger_name, COUNT(*) AS "Количество билетов"
+FROM tickets
+GROUP BY passenger_name
+HAVING COUNT(*) > 1
+ORDER BY "Количество билетов" DESC;
+
+6) Выручка брони по каждому пассажиру из таблиц bookings и tickets.
+SELECT t.passenger_name, SUM(b.total_amount) AS "Выручка"
+FROM tickets t
+JOIN bookings b ON t.book_ref = b.book_ref
+GROUP BY t.passenger_name
+ORDER BY "Выручка" DESC;
+
+7) Количество билетов по первым цифрам номера паспорта (по первым 2 символам passenger_id) из tickets.
+SELECT SUBSTRING(passenger_id, 1, 2) AS id_prefix, COUNT(*)
+FROM tickets
+GROUP BY id_prefix
+ORDER BY COUNT(*) DESC; 
+
+8) ТОП-5 самых больших бронирований (по total_amount) из таблицы bookings.
+SELECT *                                                 
+FROM bookings
+ORDER BY total_amount DESC
+LIMIT 5;
+
+9) Количество бронирований и средний чек по месяцам из таблицы bookings.
+SELECT
+  DATE_TRUNC('month', book_date) AS "Месяц",
+  COUNT(*) AS "Количество бронирований",
+  AVG(total_amount) AS "Средний чек"
+FROM bookings
+GROUP BY "Месяц"
+ORDER BY "Месяц" DESC;
+
+10) Количество билетов и сумма бронирований для каждого book_ref(Объединяем данные в одну строку для каждого заказа) из таблиц bookings и tickets.
+SELECT
+  b.book_ref,                               
+  COUNT(t.ticket_no) AS "Количество билетов",
+  b.total_amount
+FROM bookings b
+LEFT JOIN tickets t ON b.book_ref = t.book_ref
+GROUP BY b.book_ref, b.total_amount
+ORDER BY "Количество билетов" DESC;
+
+11) Количество уникальных клиентов, указавших email (jsonb -> email)(Извлекаем email из contact_data) из таблицы tickets.
+SELECT COUNT(DISTINCT t.passenger_id)
+FROM tickets t
+WHERE t.contact_data ? 'email';
+
+12) Количество бронирований с более чем 3 билетами из таблицы tickets.
+SELECT t.book_ref, COUNT(*) AS "Количество билетов"
+FROM tickets t
+GROUP BY t.book_ref
+HAVING COUNT(*) > 3
+ORDER BY "Количество билетов" DESC;
+
+13) агрегировать выручку по дням только для бронирований с определённым количеством билетов(2 билета) из таблиц bookings и tickets.
+SELECT
+  "Бронь_день",
+  SUM(total_amount) AS "Выручка_брони_день"
+FROM (
+  SELECT
+    DATE(b.book_date) AS "Бронь_день",
+    b.total_amount,
+    COUNT(t.ticket_no) AS "Количество билетов"
+  FROM bookings b
+  JOIN tickets t ON b.book_ref = t.book_ref
+  GROUP BY b.book_ref, b.book_date, b.total_amount
+) subq
+WHERE "Количество билетов" >= 2
+GROUP BY "Бронь_день"
+ORDER BY "Выручка_брони_день" DESC;
+Да и незабудь Старина список большой используй стрелки вверх,вниз, page up, page down, home или end
+ и чтобы выйти из списка нажми клавишу q(только Старина не забудь на английской раскладке  должна быть клавиатура).
+
+После этого выходим из базы данных demo:
+\q
+
+Потом дальше иследуй другую директорию, например Blue3:
+cd Blue3
+
+To complete the task:
+First you need to see where you are, use the pwd command:
+pwd
+For example, she'll show you the way  /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Blue2
+ it turns out that you are currently in Blue2,
+you need to go back using the cd .. :
+cd ..
+After that, type the command ls or ls -a and see what is around you, which files and directories:
+ls
+or
+ls -a
+Then type the mkdir command to create
+the Blue directory(if you didn't create Blue directory):
+mkdir Blue
+Then go to the directory in Blue2:
+cd Blue2
+Then  copy the file BLUE2.txt to the Blue:
+cp BLUE2.txt ../Blue/
+Then check that you copied the file. BLUE2.txt to the Blue directory using the command ls:
+ls ../Blue/BLUE2.txt
+Then transfer the file BLUE2_ANSWER.txt to the Blue:
+mv BLUE2_ANSWER.txt ../Blue/
+Then delete the file BLUE2.txt using the rm command:
+rm BLUE2.txt
+or
+rm -i BLUE2.txt
+or
+rm -f BLUE2.txt
+Then exit this directory Blue2:
+cd ..
+Then delete the Blue2 directory:
+rm -r Blue2
+After that, make sure that you have deleted the directory:
+ls
+or
+ls -a
+
+If you have already explored the Blue1 directory, then we connect to postgres:
+sudo -u postgres psql postgres
+
+We enter the password from the postgres user that we created before
+
+Now let's look at which databases using the \l command:
+\l
+
+We see the demo and go to it using the \c command:
+\c demo
+
+Then you can see which tables are in the demo database.:
+\dt
+
+Then you can view more information about the table, for example bookings(columns and keys):
+\d bookings
+
+Then you can see more details about the table, for example tickets(columns and keys):
+\d tickets
+
+Then we select data from two tables bookings and tickets from the demo database:
+1) The number of tickets purchased for each booking from the tickets table.:
+SELECT book_ref, COUNT(*) AS "Number of tickets"
+FROM tickets
+GROUP BY book_ref
+ORDER BY "Number of tickets" DESC;
+And don't forget, Old Man, the list is big. Use the up, down, page up, page down, home or end arrows
+and press the q key to exit the list (just don't forget, Old man, there should be a keyboard on the English layout).
+
+2) The sum of all bookings for each day from the bookings table.:
+SELECT DATE(book_date) AS day, SUM(total_amount) AS "Total of all bookings for the day"
+FROM bookings
+GROUP BY day
+ORDER BY day DESC;
+And don't forget, Old Man, the list is big. Use the up, down, page up, page down, home or end arrows
+and press the q key to exit the list (just don't forget, Old man, there should be a keyboard on the English layout).
+
+3) The number of bookings with an amount above 500,000 from the bookings table.
+SELECT COUNT(*) AS "Number of bookings"
+FROM bookings
+WHERE total_amount > 500000;
+
+4) The day with the highest number of tickets issued from the bookings and tickets tables.
+SELECT DATE(b.book_date) AS day, COUNT(t.ticket_no) AS "Number of tickets issued"
+FROM bookings b
+JOIN tickets t ON b.book_ref = t.book_ref
+GROUP BY day
+ORDER BY "Number of tickets issued" DESC
+LIMIT 1;
+
+5) A list of names of passengers who have issued more than one ticket from the tickets table.
+SELECT passenger_name, COUNT(*) AS "Number of tickets"
+FROM tickets
+GROUP BY passenger_name
+HAVING COUNT(*) > 1
+ORDER BY "Number of tickets" DESC;
+
+6) Booking revenue for each passenger from the bookings and tickets tables.
+SELECT t.passenger_name, SUM(b.total_amount) AS "Revenue"
+FROM tickets t
+JOIN bookings b ON t.book_ref = b.book_ref
+GROUP BY t.passenger_name
+ORDER BY "Revenue" DESC;
+
+7) The number of tickets according to the first digits of the passport number (according to the first 2 characters of the passer_id) from tickets.
+SELECT SUBSTRING(passenger_id, 1, 2) AS id_prefix, COUNT(*)
+FROM tickets
+GROUP BY id_prefix
+ORDER BY COUNT(*) DESC; 
+
+8) TOP 5 largest bookings (by total_amount) from the bookings table.
+SELECT *
+FROM bookings
+ORDER BY total_amount DESC
+LIMIT 5;
+
+9) The number of bookings and the average monthly receipt from the bookings table.
+SELECT
+  DATE_TRUNC('month', book_date) AS "Month",
+  COUNT(*) AS "Number of bookings",
+AVG(total_amount) AS "Average receipt"
+FROM bookings
+GROUP BY "Month"
+ORDER BY "Month" DESC;
+
+10) The number of tickets and the amount of bookings for each book_ref(Combining the data into one row for each order) from the bookings and tickets tables.
+SELECT
+  b.book_ref,
+  COUNT(t.ticket_no) AS "Number of tickets",
+b.total_amount
+FROM bookings b
+LEFT JOIN tickets t ON b.book_ref = t.book_ref
+GROUP BY b.book_ref, b.total_amount
+ORDER BY "Number of tickets" DESC;
+
+11) The number of unique clients who have specified email (jsonb -> email)(Extracting the email from contact_data) from the tickets table.
+SELECT COUNT(DISTINCT t.passenger_id)
+FROM tickets t
+WHERE t.contact_data ? 'email';
+
+12) The number of bookings with more than 3 tickets from the tickets table.
+SELECT t.book_ref, COUNT(*) AS "Number of tickets"
+FROM tickets t
+GROUP BY t.book_ref
+HAVING COUNT(*) > 3
+ORDER BY "Number of tickets" DESC;
+
+13) aggregate revenue by day only for bookings with a certain number of tickets (2 tickets) from the bookings and tickets tables.
+SELECT
+  "Booking_day",
+  SUM(total_amount) AS "Revenue Everyday"
+FROM (
+SELECT
+    DATE(b.book_date) AS "Booking_day",
+    b.total_amount,
+    COUNT(t.ticket_no) AS "Number of tickets"
+FROM bookings b
+JOIN tickets t ON b.book_ref = t.book_ref
+GROUP BY b.book_ref, b.book_date, b.total_amount
+) subq
+WHERE "Number of tickets" >= 2
+GROUP BY "Booking_day"
+ORDER BY "Revenue Everyday" DESC;
+And don't forget, Old Man, the list is big. Use the up, down, page up, page down, home or end arrows
+and press the q key to exit the list (just don't forget, Old man, there should be a keyboard on the English layout).
+
+After that, we exit the demo database.:
+\q
+
+Then follow another directory, for example Blue3:
+cd Blue3
