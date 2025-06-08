@@ -1,0 +1,192 @@
+Чтобы выполнить задание:
+Первое нужно посмотреть где ты находишься, используй команду pwd:
+pwd
+К примеру она тебе покажет путь /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Blue5, получается ты сейчас находишься в Blue5, 
+тебе нужно вернуться назад используй команду cd ..:
+cd ..
+После этого набери команду ls или ls -a и посмотри что находится вокруг тебя какие файлы и директории:
+ls
+или
+ls -a
+Затем набери команду mkdir чтобы создать директорию Blue (в том случае если ещё не создавал директорию Blue):
+mkdir Blue
+Затем перейди директорию в Blue5:
+cd Blue5
+Потом перенеси файл BLUE5.txt в директорию Blue:
+mv BLUE5.txt ../Blue/
+После скопируй файл файл BLUE5_ANSWER.txt в директорию Blue:
+cp BLUE5_ANSWER.txt ../Blue/
+Затем проверь что скопировал файл BLUE5_ANSWER.txt в директорию Blue при помощи команды ls:
+ls ../Blue/BLUE5_ANSWER.txt
+Потом удали файл BLUE5_ANSWER.txt при помощи команды rm:
+rm BLUE5_ANSWER.txt
+или
+rm -i BLUE5_ANSWER.txt
+или
+rm -f BLUE5_ANSWER.txt
+После выйди из этой директории Blue5:
+cd ..
+Затем удали директорию Blue5:
+rm -r Blue5
+После убедись что удалил директорию:
+ls 
+или
+ls -a
+Если исследовал уже директорию Blue4,то входим в директорию LearnPython(выполняли задание из Black5):
+cd LearnPython
+После создаем файл при помощи команды touch:
+touch FUNCTiONS_AND_ARGUMENTS.py
+После создания файла открываем его в текстовом редакторе nano в терминале:
+nano FUNCTIONS_AND_ARGUMENTS.py
+После открытия файла в редакторе пишем:
+""" Функции и Аргументы """
+def square(x):
+	return x ** 2
+
+result = square(4)
+print("Квадрат числа 4:", result)  # Вывод: Квадрат числа 4: 16
+
+""" Аргументы функции """
+def multiply(a, b):
+	return a * b
+
+product = multiply(3, 5)
+print(f"Произведение: {product}")  # Вывод: Произведение: 15
+
+""" Аргументы функции по умолчанию """
+def greet(name="Искусственный интеллект"):
+	return f"Привет, {name}!"
+
+print(greet())	# Вывод: Привет, Исскуственный интелект!
+print(greet("Artificial Intelligence"))	# Вывод: Привет, Artificial Intelligence!
+
+""" Неопределенное количество аргументов """
+def add_numbers(*args):
+	return sum(args)
+
+print("Сумма:", add_numbers(1, 2, 3, 4, 5))  # Вывод: Сумма: 15
+
+def print_info(**kwargs):
+	for key, value in kwargs.items():
+		print(f"{key}: {value}")
+
+print_info(name="Искуственный интеллект", age=18)  # Вывод: name: Искусственный интеллект, age: 18
+
+""" Замыкания """
+def make_adder(x):
+	def adder(y):
+		return x + y
+	return adder
+
+add_five = make_adder(5)
+print(add_five(10))  # Вывод: 15
+
+""" Лямбда-функции """
+double = lambda x: x * 2
+print(double(10))  # Вывод: 20
+
+Да Старина и не забудь, когда копируешь код и вставляешь код, не забывай проверять отступы при помощи клавиши tab например в конструкции if(данные могут не отобразиться и выводиться будет ошибка),
+ затем сохраняем файл нажимая клавиши ctrl + o нажимаем enter и выходим из файла ctrl + x
+После запускаем файл в терминале:
+python3 FUNCTIONS_AND_OPERATORS.py
+Дальше выйди из папки LearnPython:
+cd ..
+Потом иследуй другую директорию, например Blue6
+cd Blue6
+
+To complete the task:
+First you need to see where you are, use the pwd command:
+pwd
+For example, she'll show you the way  /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Blue5
+ it turns out that you are currently in Blue5,
+you need to go back using the cd .. :
+cd ..
+After that, type the command ls or ls -a and see what is around you, which files and directories:
+ls
+or
+ls -a
+Then type the mkdir command to create
+the Blue directory (if you didn't create Blue directory):
+ mkdir Blue
+Then go to the directory in Blue5:
+cd Blue5
+Then transfer the file. BLUE5.txt to the Blue: 
+mv BLUE5.txt ../Blue/
+Then copy the file BLUE5_ANSWER.txt to the Blue:
+ cp BLUE5_ANSWER.txt ../Blue/
+Then check that you copied the file. BLUE5_ANSWER.txt to the Blue directory using the command ls:
+ls ../Blue/BLUE5_ANSWER.txt
+Then delete the file BLUE5_ANSWER.txt using the rm command:
+rm BLUE5_ANSWER.txt
+or
+rm -i BLUE5_ANSWER.txt
+or
+rm -f BLUE5_ANSWER.txt
+Then exit this directory Blue5:
+cd ..
+Then delete the Blue5 directory:
+rm -r Blue5
+After that, make sure that you have deleted the directory:
+ls
+or
+ls -a
+If you have already explored the Blue4 directory, then we enter the LearnPython directory (we performed the task from Black5):
+cd LearnPython
+After that, we create the file using the touch command:
+touch FUNCTIONs_AND_ARGUMENTS.py
+After opening the file in the editor, we write:
+""" Functions and Arguments """
+def square(x):
+        return x ** 2
+
+result = square(4)
+print("Квадрат числа 4:", result)  # Output: Квадрат числа 4: 16
+
+""" Arguments """
+def multiply(a, b):
+        return a * b
+
+product = multiply(3, 5)
+print(f"Произведение: {product}")  # Output: Произведение: 15
+
+""" Arguments by defaults """
+def greet(name="Искусственный интеллект"):
+        return f"Привет, {name}!"
+
+print(greet())  # Вывод: Привет, Исскуственный интелект!
+print(greet("Artificial Intelligence")) # Output: Привет, Artificial Intelligence!
+
+""" indefinite number of arguments """
+def add_numbers(*args):
+        return sum(args)
+
+print("Сумма:", add_numbers(1, 2, 3, 4, 5))  # Output: Сумма: 15
+
+def print_info(**kwargs):
+        for key, value in kwargs.items():
+                print(f"{key}: {value}")
+
+print_info(name="Искуственный интеллект", age=18)  # Output: name: Искусственный интеллект, age: 18
+
+""" Short circuits """
+def make_adder(x):
+        def adder(y):
+                return x + y
+        return adder
+
+add_five = make_adder(5)
+print(add_five(10))  # Output: 15
+
+""" Lambda-function """
+double = lambda x: x * 2
+print(double(10))  # Output: 20
+
+Yes, Old man, and don't forget, when you copy the code and paste the code, don't forget to check the margins using the tab key,
+ for example, in the if construction(data may not be displayed and an error will be displayed),
+then save the file by pressing ctrl + o, press enter and exit the file with ctrl + x
+Then run the file in the terminal:
+python3 FUNCTIONS_AND_ARGUMENTS.py
+Next, exit the LearnPython:
+cd .. 
+Then follow another directory, for example Blue6
+cd Blue6
