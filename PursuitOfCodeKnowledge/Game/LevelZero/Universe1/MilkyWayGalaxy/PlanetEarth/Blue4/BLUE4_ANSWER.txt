@@ -150,7 +150,7 @@ ls
 or
 ls -a
 
-If you have already explored the Blue1 directory, then we connect to postgres:
+If you have already explored the Blue3 directory, then we connect to postgres:
 sudo -u postgres psql postgres
 We enter the password from the postgres user that we created before
 
