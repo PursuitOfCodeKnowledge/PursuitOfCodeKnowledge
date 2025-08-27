@@ -184,13 +184,13 @@ ls -a
 Then type the mkdir command to create
 the Green directory (if you didn't create Green directory):
  mkdir Green
-Then go to the directory in Green1:
+Then go to the directory in Green3:
 cd Green3
-Then transfer the file. GREEN1.txt to the Green: 
+Then transfer the file. GREEN3.txt to the Green: 
 mv GREEN3.txt ../Green/
 Then copy the file GREEN1_ANSWER.txt to the Green:
  cp GREEN3_ANSWER.txt ../Green/
-Then check that you copied the file. GREEN1_ANSWER.txt to the Green directory using the command ls:
+Then check that you copied the file. GREEN3_ANSWER.txt to the Green directory using the command ls:
 ls ../Green/GREEN3_ANSWER.txt
 Then delete the file GREEN3_ANSWER.txt using the rm command:
 rm GREEN3_ANSWER.txt
@@ -206,7 +206,7 @@ After that, make sure that you have deleted the directory:
 ls
 or
 ls -a
-If you have already explored the Blue6 directory, then we go into our environment (see the Green2 directory):
+If you have already explored the Blue6 directory, then we go into our environment (see the Blue1 directory):
 conda activate envlearnpython
 Then we go to our LearnPython directory:
 cd LearnPython
