@@ -1,0 +1,245 @@
+Чтобы выполнить задание:
+Первое нужно посмотреть где ты находишься, используй команду pwd:
+pwd
+К примеру она тебе покажет путь /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Blue1, получается ты сейчас находишься в Blue1, 
+тебе нужно вернуться назад используй команду cd ..:
+cd ..
+После этого набери команду ls или ls -a и посмотри что находится вокруг тебя какие файлы и директории:
+ls
+или
+ls -a
+Затем набери команду mkdir чтобы создать директорию Blue (в том случае если ещё не создавал директорию Blue):
+mkdir Blue
+Затем перейди директорию в Blue1:
+cd Blue1
+Потом перенеси файл BLUE1.txt в директорию Blue:
+mv BLUE1.txt ../Blue/
+После скопируй файл файл BLUE1_ANSWER.txt в директорию Blue:
+cp BLUE1_ANSWER.txt ../Blue/
+Затем проверь что скопировал файл BLUE1_ANSWER.txt в директорию Blue при помощи команды ls:
+ls ../Blue/BLUE1_ANSWER.txt
+Потом удали файл BLUE1_ANSWER.txt при помощи команды rm:
+rm BLUE1_ANSWER.txt
+или
+rm -i BLUE1_ANSWER.txt
+или
+rm -f BLUE1_ANSWER.txt
+После выйди из этой директории Blue1:
+cd ..
+Затем удали директорию Blue1:
+rm -r Blue1
+После убедись что удалил директорию:
+ls 
+или
+ls -a
+Если исследовал уже директорию Black6,тогда скачай Anaconda из терминала при помощи команды wget:
+wget https://repo.anaconda.com/archive/Anaconda3-2024.10-1-Linux-x86_64.sh
+Когда скачается файл, вводим команду ls:
+ls
+И мы должны увидить файл Anaconda3-2024.10-1-Linux-x86_64.sh, после этого назначаем права на исполнение этому файлу при помощи команды chmod:
+chmod +x ./Anaconda3-2024.10-1-Linux-x86_64.sh
+После того как назначили права запускаем этот файл в терминале:
+./Anaconda3-2024.10-1-Linux-x86_64.sh
+Во время установки нажимаем enter просматриваем лицензию используюя стрелочку вниз как дойдем до конца документа нажимаем клавишу q, затем напишем yes, потом enter.
+Когда установилась Anaconda, активируем её в терминале при помощи source:
+source ~/anaconda3/bin/activate
+После того как активировали набираем команду conda в терминале:
+conda --version
+Как увидели версию conda, посмотрим какие есть окружения в conda:
+conda env list
+или
+conda info --envs
+Затем можно посмотреть в каком  окружении находишься:
+echo $CONDA_DEFAULT_ENV
+После как увидели окружение, делаем отключение(деактивацию окружения conda) в терминале: 
+conda deactivate
+Как вышли из окружения создаем своё окружение envlearnpython в терминале:
+conda create --name envlearnpython python=3.12 -y
+После создания своего окружения делаем включение(активация) своего окружения:
+conda activate envlearnpython
+Как включили окружение, что есть в этом окружении:
+conda list
+После просмотра пакетов в своём окружении, устанавливаем пакеты numpy, networkx, matplotlib:
+conda install numpy matplotlib networkx -y
+Потом проверяем что установили пакеты:
+conda list
+После этого проверим в интерпретаторе Python:
+python3
+Как зашли в интерпретатор пишем:
+import numpy
+print(numpy.__version__);
+Должна отобразиться версия пакета numpy
+Затем проверяем версию пакета networkx:
+import networkx as nx
+print(nx.__version__);
+import matplotlib as plt
+print(plt.__version__);
+Теперь выходим из интерпретатора:
+exit()
+Затем набираем команду ls:  
+ls
+И вы должны увидить файл Anaconda3-2024.10-1-Linux-x86_64.sh
+Теперь удаляе этот файл при помощи команды rm:
+rm Anaconda3-2024.10-1-Linux-x86_64.sh
+Убеждаемся что удалили при помощи команды ls:
+ls
+Затем входим в директорию LearnPython(выполняли задание из Black5):
+cd LearnPython
+После создаем файл при помощи команды touch:
+touch DATATYPES.py
+После создания файла открываем его в текстовом редакторе nano в терминале:
+nano DATATYPES.py
+После открытия файла в редакторе пишем:
+# Целые числа
+a = 10;
+b = 5;
+
+"""
+Вещественные
+	числа
+"""
+pi = 3.14;
+
+# Строки
+greeting = "Привет, Искусственный интеллект!";
+
+# Логические значения
+is_valid = True;
+is_greeting = False;
+
+if __name__ == "__main__":
+	print("a:", a, "b:", b);
+	print(f"pi: {pi}, greeting: {greeting}, is_valid: {is_valid}, is_greeting: {is_greeting}");
+Да Старина и не забудь, когда копируешь код и вставляешь код, не забывай проверять отступы при помощи клавиши tab например в конструкции if(данные могут не отобразиться и выводиться будет ошибка),
+ затем сохраняем файл нажимая клавиши ctrl + o нажимаем enter и выходим из файла ctrl + x
+После запускаем файл в терминале:
+python3 DATATYPES.py
+Дальше выйди из папки LearnPython:
+cd ..
+Потом иследуй другую директорию, например Blue2
+cd Blue2
+
+
+To complete the task:
+First you need to see where you are, use the pwd command:
+pwd
+For example, she'll show you the way  /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Blue1
+ it turns out that you are currently in Blue1,
+you need to go back using the cd .. :
+cd ..
+After that, type the command ls or ls -a and see what is around you, which files and directories:
+ls
+or
+ls -a
+Then type the mkdir command to create
+the Blue directory (if you didn't create Blue directory):
+ mkdir Blue
+Then go to the directory in Blue1:
+cd Blue1
+Then transfer the file. BLUE1.txt to the Blue: 
+mv BLUE1.txt ../Blue/
+Then copy the file BLUE1_ANSWER.txt to the Blue:
+ cp BLUE1_ANSWER.txt ../Blue/
+Then check that you copied the file. BLUE1_ANSWER.txt to the Blue directory using the command ls:
+ls ../Blue/BLUE1_ANSWER.txt
+Then delete the file BLUE1_ANSWER.txt using the rm command:
+rm BLUE1_ANSWER.txt
+or
+rm -i BLUE1_ANSWER.txt
+or
+rm -f BLUE1_ANSWER.txt
+Then exit this directory Blue1:
+cd ..
+Then delete the Blue1 directory:
+rm -r Blue1
+After that, make sure that you have deleted the directory:
+ls
+or
+ls -a
+If you have already explored the Black6 directory,then download Anaconda from the terminal using the wget command:
+wget https://repo.anaconda.com/archive/Anaconda3-2024.10-1-Linux-x86_64.sh
+When the file is downloaded, enter the command ls:
+ls
+And we should see the file. Anaconda3-2024.10-1-Linux-x86_64.sh after that, we assign execution rights to this file using the chmod:
+chmod +x ./Anaconda3-2024.10-1-Linux-x86_64.sh
+After you have assigned the rights, run this file in the terminal:
+./Anaconda3-2024.10-1-Linux-x86_64.sh
+During installation, press enter, view the license using the down arrow. When we reach the end of the document, press the q key, then write yes, then enter.
+When Anaconda is installed, activate it in the terminal using source:
+source ~/anaconda3/bin/activate
+After you have activated it, type the conda command in the terminal:
+conda --version
+As we saw the conda version, let's see what environments are in conda.:
+conda env list
+or
+conda info --envs
+Then you can see what kind of environment you are in.:
+echo $CONDA_DEFAULT_ENV
+After we see the environment, we disable (deactivate the conda environment) in the terminal:
+conda deactivate
+How we got out of the environment, creating our envlearnpython environment in the terminal:
+conda create --name envlearnpython python=3.12 -y
+After creating our environment, we turn on (activate) our environment:
+conda activate envlearnpython
+How was the environment turned on, what is in this environment:
+conda list
+After viewing the packages in our environment, install the numpy, networkx, and matplotlib packages.:
+conda install numpy matplotlib networkx -y
+Then we check that the packages have been installed.:
+conda list
+After that, we'll check in the Python interpreter:
+python3
+As we entered the interpreter, we write:
+import numpy
+print(numpy.__version__);
+The numpy package version should be displayed.
+Then we check the version of the networkx package:
+import networkx as nx
+print(nx.__version__);
+import matplotlib as plt
+print(plt.__version__);
+Now exit the interpreter:
+exit()
+, then type the command ls:
+ls
+And you should see the file Anaconda3-2024.10-1-Linux-x86_64.sh
+Now delete this file using the rm:
+rm Anaconda3-2024.10-1-Linux-x86_64.sh
+We make sure that we have deleted it using the ls:
+ls command
+Then we enter the LearnPython directory (we performed the task from Black5):
+cd LearnPython
+After that, we create the file using the touch command:
+touch DATATYPES.py
+After creating the file, open it in the nano text editor in the terminal.:
+nano DATATYPES.py
+After opening the file in the editor, we write:
+# Integers
+a = 10;
+b = 5;
+
+"""
+Real
+        numbers
+"""
+pi = 3.14;
+
+# Strings
+greeting = "Hello, Artificial Intelligence!";
+
+# Boolean values
+is_valid = True;
+is_greeting = False;
+
+if __name__ == "__main__":
+        print("a:", a, "b:", b);
+        print(f"pi: {pi}, greeting: {greeting}, is_valid: {is_valid}, is_greeting: {is_greeting}");
+Yes, Old man, and don't forget, when you copy the code and paste the code, don't forget to check the margins using the tab key,
+ for example, in the if construction(data may not be displayed and an error will be displayed),
+then save the file by pressing ctrl + o, press enter and exit the file with ctrl + x
+Then run the file in the terminal:
+python3 DATATYPES.py
+Next, exit the LearnPython:
+cd .. 
+Then follow another directory, for example Blue2
+cd Blue2
