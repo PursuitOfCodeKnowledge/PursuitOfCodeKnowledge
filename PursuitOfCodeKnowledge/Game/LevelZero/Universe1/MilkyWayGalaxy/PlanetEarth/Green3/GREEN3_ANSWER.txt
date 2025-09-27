@@ -1,0 +1,344 @@
+Чтобы выполнить задание:
+Первое нужно посмотреть где ты находишься, используй команду pwd:
+pwd
+К примеру она тебе покажет путь /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Green3, получается ты сейчас находишься в Green3, 
+тебе нужно вернуться назад используй команду cd ..:
+cd ..
+После этого набери команду ls или ls -a и посмотри что находится вокруг тебя какие файлы и директории:
+ls
+или
+ls -a
+Затем набери команду mkdir чтобы создать директорию Green (в том случае если ещё не создавал директорию Green):
+mkdir Green
+Затем перейди директорию в Green3:
+cd Green3
+Потом перенеси файл GREEN3.txt в директорию Green:
+mv GREEN3.txt ../Green/
+После скопируй файл файл GREEN3_ANSWER.txt в директорию Green:
+cp GREEN3_ANSWER.txt ../Green/
+Затем проверь что скопировал файл GREEN3_ANSWER.txt в директорию Green при помощи команды ls:
+ls ../Green/GREEN3_ANSWER.txt
+Потом удали файл GREEN3_ANSWER.txt при помощи команды rm:
+rm GREEN3_ANSWER.txt
+или
+rm -i GREEN3_ANSWER.txt
+или
+rm -f GREEN3_ANSWER.txt
+После выйди из этой директории Green3:
+cd ..
+Затем удали директорию Green3:
+rm -r Green3
+После убедись что удалил директорию:
+ls 
+или
+ls -a
+Если исследовал уже директорию Green2, то заходим в своё окружение(смотри директорию Blue1):
+conda activate envlearnpython
+Затем заходим в свою директорию LearnPython:
+cd LearnPython
+Потом создай директорию ListAndTheirMethods:
+mkdir ListAndTheirMethods
+Затем перейди в эту директорию ListAndTheirMethods:
+cd ListAndTheirMethods
+Итак создай файл list_and_their_methods.py:
+touch list_and_their_methods.py
+Потом открой файл list_and_their_methods.py:
+nano list_and_their_methods.py
+Пишем в файле:
+# 1) создать список list_ai со значениями 7, 8, 9, "четыре", 5.0, и затем вывести список на экран в терминале.
+list_ai = [7, 8, 9, "четыре", 5.0]
+print(list_ai)
+
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 list_and_their_methods.py
+
+Потом открой файл list_and_their_methods.py:
+nano list_and_their_methods.py
+Дописать снизу в файле:
+# 2) добавить значение 777 в конец списка, используя метод append() и затем вывести список на экран в терминале.
+list_ai.append(777)
+print(list_ai)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 list_and_their_methods.py
+
+Потом открой файл list_and_their_methods.py:
+nano list_and_their_methods.py
+Дописать снизу в файле:
+# 3) вставить значение "два и половина" на определённую позицию 2 в списке, используя метод insert() и затем вывести список на экран в терминале.
+list_ai.insert(2, "два и половина")
+print(list_ai)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 list_and_their_methods.py
+
+Потом открой файл list_and_their_methods.py:
+nano list_and_their_methods.py
+Дописать снизу в файле:
+# 4) удалить первое входждение указанного значения "четыре" и "два и половина" из списка,используя метод remove() и затем список вывести на экран в терминале.
+list_ai.remove("четыре")
+list_ai.remove("два и половина")
+print(list_ai)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 list_and_their_methods.py
+
+Потом открой файл list_and_their_methods.py:
+nano list_and_their_methods.py
+Дописать снизу в файле:
+# 5) удалить последнее значение используя метод pop(), и затем список вывести на экран в терминале.
+list_ai.pop()
+print(list_ai)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 list_and_their_methods.py
+
+Потом открой файл list_and_their_methods.py:
+nano list_and_their_methods.py
+Дописать снизу в файле:
+# 6) удалить значение указанное по индексу 2, используя метод pop(), и затем список вывести на экран в терминале.
+list_ai.pop(2)
+print(list_ai)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 list_and_their_methods.py
+
+Потом открой файл list_and_their_methods.py:
+nano list_and_their_methods.py
+Дописать снизу в файле:
+# 7) изменить значение по индексу 2 на значение "пять измененное", и затем список вывести на экран в терминале.
+list_ai[2] = "пять измененное"
+print(list_ai)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 list_and_their_methods.py
+
+Потом открой файл list_and_their_methods.py:
+nano list_and_their_methods.py
+Дописать снизу в файле:
+# 8) объединить два списка(list_ai и ai = [1, 2, 3]) в список combined_list с помощью оператора +, и затем список вывести на экран в терминале.
+ai = [1, 2, 3]
+combined_list = list_ai + ai
+print(combined_list)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 list_and_their_methods.py
+
+Потом открой файл list_and_their_methods.py:
+nano list_and_their_methods.py
+Дописать снизу в файле:
+# 9) получить первые три элемента списка, используя срез, и затем этот список вывести на экран в терминале.
+sublist = combined_list[:3]
+print(sublist)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 list_and_their_methods.py
+
+Потом открой файл list_and_their_methods.py:
+nano list_and_their_methods.py
+Дописать снизу в файле:
+# 10) добавить в список combined_list значения из другого итерируемого объекта (например из списка, ai), используя метод extend() и и затем список вывести на экран в терминале.
+combined_list.extend(ai)
+print(combined_list)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 list_and_their_methods.py
+
+Потом открой файл list_and_their_methods.py:
+nano list_and_their_methods.py
+Дописать снизу в файле:
+# 11) возвратить количество вхождений указанного значения 3  в списке combined_list и затем вывести на экран в терминале.
+print(f"Количество вхождений чила 3: {combined_list.count(3)} раза")
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 list_and_their_methods.py
+
+Потом открой файл list_and_their_methods.py:
+nano list_and_their_methods.py
+Дописать снизу в файле:
+# 12) сделать сортировку элементов в списке combined_list и затем список вывести на экран в терминале.
+combined_list.remove("пять измененное")
+combined_list.sort()
+print(combined_list)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 list_and_their_methods.py
+
+Потом открой файл list_and_their_methods.py:
+nano list_and_their_methods.py
+Дописать снизу в файле:
+# 13) Изменить порядок элементов в списке на обратный и затем список вывести на экран в терминале. 
+combined_list.reverse()
+print(combined_list)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 list_and_their_methods.py
+
+После выходим из директории ListAndTheirMethods:
+cd ..
+Дальше выйди из папки LearnPython:
+cd ..
+Потом иследуй другую директорию, например Green4
+cd Green4
+
+
+To complete the task:
+First you need to see where you are, use the pwd command:
+pwd
+For example, she'll show you the way  /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Green3
+ it turns out that you are currently in Green3,
+you need to go back using the cd .. :
+cd ..
+After that, type the command ls or ls -a and see what is around you, which files and directories:
+ls
+or
+ls -a
+Then type the mkdir command to create
+the Green directory (if you didn't create Green directory):
+ mkdir Green
+Then go to the directory in Green3:
+cd Green3
+Then transfer the file. GREEN3.txt to the Green: 
+mv GREEN3.txt ../Green/
+Then copy the file GREEN1_ANSWER.txt to the Green:
+ cp GREEN3_ANSWER.txt ../Green/
+Then check that you copied the file. GREEN3_ANSWER.txt to the Green directory using the command ls:
+ls ../Green/GREEN3_ANSWER.txt
+Then delete the file GREEN3_ANSWER.txt using the rm command:
+rm GREEN3_ANSWER.txt
+or
+rm -i GREEN3_ANSWER.txt
+or
+rm -f GREEN3_ANSWER.txt
+Then exit this directory Green3:
+cd ..
+Then delete the Green3 directory:
+rm -r Green3
+After that, make sure that you have deleted the directory:
+ls
+or
+ls -a
+If you have already explored the Blue6 directory, then we go into our environment (see the Blue1 directory):
+conda activate envlearnpython
+Then we go to our LearnPython directory:
+cd LearnPython
+Then create the ListAndTheirMethods directory:
+mkdir ListAndTheirMethods
+Then go to this ListAndTheirMethods directory:
+cd ListAndTheirMethods
+So create a file list_and_their_methods.py:
+touch list_and_their_methods.py
+Then open the file. list_and_their_methods.py:
+nano list_and_their_methods.py
+Write in file:
+# 1) создать список list_ai со значениями 7, 8, 9, "четыре", 5.0, и затем вывести список на экран в терминале.
+list_ai = [7, 8, 9, "четыре", 5.0]
+print(list_ai)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 list_and_their_methods.py
+
+Потом открой файл list_and_their_methods.py:
+nano list_and_their_methods.py
+Дописать снизу в файле:
+# 2) добавить значение 777 в конец списка, используя метод append() и затем вывести список на экран в терминале.
+list_ai.append(777)
+print(list_ai)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 list_and_their_methods.py
+
+Потом открой файл list_and_their_methods.py:
+nano list_and_their_methods.py
+Дописать снизу в файле:
+# 3) вставить значение "два и половина" на определённую позицию 2 в списке, используя метод insert() и затем вывести список на экран в терминале.
+list_ai.insert(2, "два и половина")
+print(list_ai)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 list_and_their_methods.py
+
+Потом открой файл list_and_their_methods.py:
+nano list_and_their_methods.py
+Дописать снизу в файле:
+# 4) удалить первое входждение указанного значения "четыре" и "два и половина" из списка,используя метод remove() и затем список вывести на экран в терминале.
+list_ai.remove("четыре")
+list_ai.remove("два и половина")
+print(list_ai)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 list_and_their_methods.py
+
+Потом открой файл list_and_their_methods.py:
+nano list_and_their_methods.py
+Дописать снизу в файле:
+# 5) удалить последнее значение используя метод pop(), и затем список вывести на экран в терминале.
+list_ai.pop()
+print(list_ai)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 list_and_their_methods.py
+
+Потом открой файл list_and_their_methods.py:
+nano list_and_their_methods.py
+Дописать снизу в файле:
+# 6) удалить значение указанное по индексу 2, используя метод pop(), и затем список вывести на экран в терминале.
+list_ai.pop(2)
+print(list_ai)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 list_and_their_methods.py
+
+Потом открой файл list_and_their_methods.py:
+nano list_and_their_methods.py
+Дописать снизу в файле:
+# 7) изменить значение по индексу 2 на значение "пять измененное", и затем список вывести на экран в терминале.
+list_ai[2] = "пять измененное"
+print(list_ai)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 list_and_their_methods.py
+
+Потом открой файл list_and_their_methods.py:
+nano list_and_their_methods.py
+Дописать снизу в файле:
+# 8) объединить два списка(list_ai и ai = [1, 2, 3]) в список combined_list с помощью оператора +, и затем список вывести на экран в терминале.
+ai = [1, 2, 3]
+combined_list = list_ai + ai
+print(combined_list)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 list_and_their_methods.py
+
+Потом открой файл list_and_their_methods.py:
+nano list_and_their_methods.py
+Дописать снизу в файле:
+# 9) получить первые три элемента списка, используя срез, и затем этот список вывести на экран в терминале.
+sublist = combined_list[:3]
+print(sublist)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 list_and_their_methods.py
+
+Потом открой файл list_and_their_methods.py:
+nano list_and_their_methods.py
+Дописать снизу в файле:
+# 10) добавить в список combined_list значения из другого итерируемого объекта (например из списка, ai), используя метод extend() и и затем список вывести на экран в терминале.
+combined_list.extend(ai)
+print(combined_list)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 list_and_their_methods.py
+
+Потом открой файл list_and_their_methods.py:
+nano list_and_their_methods.py
+Дописать снизу в файле:
+# 11) возвратить количество вхождений указанного значения 3  в списке combined_list и затем вывести на экран в терминале.
+print(f"Количество вхождений чила 3: {combined_list.count(3)} раза")
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 list_and_their_methods.py
+
+Потом открой файл list_and_their_methods.py:
+nano list_and_their_methods.py
+Дописать снизу в файле:
+# 12) сделать сортировку элементов в списке combined_list и затем список вывести на экран в терминале.
+combined_list.remove("пять измененное")
+combined_list.sort()
+print(combined_list)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 list_and_their_methods.py
+
+Потом открой файл list_and_their_methods.py:
+nano list_and_their_methods.py
+Дописать снизу в файле:
+# 13) Изменить порядок элементов в списке на обратный и затем список вывести на экран в терминале. 
+combined_list.reverse()
+print(combined_list)
+
+Press ctrl + o, then enter and exit the file with ctrl + x, then run the script:
+python3 list_and_their_methods.py 
+
+After that, we exit the ListAndTheirMethods:
+cd ..
+Next, exit the LearnPython:
+cd .. 
+Then follow another directory, for example Green4
+cd Green4

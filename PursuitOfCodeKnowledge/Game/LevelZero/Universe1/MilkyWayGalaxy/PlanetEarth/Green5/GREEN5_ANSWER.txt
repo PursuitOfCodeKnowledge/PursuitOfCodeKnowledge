@@ -1,0 +1,263 @@
+Чтобы выполнить задание:
+Первое нужно посмотреть где ты находишься, используй команду pwd:
+pwd
+К примеру она тебе покажет путь /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Green5, получается ты сейчас находишься в Green5, 
+тебе нужно вернуться назад используй команду cd ..:
+cd ..
+После этого набери команду ls или ls -a и посмотри что находится вокруг тебя какие файлы и директории:
+ls
+или
+ls -a
+Затем набери команду mkdir чтобы создать директорию Green (в том случае если ещё не создавал директорию Green):
+mkdir Green
+Затем перейди директорию в Green5:
+cd Green5
+Потом перенеси файл GREEN5.txt в директорию Green:
+mv GREEN5.txt ../Green/
+После скопируй файл файл GREEN5_ANSWER.txt в директорию Green:
+cp GREEN5_ANSWER.txt ../Green/
+Затем проверь что скопировал файл GREEN5_ANSWER.txt в директорию Green при помощи команды ls:
+ls ../Green/GREEN5_ANSWER.txt
+Потом удали файл GREEN5_ANSWER.txt при помощи команды rm:
+rm GREEN5_ANSWER.txt
+или
+rm -i GREEN5_ANSWER.txt
+или
+rm -f GREEN5_ANSWER.txt
+После выйди из этой директории Green5:
+cd ..
+Затем удали директорию Green5:
+rm -r Green5
+После убедись что удалил директорию:
+ls 
+или
+ls -a
+Если исследовал уже директорию Green4, то заходим в своё окружение(смотри директорию Blue1):
+conda activate envlearnpython
+Затем заходим в свою директорию LearnPython:
+cd LearnPython
+Потом создай директорию TuplesAndSets:
+mkdir TuplesAndSets
+Затем перейди в эту директорию TuplesAndSets:
+cd TuplesAndSets
+Итак создай файл tuples_and_sets.py:
+touch tuples_and_sets.py
+Потом открой файл tuples_and_sets.py:
+nano tuples_and_sets.py
+Пишем в файле:
+# 1) создать кортеж tuple_ai со значениями 777, 888, 333, 444, 555, 333, и затем вывести кортеж на экран в терминале.
+tuple_ai = (777, 888, 333, 444, 555, 333)
+print(tuple_ai)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 tuples_and_sets.py
+
+Потом открой файл tuples_and_sets.py:
+nano tuples_and_sets.py
+Дописать снизу в файле:
+# 2) возвратить количество вхождений указанного значения 333  в кортеже и затем вывести на экран в терминале.
+print(tuple_ai.count(333))
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 tuples_and_sets.py
+
+Потом открой файл tuples_and_sets.py:
+nano tuples_and_sets.py       
+Дописать снизу в файле:
+# 3) возратить первый встречающийся индекс, по которому найден элемент 333 и затем вывести на экран в терминале.
+print(tuple_ai.index(333))
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 tuples_and_sets.py  
+
+Потом открой файл tuples_and_sets.py:
+nano tuples_and_sets.py       
+Дописать снизу в файле:
+# 4) создать множество set_ai cо значениями 77, 88, 33, 55, 44 и затем вывести множество на экран в терминале.
+set_ai = {77, 88, 33, 55, 44}
+print(set_ai)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 tuples_and_sets.py  
+
+Потом открой файл tuples_and_sets.py:
+nano tuples_and_sets.py       
+Дописать снизу в файле:
+# 5) добавить элемент 11  в множество и затем вывести множество на экран в терминале.
+set_ai.add(11)
+print(set_ai)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 tuples_and_sets.py  
+
+Потом открой файл tuples_and_sets.py:
+nano tuples_and_sets.py       
+Дописать снизу в файле:
+# 6) удалить элемент 11 из множества(используя remove()) и затем вывести множество на экран в терминале.
+set_ai.remove(11)
+print(set_ai)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 tuples_and_sets.py  
+
+Потом открой файл tuples_and_sets.py:
+nano tuples_and_sets.py       
+Дописать снизу в файле:
+# 7) удалить элемент 44 из множества(используя discard()) и затем вывести множество на экран в терминале.
+set_ai.discard(44)
+print(set_ai)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 tuples_and_sets.py  
+
+Потом открой файл tuples_and_sets.py:
+nano tuples_and_sets.py       
+Дописать снизу в файле:
+# 8) возвратить объединение двух множеств set_ai и ai = {11, 33, 44, 77} и затем вывести множество на экран в терминале.
+ai = {11, 33, 44, 77}
+union_set = set_ai.union(ai)
+print(union_set)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 tuples_and_sets.py  
+
+Потом открой файл tuples_and_sets.py:
+nano tuples_and_sets.py       
+Дописать снизу в файле:
+# 9) Возвратить пересечение двух множеств set_ai и ai = {11, 33, 44, 77} и затем вывести множество на экран в терминале.
+intersection_set = set_ai.intersection(ai)
+print(intersection_set)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 tuples_and_sets.py  
+
+После выходим из директории TuplesAndSets:
+cd ..
+Дальше выйди из папки LearnPython:
+cd ..
+Потом иследуй другую директорию, например Green6
+cd Green6
+
+To complete the task:
+First you need to see where you are, use the pwd command:
+pwd
+For example, she'll show you the way  /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Green5
+ it turns out that you are currently in Green5,
+you need to go back using the cd .. :
+cd ..
+After that, type the command ls or ls -a and see what is around you, which files and directories:
+ls
+or
+ls -a
+Then type the mkdir command to create
+the Green directory (if you didn't create Green directory):
+ mkdir Green
+Then go to the directory in Green5:
+cd Green5
+Then transfer the file. GREEN5.txt to the Green: 
+mv GREEN5.txt ../Green/
+Then copy the file GREEN5_ANSWER.txt to the Green:
+ cp GREEN5_ANSWER.txt ../Green/
+Then check that you copied the file. GREEN5_ANSWER.txt to the Green directory using the command ls:
+ls ../Green/GREEN5_ANSWER.txt
+Then delete the file GREEN5_ANSWER.txt using the rm command:
+rm GREEN5_ANSWER.txt
+or
+rm -i GREEN5_ANSWER.txt
+or
+rm -f GREEN5_ANSWER.txt
+Then exit this directory Green5:
+cd ..
+Then delete the Green5 directory:
+rm -r Green5
+After that, make sure that you have deleted the directory:
+ls
+or
+ls -a
+If you have already explored the Green4 directory, then we go into our environment (see the Blue1 directory):
+conda activate envlearnpython
+Then we go to our LearnPython directory:
+cd LearnPython
+Then create the TuplesAndSets directory:
+mkdir TuplesAndSets
+Then go to this TuplesAndSets directory:
+cd TuplesAndSets
+So create a file tuples_and_sets.py:
+touch tuples_and_sets.py
+Then open the file. tuples_and_sets.py:
+nano tuples_and_sets.py
+Write in file:
+# 1) создать кортеж tuple_ai со значениями 777, 888, 333, 444, 555, 333, и затем вывести кортеж на экран в терминале.
+tuple_ai = (777, 888, 333, 444, 555, 333)
+print(tuple_ai)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 tuples_and_sets.py
+
+Потом открой файл tuples_and_sets.py:
+nano tuples_and_sets.py
+Дописать снизу в файле:
+# 2) возвратить количество вхождений указанного значения 333  в кортеже и затем вывести на экран в терминале.
+print(tuple_ai.count(333))
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 tuples_and_sets.py
+
+Потом открой файл tuples_and_sets.py:
+nano tuples_and_sets.py       
+Дописать снизу в файле:
+# 3) возратить первый встречающийся индекс, по которому найден элемент 333 и затем вывести на экран в терминале.
+print(tuple_ai.index(333))
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 tuples_and_sets.py  
+
+Потом открой файл tuples_and_sets.py:
+nano tuples_and_sets.py       
+Дописать снизу в файле:
+# 4) создать множество set_ai cо значениями 77, 88, 33, 55, 44 и затем вывести множество на экран в терминале.
+set_ai = {77, 88, 33, 55, 44}
+print(set_ai)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 tuples_and_sets.py  
+
+Потом открой файл tuples_and_sets.py:
+nano tuples_and_sets.py       
+Дописать снизу в файле:
+# 5) добавить элемент 11  в множество и затем вывести множество на экран в терминале.
+set_ai.add(11)
+print(set_ai)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 tuples_and_sets.py  
+
+Потом открой файл tuples_and_sets.py:
+nano tuples_and_sets.py       
+Дописать снизу в файле:
+# 6) удалить элемент 11 из множества(используя remove()) и затем вывести множество на экран в терминале.
+set_ai.remove(11)
+print(set_ai)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 tuples_and_sets.py  
+
+Потом открой файл tuples_and_sets.py:
+nano tuples_and_sets.py       
+Дописать снизу в файле:
+# 7) удалить элемент 44 из множества(используя discard()) и затем вывести множество на экран в терминале.
+set_ai.discard(44)
+print(set_ai)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 tuples_and_sets.py  
+
+Потом открой файл tuples_and_sets.py:
+nano tuples_and_sets.py       
+Дописать снизу в файле:
+# 8) возвратить объединение двух множеств set_ai и ai = {11, 33, 44, 77} и затем вывести множество на экран в терминале.
+ai = {11, 33, 44, 77}
+union_set = set_ai.union(ai)
+print(union_set)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 tuples_and_sets.py  
+
+Потом открой файл tuples_and_sets.py:
+nano tuples_and_sets.py       
+Дописать снизу в файле:
+# 9) Возвратить пересечение двух множеств set_ai и ai = {11, 33, 44, 77} и затем вывести множество на экран в терминале.
+intersection_set = set_ai.intersection(ai)
+print(intersection_set)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 tuples_and_sets.py  
+
+After that, we exit the TuplesAndSets:
+cd ..
+Next, exit the LearnPython:
+cd .. 
+Then follow another directory, for example Green6
+cd Green6

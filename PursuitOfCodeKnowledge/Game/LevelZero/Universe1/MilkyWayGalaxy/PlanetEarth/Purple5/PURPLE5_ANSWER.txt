@@ -1,0 +1,117 @@
+Чтобы выполнить задание:
+Первое нужно посмотреть где ты находишься, используй команду pwd:
+pwd
+К примеру она тебе покажет путь /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Purple5, получается ты сейчас находишься в Purple5, 
+тебе нужно вернуться назад используй команду cd ..:
+cd ..
+После этого набери команду ls или ls -a и посмотри что находится вокруг тебя какие файлы и директории:
+ls
+или
+ls -a
+Затем набери команду mkdir чтобы создать директорию Purple (в том случае если ещё не создавал директорию Purple):
+mkdir Purple
+Затем перейди директорию в Purple5:
+cd Purple5
+Потом перенеси файл PURPLE5.txt в директорию Purple:
+mv PURPLE5.txt ../Purple/
+После скопируй файл файл PURPLE5_ANSWER.txt в директорию Purple:
+cp PURPLE5_ANSWER.txt ../Purple/
+Затем проверь что скопировал файл PURPLE5_ANSWER.txt в директорию Purple при помощи команды ls:
+ls ../Purple/PURPLE5_ANSWER.txt
+Потом удали файл PURPLE5_ANSWER.txt при помощи команды rm:
+rm PURPLE5_ANSWER.txt
+или
+rm -i PURPLE5_ANSWER.txt
+или
+rm -f PURPLE5_ANSWER.txt
+После выйди из этой директории Purple5:
+cd ..
+Затем удали директорию Purple5:
+rm -r Purple5
+После убедись что удалил директорию:
+ls 
+или
+ls -a
+Если исследовал уже директорию Purple4, то заходим в ARDUINO IDE(Видео по установке АRDUINO IDE(https://t.me/pursuitofcodeknowledge/17), 
+Видео и Фото по установке электронных компонентов, можешь посмотреть в телеграмме 
+на канале PursuitOfCodeKnowledge: https://t.me/pursuitofcodeknowledge/18    https://t.me/pursuitofcodeknowledge/19 и вставляем код:
+const int buttonPin = 2;     // the number of the pushbutton pin
+const int ledPin = 9;      // the number of the LED pin
+
+void setup() {
+  // initialize the LED pin as an output:
+  pinMode(ledPin, OUTPUT);
+  // initialize the pushbutton pin as an input:
+  pinMode(buttonPin, INPUT);
+}
+
+void loop() {  
+  if (digitalRead(buttonPin) == LOW) {    
+    digitalWrite(ledPin, LOW);
+  } else {    
+    digitalWrite(ledPin, HIGH);
+  }
+}
+
+Потом иследуй другую директорию, например Purple6
+cd Purple6
+
+To complete the task:
+First you need to see where you are, use the pwd command:
+pwd
+For example, she'll show you the way  /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Purple5
+ it turns out that you are currently in Purple5,
+you need to go back using the cd .. :
+cd ..
+After that, type the command ls or ls -a and see what is around you, which files and directories:
+ls
+or
+ls -a
+Then type the mkdir command to create
+the Purple directory (if you didn't create Purple directory):
+ mkdir Purple
+Then go to the directory in Purple5:
+cd Purple5
+Then transfer the file. PURPLE5.txt to the Purple: 
+mv PURPLE5.txt ../Purple/
+Then copy the file PURPLE5_ANSWER.txt to the Purple:
+ cp PURPLE5_ANSWER.txt ../Purple/
+Then check that you copied the file. PURPLE3_ANSWER.txt to the Purple directory using the command ls:
+ls ../Purple/PURPLE5_ANSWER.txt
+Then delete the file PURPLE5_ANSWER.txt using the rm command:
+rm PURPLE5_ANSWER.txt
+or
+rm -i PURPLE5_ANSWER.txt
+or
+rm -f PURPLE5_ANSWER.txt
+Then exit this directory Purple5:
+cd ..
+Then delete the Purple5 directory:
+rm -r Purple5
+After that, make sure that you have deleted the directory:
+ls
+or
+ls -a
+If you have already explored the Purple4 directory, то заходим в ARDUINO IDE(Видео по установке АRDUINO IDE(https://t.me/pursuitofcodeknowledge/17), 
+Видео и Фото по установке электронных компонентов, можешь посмотреть в телеграмме
+ на канале PursuitOfCodeKnowledge: https://t.me/pursuitofcodeknowledge/18    https://t.me/pursuitofcodeknowledge/19 и вставляем код:
+const int buttonPin = 2;     // the number of the pushbutton pin
+const int ledPin = 9;      // the number of the LED pin
+
+void setup() {
+  // initialize the LED pin as an output:
+  pinMode(ledPin, OUTPUT);
+  // initialize the pushbutton pin as an input:
+  pinMode(buttonPin, INPUT);
+}
+
+void loop() {  
+  if (digitalRead(buttonPin) == LOW) {    
+    digitalWrite(ledPin, LOW);
+  } else {    
+    digitalWrite(ledPin, HIGH);
+  }
+}
+ 
+Then follow another directory, for example Purple6
+cd Purple6
