@@ -1,0 +1,329 @@
+Чтобы выполнить задание:
+Первое нужно посмотреть где ты находишься, используй команду pwd:
+pwd
+К примеру она тебе покажет путь /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Purple6, получается ты сейчас находишься в Purple6, 
+тебе нужно вернуться назад используй команду cd ..:
+cd ..
+После этого набери команду ls или ls -a и посмотри что находится вокруг тебя какие файлы и директории:
+ls
+или
+ls -a
+Затем набери команду mkdir чтобы создать директорию Purple (в том случае если ещё не создавал директорию Purple):
+mkdir Purple
+Затем перейди директорию в Purple6:
+cd Purple6
+Потом скопируй файл PURPLE6.txt в директорию Purple:
+cp PURPLE6.txt ../Purple/
+Затем проверь что скопировал файл PURPLE6.txt в директорию Purple при помощи команды ls:
+ls ../Purple/PURPLE6.txt
+После перенеси  файл файл PURPLE6_ANSWER.txt в директорию Purple:
+mv PURPLE6_ANSWER.txt ../Purple/
+Потом удали файл PURPLE6.txt при помощи команды rm:
+rm PURPLE6.txt
+или
+rm -i PURPLE6.txt
+или
+rm -f PURPLE6.txt
+После выйди из этой директории Purple6:
+cd ..
+Затем удали директорию Purple6:
+rm -r Purple6
+После убедись что удалил директорию:
+ls 
+или
+ls -a
+
+Если исследовал уже директорию Purple5, то подключаемся к postgres: 
+sudo -u postgres psql postgres
+Вводим пароль от пользователя postgres, который мы создавали до этого
+
+Теперь посмотрим какие базы данных при помощи команды \l:
+\l
+
+Видим demo и переходим в неё при помощи команды \c:
+\c demo
+
+Потом можно посмотреть какие таблицы в базе данных demo:
+\dt
+
+Затем можно посмотреть подробнее о таблице, например bookings(столбцы и ключи):
+\d bookings
+
+Потом можно посмотреть подробнее о таблице, например tickets(столбцы и ключи):
+\d tickets
+
+Потом можно посмотреть подробнее о таблице, например ticket_flights(столбцы и ключи):
+\d ticket_flights
+
+Потом можно посмотреть подробнее о таблице, например flights(столбцы и ключи):
+\d flights
+
+Теперь создаем функцию через команду:
+\ef
+После нам предложат выбрать редактор:
+Select an editor.  To change later, run 'select-editor'.
+  1. /bin/nano        <---- easiest
+  2. /usr/bin/vim.tiny
+Выбираем nano, нажимаем клавишу цифру 1 и нажимаем клавишу Enter.
+Итак мы находимся в файле, стираем в нём всё и копируем из примера 1 и вставляем в файл(используя клавиши ctrl+shift+v) 
+Пример 1:
+--1) Функция для подсчёта суммы бронирования по book_ref. 
+CREATE OR REPLACE FUNCTION bookings.get_booking_total(p_book_ref CHAR(6))
+RETURNS NUMERIC AS $$
+    SELECT SUM(amount)
+    FROM bookings.ticket_flights tf
+    JOIN bookings.tickets t ON t.ticket_no = tf.ticket_no
+    WHERE t.book_ref = p_book_ref;
+$$ LANGUAGE SQL;
+После нажимаем клавиши ctrl+o, затем нажимаем клавишу Enter, и затем выходим ctrl+x.
+Затем проверяем функцию:
+SELECT get_booking_total('0002AD');
+
+Теперь создаем функцию через команду:
+\ef
+После нам предложат выбрать редактор:
+Select an editor.  To change later, run 'select-editor'.
+  1. /bin/nano        <---- easiest
+  2. /usr/bin/vim.tiny
+Выбираем nano, нажимаем клавишу цифру 1 и нажимаем клавишу Enter.
+Итак мы находимся в файле, стираем в нём всё и копируем из примера 2 и вставляем в файл(используя клавиши ctrl+shift+v)
+Пример 2: 
+--2) Функция для поиска всех пассажиров по бронированию.
+CREATE OR REPLACE FUNCTION bookings.get_passengers(p_book_ref CHAR(6))
+RETURNS TABLE(passenger_name TEXT, ticket_no CHAR(13)) AS $$
+    SELECT passenger_name, ticket_no
+    FROM bookings.tickets
+    WHERE book_ref = p_book_ref;
+$$ LANGUAGE SQL;
+После нажимаем клавиши ctrl+o, затем нажимаем клавишу Enter, и затем выходим ctrl+x.
+Затем проверяем функцию:
+SELECT * FROM bookings.get_passengers('10F447');
+
+Теперь создаем процедуру через команду:
+\ef
+После нам предложат выбрать редактор:
+Select an editor.  To change later, run 'select-editor'.
+  1. /bin/nano        <---- easiest
+  2. /usr/bin/vim.tiny
+Выбираем nano, нажимаем клавишу цифру 1 и нажимаем клавишу Enter.
+Итак мы находимся в файле, стираем в нём всё и копируем из примера 3 и вставляем в файл(используя клавиши ctrl+shift+v)
+Пример 3: 
+--3) Процедура: обновление статуса рейса.
+CREATE OR REPLACE PROCEDURE bookings.update_flight_status(p_flight_id INT, p_status VARCHAR)
+LANGUAGE SQL AS $$
+    UPDATE bookings.flights
+    SET status = p_status
+    WHERE flight_id = p_flight_id;
+$$;
+После нажимаем клавиши ctrl+o, затем нажимаем клавишу Enter, и затем выходим ctrl+x.
+Теперь вызываем процедуру:
+CALL bookings.update_flight_status(1001, 'Delayed');
+Затем проверяем процедуру:
+SELECT flight_id, status FROM bookings.flights WHERE flight_id = 1001;
+
+Теперь создаем процедуру через команду:
+\ef
+После нам предложат выбрать редактор:
+Select an editor.  To change later, run 'select-editor'.
+  1. /bin/nano        <---- easiest
+  2. /usr/bin/vim.tiny
+Выбираем nano, нажимаем клавишу цифру 1 и нажимаем клавишу Enter.
+Итак мы находимся в файле, стираем в нём всё и копируем из примера 4 и вставляем в файл(используя клавиши ctrl+shift+v)
+Пример 4:
+--4) Процедура: добавление нового билета (с JSON данными пассажира).
+CREATE OR REPLACE PROCEDURE bookings.add_ticket(
+    p_ticket_no CHAR(13),
+    p_book_ref CHAR(6),
+    p_passenger_id VARCHAR,
+    p_passenger_name TEXT,
+    p_contact_data JSONB
+)
+LANGUAGE SQL AS $$
+    INSERT INTO bookings.tickets(ticket_no, book_ref, passenger_id, passenger_name, contact_data)
+    VALUES (p_ticket_no, p_book_ref, p_passenger_id, p_passenger_name, p_contact_data);
+$$;
+
+После нажимаем клавиши ctrl+o, затем нажимаем клавишу Enter, и затем выходим ctrl+x.
+Теперь вызываем процедуру:
+CALL bookings.add_ticket(
+    '3333333333333',
+    '10F447',
+    '3333 333333',
+    'AI',
+    '{"phone": "101001110001011110001011110111111", "email": "101001110001011110001011110111111"}'
+);
+
+Затем проверяем процедуру:
+select * from tickets where ticket_no = '3333333333333';
+
+После этого выходим из базы данных demo:
+\q
+
+Потом дальше иследуй другую директорию, например Red1:
+cd Red1
+
+To complete the task:
+First you need to see where you are, use the pwd command:
+pwd
+For example, she'll show you the way  /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Purple6
+ it turns out that you are currently in Purple6,
+you need to go back using the cd .. :
+cd ..
+After that, type the command ls or ls -a and see what is around you, which files and directories:
+ls
+or
+ls -a
+Then type the mkdir command to create
+the Purple directory(if you didn't create Purple directory):
+mkdir Purple
+Then go to the directory in Purple6:
+cd Purple6
+Then  copy the file PURPLE6.txt to the Purple:
+cp PURPLE6.txt ../Purple/
+Then check that you copied the file. PURPLE6.txt to the Purple directory using the command ls:
+ls ../Purple/PURPLE6.txt
+Then transfer the file PURPLE6_ANSWER.txt to the Purple:
+mv PURPLE6_ANSWER.txt ../Purple/
+Then delete the file PURPLE6.txt using the rm command:
+rm PURPLE6.txt
+or
+rm -i PURPLE6.txt
+or
+rm -f PURPLE6.txt
+Then exit this directory Purple6:
+cd ..
+Then delete the Purple6 directory:
+rm -r Purple6
+After that, make sure that you have deleted the directory:
+ls
+or
+ls -a
+
+If you have already explored the Purple5 directory, then we connect to postgres:
+sudo -u postgres psql postgres
+We enter the password from the postgres user that we created before
+
+Now let's look at which databases using the \l command:
+\l
+
+We see the demo and go to it using the \c command:
+\c demo
+
+Then you can see which tables are in the demo database.:
+\dt
+
+Then you can view more information about the table, for example bookings(columns and keys):
+\d bookings
+
+Then you can see more details about the table, for example tickets(columns and keys):
+\d tickets
+
+Then you can see more details about the table, for example ticket_flights(columns and keys):
+\d ticket_flights
+
+Then you can see more details about the table, for example flights(columns and keys):
+\d flights
+
+Теперь создаем функцию через команду:
+\ef
+После нам предложат выбрать редактор:
+Select an editor.  To change later, run 'select-editor'.
+  1. /bin/nano        <---- easiest
+  2. /usr/bin/vim.tiny
+Выбираем nano, нажимаем клавишу цифру 1 и нажимаем клавишу Enter.
+Итак мы находимся в файле, стираем в нём всё и копируем из примера 1 и вставляем в файл(используя клавиши ctrl+shift+v) 
+Пример 1:
+--1) Функция для подсчёта суммы бронирования по book_ref. 
+CREATE OR REPLACE FUNCTION bookings.get_booking_total(p_book_ref CHAR(6))
+RETURNS NUMERIC AS $$
+    SELECT SUM(amount)
+    FROM bookings.ticket_flights tf
+    JOIN bookings.tickets t ON t.ticket_no = tf.ticket_no
+    WHERE t.book_ref = p_book_ref;
+$$ LANGUAGE SQL;
+После нажимаем клавиши ctrl+o, затем нажимаем клавишу Enter, и затем выходим ctrl+x.
+Затем проверяем функцию:
+SELECT get_booking_total('0002AD');
+
+Теперь создаем функцию через команду:
+\ef
+После нам предложат выбрать редактор:
+Select an editor.  To change later, run 'select-editor'.
+  1. /bin/nano        <---- easiest
+  2. /usr/bin/vim.tiny
+Выбираем nano, нажимаем клавишу цифру 1 и нажимаем клавишу Enter.
+Итак мы находимся в файле, стираем в нём всё и копируем из примера 2 и вставляем в файл(используя клавиши ctrl+shift+v)
+Пример 2: 
+--2) Функция для поиска всех пассажиров по бронированию.
+CREATE OR REPLACE FUNCTION bookings.get_passengers(p_book_ref CHAR(6))
+RETURNS TABLE(passenger_name TEXT, ticket_no CHAR(13)) AS $$
+    SELECT passenger_name, ticket_no
+    FROM bookings.tickets
+    WHERE book_ref = p_book_ref;
+$$ LANGUAGE SQL;
+После нажимаем клавиши ctrl+o, затем нажимаем клавишу Enter, и затем выходим ctrl+x.
+Затем проверяем функцию:
+SELECT * FROM bookings.get_passengers('10F447');
+
+Теперь создаем процедуру через команду:
+\ef
+После нам предложат выбрать редактор:
+Select an editor.  To change later, run 'select-editor'.
+  1. /bin/nano        <---- easiest
+  2. /usr/bin/vim.tiny
+Выбираем nano, нажимаем клавишу цифру 1 и нажимаем клавишу Enter.
+Итак мы находимся в файле, стираем в нём всё и копируем из примера 3 и вставляем в файл(используя клавиши ctrl+shift+v)
+Пример 3: 
+--3) Процедура: обновление статуса рейса.
+CREATE OR REPLACE PROCEDURE bookings.update_flight_status(p_flight_id INT, p_status VARCHAR)
+LANGUAGE SQL AS $$
+    UPDATE bookings.flights
+    SET status = p_status
+    WHERE flight_id = p_flight_id;
+$$;
+После нажимаем клавиши ctrl+o, затем нажимаем клавишу Enter, и затем выходим ctrl+x.
+Теперь вызываем процедуру:
+CALL bookings.update_flight_status(1001, 'Delayed');
+Затем проверяем процедуру:
+SELECT flight_id, status FROM bookings.flights WHERE flight_id = 1001;
+
+Теперь создаем процедуру через команду:
+\ef
+После нам предложат выбрать редактор:
+Select an editor.  To change later, run 'select-editor'.
+  1. /bin/nano        <---- easiest
+  2. /usr/bin/vim.tiny
+Выбираем nano, нажимаем клавишу цифру 1 и нажимаем клавишу Enter.
+Итак мы находимся в файле, стираем в нём всё и копируем из примера 4 и вставляем в файл(используя клавиши ctrl+shift+v)
+Пример 4:
+--4) Процедура: добавление нового билета (с JSON данными пассажира).
+CREATE OR REPLACE PROCEDURE bookings.add_ticket(
+    p_ticket_no CHAR(13),
+    p_book_ref CHAR(6),
+    p_passenger_id VARCHAR,
+    p_passenger_name TEXT,
+    p_contact_data JSONB
+)
+LANGUAGE SQL AS $$
+    INSERT INTO bookings.tickets(ticket_no, book_ref, passenger_id, passenger_name, contact_data)
+    VALUES (p_ticket_no, p_book_ref, p_passenger_id, p_passenger_name, p_contact_data);
+$$;
+
+После нажимаем клавиши ctrl+o, затем нажимаем клавишу Enter, и затем выходим ctrl+x.
+Теперь вызываем процедуру:
+CALL bookings.add_ticket(
+    '3333333333333',
+    '10F447',
+    '3333 333333',
+    'AI',
+    '{"phone": "101001110001011110001011110111111", "email": "101001110001011110001011110111111"}'
+);
+
+Затем проверяем процедуру:
+select * from tickets where ticket_no = '3333333333333';
+
+After that, we exit the demo database.:
+\q
+
+Then follow another directory, for example Red1:
+cd Red1
