@@ -1,5 +1,5 @@
-## Реальная Игра Погоня За Кодовым Знанием для Реального Терминала Линукс в качестве примера Debian 12 и других систем Линукс в будущем!
-## Real Game PursuitOfCodeKnowledge for Real Terminal Linux as example Debian 12 and other Linux system in the future! 
+## ДОБРО ПОЖАЛОВАТЬ в МАТРИЦУ: Реальная Игра Погоня За Кодовым Знанием для Реального Терминала Линукс в качестве примера Debian 12 BOOKWORM, DEBIAN 13 TRIXIE и других систем Линукс в БУДУЩЕМ!
+## WELCOME TO THE MATRIX: Real Game PursuitOfCodeKnowledge for Real Terminal Linux as example Debian 12 BOOKWORM, DEBIAN 13 TRIXIE and other Linux system in the FUTURE! 
 
 <!--
 **PursuitOfCodeKnowledge/PursuitOfCodeKnowledge** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
