@@ -1,0 +1,231 @@
+Чтобы выполнить задание:
+Первое нужно посмотреть где ты находишься, используй команду pwd:
+pwd
+К примеру она тебе покажет путь /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Blue4, получается ты сейчас находишься в Blue4, 
+тебе нужно вернуться назад используй команду cd ..:
+cd ..
+После этого набери команду ls или ls -a и посмотри что находится вокруг тебя какие файлы и директории:
+ls
+или
+ls -a
+Затем набери команду mkdir чтобы создать директорию Blue (в том случае если ещё не создавал директорию Blue):
+mkdir Blue
+Затем перейди директорию в Blue4:
+cd Blue4
+Потом скопируй файл BLUE4.txt в директорию Blue:
+cp BLUE4.txt ../Blue/
+Затем проверь что скопировал файл BLUE4.txt в директорию Blue при помощи команды ls:
+ls ../Blue/BLUE4.txt
+После перенеси  файл файл BLUE4_ANSWER.txt в директорию Blue:
+mv BLUE4_ANSWER.txt ../Blue/
+Потом удали файл BLUE4.txt при помощи команды rm:
+rm BLUE4.txt
+или
+rm -i BLUE4.txt
+или
+rm -f BLUE4.txt
+После выйди из этой директории Blue4:
+cd ..
+Затем удали директорию Blue4:
+rm -r Blue4
+После убедись что удалил директорию:
+ls 
+или
+ls -a
+
+Если исследовал уже директорию Blue3, то подключаемся к postgres: 
+sudo -u postgres psql postgres
+Вводим пароль от пользователя postgres, который мы создавали до этого
+
+Теперь посмотрим какие базы данных при помощи команды \l:
+\l
+
+Видим demo и переходим в неё при помощи команды \c:
+\c demo
+
+Потом можно посмотреть какие таблицы в базе данных demo:
+\dt
+
+Затем можно посмотреть подробнее о таблице, например bookings(столбцы и ключи):
+\d bookings
+
+Потом можно посмотреть подробнее о таблице, например tickets(столбцы и ключи):
+\d tickets
+
+1) Примеры вставки данных в таблицы, используя INSERT:
+--Вставка нового бронирования в таблицу bookings
+BEGIN;
+INSERT INTO bookings (book_ref, book_date, total_amount)
+VALUES ('87A8F8', now(), 1500.00);
+COMMIT;
+
+--Вставка нового билета в таблицу tickets
+--Важно Старина: book_ref должен уже существовать в bookings.
+BEGIN;
+INSERT INTO tickets (
+  ticket_no,
+  book_ref,
+  passenger_id,
+  passenger_name,
+  contact_data
+)
+VALUES (
+  '8888888888888',
+  '87A8F8',      -- Ссылается на запись в bookings
+  '8888 888888',
+  'Искусственный Интеллект Интеллектович',
+  '{"email": "artificialintelligence@artificialintelligence.ai", "phone": "1010 1001 1001 0110 0111 1111 0000"}'
+);
+COMMIT;
+
+2) Примеры обновления данных в таблицах, используя UPDATE:
+--Обновить сумму бронирования
+BEGIN;
+UPDATE bookings
+SET total_amount = total_amount + 500
+WHERE book_ref = '87A8F8';
+COMMIT;
+
+--Изменить имя пассажира и контактные данные
+BEGIN;
+UPDATE tickets
+SET passenger_name = 'Artificial Intelligence',
+    contact_data = jsonb_set(contact_data, '{email}', '"pursuitofcodeknowledge@artificialintelligence.ai"', true)
+WHERE ticket_no = '8888888888888';
+COMMIT;
+
+3) Примеры удаления данных в таблицах, используя DELETE:
+--Удалить все билеты по book_ref
+BEGIN;
+DELETE FROM tickets
+WHERE book_ref = '87A8F8';
+COMMIT;
+
+--Теперь удалить само бронирование
+BEGIN;
+DELETE FROM bookings
+WHERE book_ref = '87A8F8';
+COMMIT;
+
+После этого выходим из базы данных demo:
+\q
+
+Потом дальше иследуй другую директорию, например Blue5:
+cd Blue5
+
+To complete the task:
+First you need to see where you are, use the pwd command:
+pwd
+For example, she'll show you the way  /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Blue4
+ it turns out that you are currently in Blue4,
+you need to go back using the cd .. :
+cd ..
+After that, type the command ls or ls -a and see what is around you, which files and directories:
+ls
+or
+ls -a
+Then type the mkdir command to create
+the Blue directory(if you didn't create Blue directory):
+mkdir Blue
+Then go to the directory in Blue4:
+cd Blue4
+Then  copy the file BLUE4.txt to the Blue:
+cp BLUE4.txt ../Blue/
+Then check that you copied the file. BLUE4.txt to the Blue directory using the command ls:
+ls ../Blue/BLUE4.txt
+Then transfer the file BLUE4_ANSWER.txt to the Blue:
+mv BLUE4_ANSWER.txt ../Blue/
+Then delete the file BLUE4.txt using the rm command:
+rm BLUE4.txt
+or
+rm -i BLUE4.txt
+or
+rm -f BLUE4.txt
+Then exit this directory Blue4:
+cd ..
+Then delete the Blue4 directory:
+rm -r Blue4
+After that, make sure that you have deleted the directory:
+ls
+or
+ls -a
+
+If you have already explored the Blue3 directory, then we connect to postgres:
+sudo -u postgres psql postgres
+We enter the password from the postgres user that we created before
+
+Now let's look at which databases using the \l command:
+\l
+
+We see the demo and go to it using the \c command:
+\c demo
+
+Then you can see which tables are in the demo database.:
+\dt
+
+Then you can view more information about the table, for example bookings(columns and keys):
+\d bookings
+
+Then you can see more details about the table, for example tickets(columns and keys):
+\d tickets
+
+1) Examples of inserting data into tables using INSERT:
+--Inserting a new booking in the bookings table
+BEGIN;
+INSERT INTO bookings (book_ref, book_date, total_amount)
+VALUES ('87A8F8', now(), 1500.00);
+COMMIT;
+
+--Inserting a new ticket into the tickets table
+--Important Old Man: book_ref should already exist in bookings.
+BEGIN;
+INSERT INTO tickets (
+  ticket_no,
+  book_ref,
+  passenger_id,
+  passenger_name,
+  contact_data
+)
+VALUES (
+  '8888888888888',
+  '87A8F8',      --Refers to an entry in bookings
+  '8888 888888',
+  'Искусственный Интеллект Интеллектович',
+  '{"email": "artificialintelligence@artificialintelligence.ai", "phone": "1010 1001 1001 0110 0111 1111 0000"}'
+);
+COMMIT;
+
+2) Examples of updating data in tables using UPDATE:
+--Update the booking amount
+BEGIN;
+UPDATE bookings
+SET total_amount = total_amount + 500
+WHERE book_ref = '87A8F8';
+COMMIT;
+
+--Change the passenger's name and contact details
+BEGIN;
+UPDATE tickets
+SET passenger_name = 'Artificial Intelligence',
+    contact_data = jsonb_set(contact_data, '{email}', '"pursuitofcodeknowledge@artificialintelligence.ai"', true)
+WHERE ticket_no = '8888888888888';
+COMMIT;
+
+3) Examples of deleting data in tables using DELETE:
+--Delete all tickets by book_ref
+BEGIN;
+DELETE FROM tickets
+WHERE book_ref = '87A8F8';
+COMMIT;
+
+--Now delete the booking itself
+BEGIN;
+DELETE FROM bookings
+WHERE book_ref = '87A8F8';
+COMMIT;
+
+After that, we exit the demo database.:
+\q
+
+Then follow another directory, for example Blue5:
+cd Blue5

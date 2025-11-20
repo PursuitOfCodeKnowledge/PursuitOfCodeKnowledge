@@ -1,0 +1,277 @@
+Чтобы выполнить задание:
+Первое нужно посмотреть где ты находишься, используй команду pwd:
+pwd
+К примеру она тебе покажет путь /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Green2, получается ты сейчас находишься в Green2, 
+тебе нужно вернуться назад используй команду cd ..:
+cd ..
+После этого набери команду ls или ls -a и посмотри что находится вокруг тебя какие файлы и директории:
+ls
+или
+ls -a
+Затем набери команду mkdir чтобы создать директорию Green (в том случае если ещё не создавал директорию Green):
+mkdir Green
+Затем перейди директорию в Green2:
+cd Green2
+Потом скопируй файл GREEN2.txt в директорию Green:
+cp GREEN2.txt ../Green/
+Затем проверь что скопировал файл GREEN2.txt в директорию Green при помощи команды ls:
+ls ../Green/GREEN2.txt
+После перенеси  файл файл GREEN2_ANSWER.txt в директорию Green:
+mv GREEN2_ANSWER.txt ../Green/
+Потом удали файл GREEN2.txt при помощи команды rm:
+rm GREEN2.txt
+или
+rm -i GREEN2.txt
+или
+rm -f GREEN2.txt
+После выйди из этой директории Green2:
+cd ..
+Затем удали директорию Green2:
+rm -r Green2
+После убедись что удалил директорию:
+ls 
+или
+ls -a
+
+Если исследовал уже директорию Green1, то подключаемся к postgres: 
+sudo -u postgres psql postgres
+Вводим пароль от пользователя postgres, который мы создавали до этого
+
+Теперь посмотрим какие базы данных при помощи команды \l:
+\l
+
+Видим demo и переходим в неё при помощи команды \c:
+\c demo
+
+Потом можно посмотреть какие таблицы в базе данных demo:
+\dt
+
+Затем можно посмотреть подробнее о таблице, например bookings(столбцы и ключи):
+\d bookings
+
+Потом можно посмотреть подробнее о таблице, например tickets(столбцы и ключи):
+\d tickets
+
+Потом можно посмотреть подробнее о таблице, например ticket_flights(столбцы и ключи):
+\d ticket_flights
+
+Потом можно посмотреть подробнее о таблице, например flights(столбцы и ключи):
+\d flights
+
+Пример 1: 
+-- вывести все покупки вместе с деталями билетов.
+SELECT
+b.book_ref,
+b.book_date,
+b.total_amount,
+t.ticket_no,
+t.passenger_id,
+t.passenger_name
+FROM bookings b
+JOIN tickets t
+ON b.book_ref = t.book_ref
+ORDER BY b.book_date, t.ticket_no;
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запроса
+Пример 2:
+-- увидеть все бронирования и связи по билетам
+SELECT
+b.book_ref,
+b.book_date,
+b.total_amount,
+t.ticket_no
+FROM bookings b
+LEFT JOIN tickets t
+ON b.book_ref = t.book_ref
+ORDER BY b.book_date;
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запроса
+Пример 3: 
+-- посчитать число билетов на каждое бронирование.
+SELECT
+b.book_ref,
+COUNT(t.ticket_no) AS ticket_count,
+SUM(b.total_amount) AS total_amount
+FROM bookings b
+LEFT JOIN tickets t
+ON b.book_ref = t.book_ref
+GROUP BY b.book_ref
+ORDER BY b.book_ref;
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запроса
+Пример 4:
+-- найти бронирования за конкретный диапазон и наличие билетов в этом диапазоне.
+SELECT
+b.book_ref,
+b.book_date,
+b.total_amount,
+t.ticket_no
+FROM bookings b
+LEFT JOIN tickets t
+ON b.book_ref = t.book_ref
+WHERE b.book_date >= TIMESTAMPTZ '2016-01-01 00:00:00+00'
+AND b.book_date < TIMESTAMPTZ '2016-08-01 00:00:00+00'
+ORDER BY b.book_date; 
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запроса
+Пример 5:
+-- получить информацию о маршрутах билетов.
+SELECT
+t.ticket_no,
+f.flight_id,
+f.departure_airport,
+f.arrival_airport,
+f.scheduled_departure, 
+f.scheduled_arrival 
+FROM tickets t
+JOIN ticket_flights tf ON t.ticket_no = tf.ticket_no
+JOIN flights f ON tf.flight_id = f.flight_id
+ORDER BY t.ticket_no;
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запроса.
+
+После этого выходим из базы данных demo:
+\q
+
+Потом дальше иследуй другую директорию, например Green3:
+cd Green3
+
+To complete the task:
+First you need to see where you are, use the pwd command:
+pwd
+For example, she'll show you the way  /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Green2
+ it turns out that you are currently in Green2,
+you need to go back using the cd .. :
+cd ..
+After that, type the command ls or ls -a and see what is around you, which files and directories:
+ls
+or
+ls -a
+Then type the mkdir command to create
+the Green directory(if you didn't create Green directory):
+mkdir Green
+Then go to the directory in Green2:
+cd Green2
+Then  copy the file GREEN2.txt to the Green:
+cp GREEN2.txt ../Green/
+Then check that you copied the file. GREEN2.txt to the Green directory using the command ls:
+ls ../Green/GREEN2.txt
+Then transfer the file GREEN2_ANSWER.txt to the Green:
+mv GREEN2_ANSWER.txt ../Green/
+Then delete the file GREEN2.txt using the rm command:
+rm GREEN2.txt
+or
+rm -i GREEN2.txt
+or
+rm -f GREEN2.txt
+Then exit this directory Green2:
+cd ..
+Then delete the Green2 directory:
+rm -r Green2
+After that, make sure that you have deleted the directory:
+ls
+or
+ls -a
+
+If you have already explored the Green1 directory, then we connect to postgres:
+sudo -u postgres psql postgres
+We enter the password from the postgres user that we created before
+
+Now let's look at which databases using the \l command:
+\l
+
+We see the demo and go to it using the \c command:
+\c demo
+
+Then you can see which tables are in the demo database.:
+\dt
+
+Then you can view more information about the table, for example bookings(columns and keys):
+\d bookings
+
+Then you can see more details about the table, for example tickets(columns and keys):
+\d tickets
+
+Потом можно посмотреть подробнее о таблице, например ticket_flights(столбцы и ключи):
+\d ticket_flights
+
+Потом можно посмотреть подробнее о таблице, например flights(столбцы и ключи):
+\d flights
+
+Пример 1: 
+-- вывести все покупки вместе с деталями билетов.
+SELECT
+b.book_ref,
+b.book_date,
+b.total_amount,
+t.ticket_no,
+t.passenger_id,
+t.passenger_name
+FROM bookings b
+JOIN tickets t
+ON b.book_ref = t.book_ref
+ORDER BY b.book_date, t.ticket_no;
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запроса
+Пример 2:
+-- увидеть все бронирования и связи по билетам
+SELECT
+b.book_ref,
+b.book_date,
+b.total_amount,
+t.ticket_no
+FROM bookings b
+LEFT JOIN tickets t
+ON b.book_ref = t.book_ref
+ORDER BY b.book_date;
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запроса
+Пример 3: 
+-- посчитать число билетов на каждое бронирование.
+SELECT
+b.book_ref,
+COUNT(t.ticket_no) AS ticket_count,
+SUM(b.total_amount) AS total_amount
+FROM bookings b
+LEFT JOIN tickets t
+ON b.book_ref = t.book_ref
+GROUP BY b.book_ref
+ORDER BY b.book_ref;
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запроса
+Пример 4:
+-- найти бронирования за конкретный диапазон и наличие билетов в этом диапазоне.
+SELECT
+b.book_ref,
+b.book_date,
+b.total_amount,
+t.ticket_no
+FROM bookings b
+LEFT JOIN tickets t
+ON b.book_ref = t.book_ref
+WHERE b.book_date >= TIMESTAMPTZ '2016-01-01 00:00:00+00'
+AND b.book_date < TIMESTAMPTZ '2016-08-01 00:00:00+00'
+ORDER BY b.book_date; 
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запроса
+Пример 5:
+-- получить информацию о маршрутах билетов.
+SELECT
+t.ticket_no,
+f.flight_id,
+f.departure_airport,
+f.arrival_airport,
+f.scheduled_departure, 
+f.scheduled_arrival 
+FROM tickets t
+JOIN ticket_flights tf ON t.ticket_no = tf.ticket_no
+JOIN flights f ON tf.flight_id = f.flight_id
+ORDER BY t.ticket_no;
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запроса.
+
+After that, we exit the demo database.:
+\q
+
+Then follow another directory, for example Green3:
+cd Green3
