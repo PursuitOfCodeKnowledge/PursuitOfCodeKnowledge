@@ -1,0 +1,130 @@
+Чтобы выполнить задание:
+Первое нужно посмотреть где ты находишься, используй команду pwd:
+pwd
+К примеру она тебе покажет путь /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Black5, получается ты сейчас находишься в Black5, 
+тебе нужно вернуться назад используй команду cd ..:
+cd ..
+После этого набери команду ls или ls -a и посмотри что находится вокруг тебя какие файлы и директории:
+ls
+или
+ls -a
+Затем набери команду mkdir чтобы создать директорию Black (в том случае если ещё не создавал директорию Black):
+mkdir Black
+Затем перейди директорию в Black5:
+cd Black5
+Потом перенеси файл BLACK5.txt в директорию Black:
+mv BLACK5.txt ../Black/
+После скопируй файл файл BLACK5_ANSWER.txt в директорию Black:
+cp BLACK5_ANSWER.txt ../Black/
+Затем проверь что скопировал файл BLACK5_ANSWER.txt в директорию Black при помощи команды ls:
+ls ../Black/BLACK5_ANSWER.txt
+Потом удали файл BLACK5_ANSWER.txt при помощи команды rm:
+rm BLACK5_ANSWER.txt
+или
+rm -i BLACK5_ANSWER.txt
+или
+rm -f BLACK5_ANSWER.txt
+После выйди из этой директории Black5:
+cd ..
+Затем удали директорию Black5:
+rm -r Black5
+После убедись что удалил директорию:
+ls 
+или
+ls -a
+Если исследовал уже директорию Black4, то тогда Изучаем Python, чтобы просмотреть версию python напиши команду в терминале:
+python3 --version
+Затем создай папку LearnPython в терминале:
+mkdir LearnPython
+После перейди в эту папку в терминале:
+cd LearnPython
+Затем в этой папке создай файл LEARNPYTHON.py в терминале:
+touch LEARNPYTHON.py
+Потом открой этот файл в редакторе nano:
+nano LEARNPYTHON.py
+После создай любые три переменные:
+name = "Artificial intelligence";
+age = 18;
+weight = 0.99;
+print(f"Name: {name}");
+print(f"Age: {age}");
+print(f"Weiht: {weight}");
+Затем сохрани файл нажми клавиши ctrl + o, потом нажми клавишу Enter, после нажми клавиши ctrl + x, чтобы выйти из редактора nano.
+Потом набери команду сat или less чтобы просмотреть что внутри в файле:
+cat LEARNPYTHON.py
+или 
+less LEARNPYTHON.py
+Чтобы выйти из less, нажми клавишу q.
+После этого запусти файл скрипт на Python, который ты  создал и должен увидеть информацию о твоих созданный переменных в терминале:
+python3 LEARNPYTHON.py
+Дальше выйди из папки LearnPython:
+cd ..
+Потом иследуй другую директорию, например Black6
+cd Black6
+
+
+To complete the task:
+First you need to see where you are, use the pwd command:
+pwd
+For example, she'll show you the way  /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Black5
+ it turns out that you are currently in Black5,
+you need to go back using the cd .. :
+cd ..
+After that, type the command ls or ls -a and see what is around you, which files and directories:
+ls
+or
+ls -a
+Then type the mkdir command to create
+the Black directory (if you didn't create Black directory):
+ mkdir Black
+Then go to the directory in Black5:
+cd Black5
+Then transfer the file. BLACK5.txt to the Black: 
+mv BLACK5.txt ../Black/
+Then copy the file BLACK5_ANSWER.txt to the Black:
+ cp BLACK5_ANSWER.txt ../Black/
+Then check that you copied the file. BLACK5_ANSWER.txt to the Black directory using the command ls:
+ls ../Black/BLACK5_ANSWER.txt
+Then delete the file BLACK5_ANSWER.txt using the rm command:
+rm BLACK5_ANSWER.txt
+or
+rm -i BLACK5_ANSWER.txt
+or
+rm -f BLACK5_ANSWER.txt
+Then exit this directory Black5:
+cd ..
+Then delete the Black5 directory:
+rm -r Black5
+After that, make sure that you have deleted the directory:
+ls
+or
+ls -a
+If you have already explored the Black4 directory, thenthen We study Python, to view the python version, write the command in the terminal:
+python3 --version
+Then create a LearnPython folder in the terminal:
+mkdir LearnPython
+Then go to this folder in the terminal:
+cd LearnPython
+Then create a LEARNPYTHON.py in this folder in the terminal:
+touch LEARNPYTHON.py
+Then open this file in the nano editor.:
+nano LEARNPYTHON.py
+Then create any three variables.:
+name = "Artificial intelligence";
+age = 18;
+weight = 0.99;
+print(f"Name: {name}");
+print(f"Age: {age}");
+print(f"Weiht: {weight}");
+Then save the file by pressing ctrl + o, then press Enter, then press ctrl + x to exit the nano editor.
+Then type the command cat or less to view what's inside the file:
+cat LEARNPYTHON.py
+or    
+less LEARNPYTHON.py
+To exit less, press the q key. 
+After that, run the Python script file that you created and you should see the information about your created variables in the terminal:
+python3 LEARNPYTHON.py
+Next, exit the LearnPython:
+cd .. 
+Then follow another directory, for example Black6
+cd Black6

@@ -1,0 +1,332 @@
+Чтобы выполнить задание:
+Первое нужно посмотреть где ты находишься, используй команду pwd:
+pwd
+К примеру она тебе покажет путь /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Orange6, получается ты сейчас находишься в Orange6, 
+тебе нужно вернуться назад используй команду cd ..:
+cd ..
+После этого набери команду ls или ls -a и посмотри что находится вокруг тебя какие файлы и директории:
+ls
+или
+ls -a
+Затем набери команду mkdir чтобы создать директорию Orange (в том случае если ещё не создавал директорию Orange):
+mkdir Orange
+Затем перейди директорию в Orange6:
+cd Orange6
+Потом скопируй файл ORANGE6.txt в директорию Orange:
+cp ORANGE6.txt ../Orange/
+Затем проверь что скопировал файл ORANGE6.txt в директорию Orange при помощи команды ls:
+ls ../Orange/ORANGE6.txt
+После перенеси  файл файл ORANGE6_ANSWER.txt в директорию Orange:
+mv ORANGE6_ANSWER.txt ../Orange/
+Потом удали файл ORANGE4.txt при помощи команды rm:
+rm ORANGE6.txt
+или
+rm -i ORANGE6.txt
+или
+rm -f ORANGE6.txt
+После выйди из этой директории Orange6:
+cd ..
+Затем удали директорию Orange6:
+rm -r Orange6
+После убедись что удалил директорию:
+ls 
+или
+ls -a
+
+Если исследовал уже директорию Orange5,то заходим в своё окружение(смотри директорию Blue1):
+conda activate envlearnpython
+После набираем команду pwd:
+pwd
+К примеру она тебе покажет путь /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth, получается ты сейчас находишься в PlanetEarth,
+тебе нужно будет запомнить это путь, потому что через несколько операций тебе нужно будет вернуться обратно.
+Теперь переходим:
+cd ~
+Потом вводим команду:
+pip list
+Он покажет весь список пакетов которые установлены в твоем окружении.
+Затем вводим команду clear:
+clear
+Устанавливаем пакеты через pip:
+pip install langchain langchain-community langchain-openai langgraph yandex-cloud-ml-sdk
+После установки пакетов открываем файл для ApiKey(ключ API взять из OpenAI API Platform или Yandex Cloud):
+nano ~/.zshrc
+В нем пишем:
+export OPENAI_API_KEY="sk-xxxxxx...Здесь ваш ключ АPI"
+export YANDEX_API_KEY="твой_секретный_ключ_от_API"
+export YANDEX_FOLDER_ID="твой_folder_id"
+export YANDEX_KEY_ID="твой_индентификатор_API_ключа"
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем:
+source ~/.zshrc
+Затем вводиш команду и должен увидеть ключи:
+echo $OPENAI_API_KEY
+или
+echo $YANDEX_API_KEY
+или
+echo $YANDEX_FOLDER_ID
+или
+echo $YANDEX_KEY_ID
+После перезагрузки компьютера,Старина тебе заново нужно будет ввести команду source ~/.zshrc, чтобы ты мог видеть свои ключи: echo $OPENAI_API_KEY и итак далее.
+Теперь обратно переходим к своему пути:
+cd /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth
+Затем заходим в свою директорию LearnPython:
+cd LearnPython
+Потом создай директорию Agents:
+mkdir Agents
+Затем перейди в эту директорию Agents:
+cd Agents
+Итак создай файл LangChain_Expression_Language.py:
+touch LangChain_Expression_Language.py
+Потом открой файл LangChain_Expression_Language.py:
+nano LangChain_Expression_Language.py
+Пишем в файле для OpenAI:
+import os
+from langchain_openai import ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+# Initialize the Language Model (using ChatOpenAI is recommended)
+llm = ChatOpenAI(temperature=0)
+# --- Prompt 1: Extract Information ---
+prompt_extract = ChatPromptTemplate.from_template("Extract the technical specifications from the following text:\n\n{text_input}")
+# --- Prompt 2: Transform to JSON ---
+prompt_transform = ChatPromptTemplate.from_template("Transform the following specifications into a JSON object with 'model','cpu', 'memory', and 'storage' as keys:\n\n{specifications}")
+# --- Build the Chain using LCEL(Lang Chain Expression Language) ---
+# The StrOutputParser() converts the LLM's message output to a simple string.
+extraction_chain = prompt_extract | llm | StrOutputParser()
+# The full chain passes the output of the extraction chain into the 'specifications'
+# variable for the transformation prompt.
+full_chain = ({"specifications": extraction_chain} | prompt_transform | llm | StrOutputParser())
+# --- Run the Chain ---
+input_text = "The robot model T1000, with a 8.9 GHz 16 core processor, 1TB nano of RAM, and a 3TB nano SSD."
+# Execute the chain with the input text dictionary.
+final_result = full_chain.invoke({"text_input": input_text})
+print("\n--- Final JSON Output ---")
+print(final_result)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 LangChain_Expression_Language.py  
+
+Или пишем в файле для YandexGPT:
+import os
+from langchain_community.llms import YandexGPT
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+
+# --- Настройка окружения ---
+# В .env (или в export в bash) должны быть переменные:
+#   export YANDEX_API_KEY="твой_ключ_от_Яндекс.Облака"
+#   export YANDEX_FOLDER_ID="твой_folder_id"
+
+api_key = os.getenv("YANDEX_API_KEY")
+folder_id = os.getenv("YANDEX_FOLDER_ID")
+
+if not api_key or not folder_id:
+    raise RuntimeError("Нужно задать YANDEX_API_KEY и YANDEX_FOLDER_ID")
+
+# --- Инициализация LLM ---
+llm = YandexGPT(
+    api_key=api_key,
+    folder_id=folder_id,
+    temperature=0,  # максимально детерминированные ответы
+    model="general",  # или "general:latest", см. документацию ЯндексGPT
+)
+
+# --- Prompt 1: Извлечение характеристик ---
+prompt_extract = ChatPromptTemplate.from_template(
+    "Извлеки технические характеристики из текста:\n\n{text_input}"
+)
+
+# --- Prompt 2: Преобразование в JSON ---
+prompt_transform = ChatPromptTemplate.from_template(
+    "Преобразуй характеристики в JSON с ключами 'модель','процессор', 'память', 'жесткий диск':\n\n{specifications}"
+)
+
+# --- Цепочки ---
+extraction_chain = prompt_extract | llm | StrOutputParser()
+full_chain = ({"specifications": extraction_chain}
+              | prompt_transform
+              | llm
+              | StrOutputParser())
+
+# --- Запуск ---
+input_text = "Робот модель T1000, с 8.9 ГГц 16 ядерный процессор , 1TB nano памяти, и 3TB nano SSD."
+result = full_chain.invoke({"text_input": input_text})
+
+print("\n--- Итоговый JSON ---")
+print(result)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 LangChain_Expression_Language.py
+
+После выходим из директории Agents:
+cd ..
+Дальше выйди из папки LearnPython:
+cd ..
+
+Потом дальше иследуй другую директорию, например Purple1:
+cd Purple1
+
+To complete the task:
+First you need to see where you are, use the pwd command:
+pwd
+For example, she'll show you the way  /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Orange6
+ it turns out that you are currently in Orange6,
+you need to go back using the cd .. :
+cd ..
+After that, type the command ls or ls -a and see what is around you, which files and directories:
+ls
+or
+ls -a
+Then type the mkdir command to create
+the Orange directory(if you didn't create Orange directory):
+mkdir Orange
+Then go to the directory in Orange6:
+cd Orange6
+Then  copy the file ORANGE6.txt to the Orange:
+cp ORANGE6.txt ../Orange/
+Then check that you copied the file. ORANGE6.txt to the Orange directory using the command ls:
+ls ../Orange/ORANGE6.txt
+Then transfer the file ORANGE6_ANSWER.txt to the Orange:
+mv ORANGE6_ANSWER.txt ../Orange/
+Then delete the file ORANGE6.txt using the rm command:
+rm ORANGE6.txt
+or
+rm -i ORANGE6.txt
+or
+rm -f ORANGE6.txt
+Then exit this directory Orange6:
+cd ..
+Then delete the Orange6 directory:
+rm -r Orange6
+After that, make sure that you have deleted the directory:
+ls
+or
+ls -a
+
+If you have already explored the Orange5 directory,then we go into our environment (see the Blue1 directory):
+conda activate envlearnpython
+После набираем команду pwd:
+pwd
+К примеру она тебе покажет путь /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth, получается ты сейчас находишься в PlanetEarth,
+тебе нужно будет запомнить это путь, потому что через несколько операций тебе нужно будет вернуться обратно.
+Теперь переходим:
+cd ~
+Потом вводим команду:
+pip list
+Он покажет весь список пакетов которые установлены в твоем окружении.
+Затем вводим команду clear:
+clear
+Устанавливаем пакеты через pip:
+pip install langchain langchain-community langchain-openai langgraph yandex-cloud-ml-sdk
+После установки пакетов открываем файл для ApiKey(ключ API взять из OpenAI API Platform или Yandex Cloud):
+nano ~/.zshrc
+В нем пишем:
+export OPENAI_API_KEY="sk-xxxxxx...Здесь ваш ключ АPI"
+export YANDEX_API_KEY="твой_секретный_ключ_от_API"
+export YANDEX_FOLDER_ID="твой_folder_id"
+export YANDEX_KEY_ID="твой_индентификатор_API_ключа"
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем:
+source ~/.zshrc
+Затем вводиш команду и должен увидеть ключи:
+echo $OPENAI_API_KEY
+или
+echo $YANDEX_API_KEY
+или
+echo $YANDEX_FOLDER_ID
+или
+echo $YANDEX_KEY_ID
+После перезагрузки компьютера,Старина тебе заново нужно будет ввести команду source ~/.zshrc, чтобы ты мог видеть свои ключи: echo $OPENAI_API_KEY и итак далее.
+Теперь обратно переходим к своему пути:
+cd /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth
+
+Then we go to our LearnPython directory:
+cd LearnPython
+Then create the  Agents directory:
+mkdir Agents
+Then go to this  Agents directory:
+cd Agents
+So create a file LangChain_Expression_Language.py:
+touch LangChain_Expression_Language.py
+Then open the file. LangChain_Expression_Language.py:
+nano LangChain_Expression_Language.py
+Write in file for OpenAI:
+import os
+from langchain_openai import ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+# Initialize the Language Model (using ChatOpenAI is recommended)
+llm = ChatOpenAI(temperature=0)
+# --- Prompt 1: Extract Information ---
+prompt_extract = ChatPromptTemplate.from_template("Extract the technical specifications from the following text:\n\n{text_input}")
+# --- Prompt 2: Transform to JSON ---
+prompt_transform = ChatPromptTemplate.from_template("Transform the following specifications into a JSON object with 'model','cpu', 'memory', and 'storage' as keys:\n\n{specifications}")
+# --- Build the Chain using LCEL(Lang Chain Expression Language) ---
+# The StrOutputParser() converts the LLM's message output to a simple string.
+extraction_chain = prompt_extract | llm | StrOutputParser()
+# The full chain passes the output of the extraction chain into the 'specifications'
+# variable for the transformation prompt.
+full_chain = ({"specifications": extraction_chain} | prompt_transform | llm | StrOutputParser())
+# --- Run the Chain ---
+input_text = "The robot model T1000, with a 8.9 GHz 16 core processor, 1TB nano of RAM, and a 3TB nano SSD."
+# Execute the chain with the input text dictionary.
+final_result = full_chain.invoke({"text_input": input_text})
+print("\n--- Final JSON Output ---")
+print(final_result)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 LangChain_Expression_Language.py
+
+Or write in file for YandexGPT:
+import os
+from langchain_community.llms import YandexGPT
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import StrOutputParser
+
+# --- Настройка окружения ---
+# В .env (или в export в bash) должны быть переменные:
+#   export YANDEX_API_KEY="твой_ключ_от_Яндекс.Облака"
+#   export YANDEX_FOLDER_ID="твой_folder_id"
+
+api_key = os.getenv("YANDEX_API_KEY")
+folder_id = os.getenv("YANDEX_FOLDER_ID")
+
+if not api_key or not folder_id:
+    raise RuntimeError("Нужно задать YANDEX_API_KEY и YANDEX_FOLDER_ID")
+
+# --- Инициализация LLM ---
+llm = YandexGPT(
+    api_key=api_key,
+    folder_id=folder_id,
+    temperature=0,  # максимально детерминированные ответы
+    model="general",  # или "general:latest", см. документацию ЯндексGPT
+)
+
+# --- Prompt 1: Извлечение характеристик ---
+prompt_extract = ChatPromptTemplate.from_template(
+    "Извлеки технические характеристики из текста:\n\n{text_input}"
+)
+
+# --- Prompt 2: Преобразование в JSON ---
+prompt_transform = ChatPromptTemplate.from_template(
+    "Преобразуй характеристики в JSON с ключами 'модель','процессор', 'память', 'жесткий диск':\n\n{specifications}"
+)
+
+# --- Цепочки ---
+extraction_chain = prompt_extract | llm | StrOutputParser()
+full_chain = ({"specifications": extraction_chain}
+              | prompt_transform
+              | llm
+              | StrOutputParser())
+
+# --- Запуск ---
+input_text = "Робот модель T1000, с 8.9 ГГц 16 ядерный процессор , 1TB nano памяти, и 3TB nano SSD."
+result = full_chain.invoke({"text_input": input_text})
+
+print("\n--- Итоговый JSON ---")
+print(result)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 LangChain_Expression_Language.py
+
+After that, we exit the Agents:
+cd ..
+Next, exit the LearnPython:
+cd .. 
+
+Then follow another directory, for example Purple1:
+cd Purple1
