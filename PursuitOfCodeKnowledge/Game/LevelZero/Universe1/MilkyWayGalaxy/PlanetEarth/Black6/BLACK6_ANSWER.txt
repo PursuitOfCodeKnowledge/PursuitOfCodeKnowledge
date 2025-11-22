@@ -1,0 +1,135 @@
+Чтобы выполнить задание:
+Первое нужно посмотреть где ты находишься, используй команду pwd:
+pwd
+К примеру она тебе покажет путь /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Black6, получается ты сейчас находишься в Black6, 
+тебе нужно вернуться назад используй команду cd ..:
+cd ..
+После этого набери команду ls или ls -a и посмотри что находится вокруг тебя какие файлы и директории:
+ls
+или
+ls -a
+Затем набери команду mkdir чтобы создать директорию Black (в том случае если ещё не создавал директорию Black):
+mkdir Black
+Затем перейди директорию в Black6:
+cd Black6
+Потом скопируй файл BLACK6.txt в директорию Black:
+cp BLACK6.txt ../Black/
+Затем проверь что скопировал файл BLACK6.txt в директорию Black при помощи команды ls:
+ls ../Black/BLACK6.txt
+После перенеси  файл файл BLACK6_ANSWER.txt в директорию Black:
+mv BLACK6_ANSWER.txt ../Black/
+Потом удали файл BLACK6.txt при помощи команды rm:
+rm BLACK6.txt
+или
+rm -i BLACK6.txt
+или
+rm -f BLACK6.txt
+После выйди из этой директории Black6:
+cd ..
+Затем удали директорию Black6:
+rm -r Black6
+После убедись что удалил директорию:
+ls 
+или
+ls -a
+
+Если исследовал уже директорию Black5, то подключаемся к postgres: 
+sudo -u postgres psql postgres
+
+Вводим пароль от пользователя postgres, который мы создавали до этого
+
+Теперь посмотрим какие базы данных при помощи команды \l:
+\l
+
+Видим demo и переходим в неё при помощи команды \c:
+\c demo
+
+Потом можно посмотреть какие таблицы в базе данных demo:
+\dt
+
+Затем можно посмотреть подробнее о таблице, например bookings(столбцы и ключи):
+\d bookings
+
+Потом можно посмотреть подробнее о таблице, например tickets(столбцы и ключи):
+\d tickets
+
+Затем выполняем выборку данных из двух таблиц bookings и tickets из базы данных demo (Да и не забудь Старина, база данных огромная, ждём когда выполнится запрос):
+SELECT b.book_date, b.total_amount, t.ticket_no, t.passenger_id, t.passenger_name, t.contact_data FROM bookings b JOIN tickets t ON b.book_ref = t.book_ref;
+
+Потом стрелками пролистали, просмотрели данные и выходим из выборки при помощи клавиши q:
+q
+
+После этого выходим из базы данных demo:
+\q
+
+Потом дальше иследуй другую директорию, например Blue1:
+cd Blue1
+
+To complete the task:
+First you need to see where you are, use the pwd command:
+pwd
+For example, she'll show you the way  /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Black6
+ it turns out that you are currently in Black6,
+you need to go back using the cd .. :
+cd ..
+After that, type the command ls or ls -a and see what is around you, which files and directories:
+ls
+or
+ls -a
+Then type the mkdir command to create
+the Black directory(if you didn't create Black directory):
+mkdir Black
+Then go to the directory in Black6:
+cd Black6
+Then  copy the file BLACK6.txt to the Black:
+cp BLACK6.txt ../Black/
+Then check that you copied the file. BLACK6.txt to the Black directory using the command ls:
+ls ../Black/BLACK6.txt
+Then transfer the file BLACK6_ANSWER.txt to the Black:
+mv BLACK6_ANSWER.txt ../Black/
+Then delete the file BLACK6.txt using the rm command:
+rm BLACK6.txt
+or
+rm -i BLACK6.txt
+or
+rm -f BLACK6.txt
+Then exit this directory Black6:
+cd ..
+Then delete the Black6 directory:
+rm -r Black6
+After that, make sure that you have deleted the directory:
+ls
+or
+ls -a
+
+If you have already explored the Black5 directory, then we connect to postgres:
+sudo -u postgres psql postgres
+
+We enter the password from the postgres user that we created before
+
+Now let's look at which databases using the \l command:
+\l
+
+We see the demo and go to it using the \c command:
+\c demo
+
+Then you can see which tables are in the demo database.:
+\dt
+
+Then you can view more information about the table, for example bookings(columns and keys):
+\d bookings
+
+Then you can see more details about the table, for example tickets(columns and keys):
+\d tickets
+
+Then we select data from two tables bookings and tickets from the demo database (And don't forget, Old man, the database is huge, we are waiting for the query to be executed):
+SELECT b.book_date, b.total_amount, t.ticket_no, t.passengers_id, t.passengers name, t.contact_data FROM bookings b JOIN tickets t ON b.book_ref = t.book_ref;
+
+Then we scrolled through the arrows, viewed the data, and exit the selection using the q:
+q
+
+After that, we exit the demo database.:
+\q
+
+Then follow another directory, for example Blue1:
+cd Blue1
