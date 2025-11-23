@@ -1,0 +1,189 @@
+Чтобы выполнить задание:
+Первое нужно посмотреть где ты находишься, используй команду pwd:
+pwd
+К примеру она тебе покажет путь /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Red5, получается ты сейчас находишься в Red5, 
+тебе нужно вернуться назад используй команду cd ..:
+cd ..
+После этого набери команду ls или ls -a и посмотри что находится вокруг тебя какие файлы и директории:
+ls
+или
+ls -a
+Затем набери команду mkdir чтобы создать директорию Red (в том случае если ещё не создавал директорию Red):
+mkdir Red
+Затем перейди директорию в Red5:
+cd Red5
+Потом перенеси файл RED3.txt в директорию Red:
+mv RED5.txt ../Red/
+После скопируй файл файл RED5_ANSWER.txt в директорию Red:
+cp RED5_ANSWER.txt ../Red/
+Затем проверь что скопировал файл RED5_ANSWER.txt в директорию Red при помощи команды ls:
+ls ../Red/RED5_ANSWER.txt
+Потом удали файл RED5_ANSWER.txt при помощи команды rm:
+rm RED5_ANSWER.txt
+или
+rm -i RED5_ANSWER.txt
+или
+rm -f RED5_ANSWER.txt
+После выйди из этой директории Red5:
+cd ..
+Затем удали директорию Red5:
+rm -r Red5
+После убедись что удалил директорию:
+ls 
+или
+ls -a
+Если исследовал уже директорию Red4, то заходим в своё окружение(смотри директорию Blue1):
+conda activate envlearnpython
+Затем заходим в свою директорию LearnPython:
+cd LearnPython
+Потом создай директорию AlgorithmsAndDataStructures(в том случае если ещё не создавал директорию AlgorithmsAndDataStructures):
+mkdir AlgorithmsAndDataStructures
+Затем перейди в эту директорию AlgorithmsAndDataStructures:
+cd AlgorithmsAndDataStructures
+Итак создай файл stack.py:
+touch stack.py
+Потом открой файл stack.py:
+nano stack.py
+Пишем в файле:
+class Stack:
+  def __init__(self):
+    self.items = []
+
+  def push(self, item):
+    self.items.append(item)
+
+  def pop(self):
+    if not self.isEmpty():
+      return self.items.pop()
+    raise IndexError("pop from empty stack")
+
+  def peek(self):
+    if not self.isEmpty():
+      return self.items[-1]
+    raise IndexError("peek from empty stack")
+
+  def size(self):
+    return  len(self.items)
+
+  def __str__(self):
+    return str(self.items)
+
+  def isEmpty(self):
+    return len(self.items) == 0
+
+if __name__ == "__main__":
+  stack = Stack()
+  for i in range(10):
+    stack.push(i)
+
+  print(f"Стек: {stack}")
+  print(f"Вершина стека: {stack.peek()}")
+  print(f"Удаленный элемент: {stack.pop()}")
+  print(f"Вершина стека: {stack.peek()}")
+  print(f"Стек: {stack}")
+
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 stack.py
+
+После выходим из директории AlgorithmsAndDataStructures:
+cd ..
+Дальше выйди из папки LearnPython:
+cd ..
+Потом иследуй другую директорию, например Red6
+cd Red6
+
+To complete the task:
+First you need to see where you are, use the pwd command:
+pwd
+For example, she'll show you the way  /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Red5
+ it turns out that you are currently in Red5,
+you need to go back using the cd .. :
+cd ..
+After that, type the command ls or ls -a and see what is around you, which files and directories:
+ls
+or
+ls -a
+Then type the mkdir command to create
+the Red directory (if you didn't create Red directory):
+ mkdir Red
+Then go to the directory in Red5:
+cd Red5
+Then transfer the file. RED5.txt to the Red: 
+mv RED5.txt ../Red/
+Then copy the file RED5_ANSWER.txt to the Red:
+ cp RED5_ANSWER.txt ../Red/
+Then check that you copied the file. RED5_ANSWER.txt to the Red directory using the command ls:
+ls ../Red/RED5_ANSWER.txt
+Then delete the file RED5_ANSWER.txt using the rm command:
+rm RED5_ANSWER.txt
+or
+rm -i RED5_ANSWER.txt
+or
+rm -f RED5_ANSWER.txt
+Then exit this directory Red5:
+cd ..
+Then delete the Red5 directory:
+rm -r Red5
+After that, make sure that you have deleted the directory:
+ls
+or
+ls -a
+If you have already explored the Red4 directory, then we go into our environment (see the Blue1 directory):
+conda activate envlearnpython
+Then we go to our LearnPython directory:
+cd LearnPython
+Then create the  AlgorithmsAndDataStructures directory(if you didn't create  AlgorithmsAndDataStructures directory):
+mkdir AlgorithmsAndDataStructures
+Then go to this  AlgorithmsAndDataStructures directory:
+cd AlgorithmsAndDataStructures
+So create a file stack.py:
+touch stack.py
+Then open the file stack.py:
+nano stack.py
+Write in file:
+class Stack:
+  def __init__(self):
+    self.items = []
+
+  def push(self, item):
+    self.items.append(item)
+
+  def pop(self):
+    if not self.isEmpty():
+      return self.items.pop()
+    raise IndexError("pop from empty stack")
+
+  def peek(self):
+    if not self.isEmpty():
+      return self.items[-1]
+    raise IndexError("peek from empty stack")
+
+  def size(self):
+    return  len(self.items)
+
+  def __str__(self):
+    return str(self.items)
+
+  def isEmpty(self):
+    return len(self.items) == 0
+
+if __name__ == "__main__":
+  stack = Stack()
+  for i in range(10):
+    stack.push(i)
+
+  print(f"Стек: {stack}")
+  print(f"Вершина стека: {stack.peek()}")
+  print(f"Удаленный элемент: {stack.pop()}")
+  print(f"Вершина стека: {stack.peek()}")
+  print(f"Стек: {stack}")
+
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 stack.py  
+
+After that, we exit the AlgorithmsAndDataStructures:
+cd ..
+Next, exit the LearnPython:
+cd .. 
+Then follow another directory, for example Red6
+cd Red6
