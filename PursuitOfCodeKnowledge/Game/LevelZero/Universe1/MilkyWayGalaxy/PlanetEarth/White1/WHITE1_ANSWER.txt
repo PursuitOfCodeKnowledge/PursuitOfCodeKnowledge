@@ -1,0 +1,135 @@
+Чтобы выполнить задание:
+Первое нужно посмотреть где ты находишься, используй команду pwd:
+pwd
+К примеру она тебе покажет путь /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/White1, получается ты сейчас находишься в White1, 
+тебе нужно вернуться назад используй команду cd ..:
+cd ..
+После этого набери команду ls или ls -a и посмотри что находится вокруг тебя какие файлы и директории:
+ls
+или
+ls -a
+Затем набери команду mkdir чтобы создать директорию White (в том случае если ещё не создавал директорию White):
+mkdir White
+Затем перейди директорию в White1:
+cd White1
+Потом перенеси файл WHITE1.txt в директорию White:
+mv WHITE1.txt ../White/
+После скопируй файл файл WHITE1_ANSWER.txt в директорию White:
+cp WHITE1_ANSWER.txt ../White/
+Затем проверь что скопировал файл WHITE1_ANSWER.txt в директорию White при помощи команды ls:
+ls ../White/WHITE1_ANSWER.txt
+Потом удали файл WHITE1_ANSWER.txt при помощи команды rm:
+rm WHITE1_ANSWER.txt
+или
+rm -i WHITE1_ANSWER.txt
+или
+rm -f WHITE1_ANSWER.txt
+После выйди из этой директории White1:
+cd ..
+Затем удали директорию White1:
+rm -r White1
+После убедись что удалил директорию:
+ls 
+или
+ls -a
+Если исследовал уже директорию Red6, то заходим в своё окружение(смотри директорию Blue1):
+conda activate envlearnpython
+Затем заходим в свою директорию LearnPython:
+cd LearnPython
+Потом создай директорию AlgorithmsAndDataStructures(в том случае если ещё не создавал директорию AlgorithmsAndDataStructures):
+mkdir AlgorithmsAndDataStructures
+Затем перейди в эту директорию AlgorithmsAndDataStructures:
+cd AlgorithmsAndDataStructures
+Итак создай файл stack_deque.py:
+touch stack_deque.py
+Потом открой файл stack_deque.py:
+nano stack_deque.py
+Пишем в файле:
+from collections import deque
+if __name__ == "__main__":
+  stack = deque()
+  for i in range(10):
+    stack.append(i)
+  print(f"Стек: {stack}")
+  print(f"Вершина стека: {stack[-1]}")
+  print(f"Удаленный элемент: {stack.pop()}")
+  print(f"Стек: {stack}")
+
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 stack_deque.py
+
+После выходим из директории AlgorithmsAndDataStructures:
+cd ..
+Дальше выйди из папки LearnPython:
+cd ..
+Потом иследуй другую директорию, например White2
+cd White2
+
+To complete the task:
+First you need to see where you are, use the pwd command:
+pwd
+For example, she'll show you the way  /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/White1
+ it turns out that you are currently in White1,
+you need to go back using the cd .. :
+cd ..
+After that, type the command ls or ls -a and see what is around you, which files and directories:
+ls
+or
+ls -a
+Then type the mkdir command to create
+the White directory (if you didn't create White directory):
+ mkdir White
+Then go to the directory in White1:
+cd White1
+Then transfer the file WHITE1.txt to the White: 
+mv WHITE1.txt ../White/
+Then copy the file WHITE1_ANSWER.txt to the White:
+ cp WHITE1_ANSWER.txt ../White/
+Then check that you copied the file. WHITE1_ANSWER.txt to the White directory using the command ls:
+ls ../White/WHITE1_ANSWER.txt
+Then delete the file WHITE1_ANSWER.txt using the rm command:
+rm WHITE1_ANSWER.txt
+or
+rm -i WHITE1_ANSWER.txt
+or
+rm -f WHITE1_ANSWER.txt
+Then exit this directory White1:
+cd ..
+Then delete the White1 directory:
+rm -r White1
+After that, make sure that you have deleted the directory:
+ls
+or
+ls -a
+If you have already explored the Red6 directory, then we go into our environment (see the Blue1 directory):
+conda activate envlearnpython
+Then we go to our LearnPython directory:
+cd LearnPython
+Then create the  AlgorithmsAndDataStructures directory(if you didn't create  AlgorithmsAndDataStructures directory):
+mkdir AlgorithmsAndDataStructures
+Then go to this  AlgorithmsAndDataStructures directory:
+cd AlgorithmsAndDataStructures
+So create a file stack_deque.py:
+touch stack_deque.py
+Then open the file stack_deque.py:
+nano stack_deque.py
+Write in file:
+from collections import deque
+if __name__ == "__main__":
+  stack = deque()
+  for i in range(10):
+    stack.append(i)
+  print(f"Стек: {stack}")
+  print(f"Вершина стека: {stack[-1]}")
+  print(f"Удаленный элемент: {stack.pop()}")
+  print(f"Стек: {stack}")
+
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 stack_deque.py  
+
+After that, we exit the AlgorithmsAndDataStructures:
+cd ..
+Next, exit the LearnPython:
+cd .. 
+Then follow another directory, for example White2
+cd White2

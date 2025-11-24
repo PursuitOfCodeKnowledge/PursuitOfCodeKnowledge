@@ -1,0 +1,293 @@
+Чтобы выполнить задание:
+Первое нужно посмотреть где ты находишься, используй команду pwd:
+pwd
+К примеру она тебе покажет путь /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Green6, получается ты сейчас находишься в Green6, 
+тебе нужно вернуться назад используй команду cd ..:
+cd ..
+После этого набери команду ls или ls -a и посмотри что находится вокруг тебя какие файлы и директории:
+ls
+или
+ls -a
+Затем набери команду mkdir чтобы создать директорию Green (в том случае если ещё не создавал директорию Green):
+mkdir Green
+Затем перейди директорию в Green6:
+cd Green6
+Потом скопируй файл GREEN6.txt в директорию Green:
+cp GREEN6.txt ../Green/
+Затем проверь что скопировал файл GREEN6.txt в директорию Green при помощи команды ls:
+ls ../Green/GREEN6.txt
+После перенеси  файл файл GREEN6_ANSWER.txt в директорию Green:
+mv GREEN6_ANSWER.txt ../Green/
+Потом удали файл GREEN6.txt при помощи команды rm:
+rm GREEN6.txt
+или
+rm -i GREEN6.txt
+или
+rm -f GREEN6.txt
+После выйди из этой директории Green6:
+cd ..
+Затем удали директорию Green6:
+rm -r Green6
+После убедись что удалил директорию:
+ls 
+или
+ls -a
+
+Если исследовал уже директорию Green5, то подключаемся к postgres: 
+sudo -u postgres psql postgres
+Вводим пароль от пользователя postgres, который мы создавали до этого
+
+Теперь посмотрим какие базы данных при помощи команды \l:
+\l
+
+Видим demo и переходим в неё при помощи команды \c:
+\c demo
+
+Потом можно посмотреть какие таблицы в базе данных demo:
+\dt
+
+Затем можно посмотреть подробнее о таблице, например bookings(столбцы и ключи):
+\d bookings
+
+Потом можно посмотреть подробнее о таблице, например tickets(столбцы и ключи):
+\d tickets
+
+Пример 1: 
+-- 1) найти билеты, принадлежащие к бронированиям за период: 30 дней до указанной даты. Например, выбрать билеты для бронирований за 2016-08-01 и за 30 дней до этой даты.
+SELECT
+t.ticket_no,
+t.passenger_name,
+t.book_ref,
+b.book_date,
+b.total_amount
+FROM
+tickets AS t
+JOIN
+bookings AS b ON t.book_ref = b.book_ref
+WHERE
+b.book_date >= TIMESTAMP '2016-08-01' - INTERVAL '30 days'
+AND b.book_date <= TIMESTAMP '2016-08-01'
+ORDER BY
+b.book_date DESC;
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запроса
+
+Пример 2: 
+-- 2) нахождения билетов, у которых билет относится к бронированию с наибольшей суммой за месяц.
+SELECT
+t.ticket_no,
+t.passenger_name,
+b.total_amount,
+b.book_date
+FROM
+tickets AS t
+JOIN
+bookings AS b ON t.book_ref = b.book_ref
+WHERE
+b.total_amount = (
+SELECT MAX(b2.total_amount)
+FROM bookings AS b2
+WHERE b2.book_ref = b.book_ref
+)
+ORDER BY
+b.book_date DESC;
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запрос
+
+Пример 3: Да Старина будь всегда аккуратен с подзапросами, потому что Базы Данных всегда ОГРОМНЫЕ и запрос может обрабатываться часами, днями и итак даллее, поэтому я ограничил запрос LIMIT 5,
+ чтобы показать тебе такой запрос:
+-- 3) добавить к каждому билету сумму и количество билетов на то же бронирование(Подзапрос в SELECT (короткий подзапрос, коррелированный)).
+SELECT
+t.ticket_no,
+t.passenger_name,
+t.book_ref,
+b.book_date,
+b.total_amount,
+(
+SELECT COUNT(*)
+FROM tickets AS t2
+WHERE t2.book_ref = t.book_ref
+) AS tickets_per_booking
+FROM
+tickets AS t
+JOIN
+bookings AS b ON t.book_ref = b.book_ref
+ORDER BY
+b.book_date DESC
+LIMIT 5;
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запрос
+
+Пример 4: 
+-- 4) подзапрос в FROM для агрегации по билетам внутри бронирований и последующего объединения(Коррелированные подзапросы в FROM).
+SELECT
+b.book_ref,
+b.book_date,
+b.total_amount,
+tp.total_tickets
+FROM
+bookings AS b
+JOIN (
+SELECT
+book_ref,
+COUNT(*) AS total_tickets
+FROM tickets
+GROUP BY book_ref
+) AS tp ON tp.book_ref = b.book_ref
+ORDER BY
+b.book_date DESC;
+После выполнения запроса нажми клавишу home или end или q для выхода из запрос
+
+После этого выходим из базы данных demo:
+\q
+
+Потом дальше иследуй другую директорию, например Orange1:
+cd Orange1
+
+To complete the task:
+First you need to see where you are, use the pwd command:
+pwd
+For example, she'll show you the way  /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Green6
+ it turns out that you are currently in Green6,
+you need to go back using the cd .. :
+cd ..
+After that, type the command ls or ls -a and see what is around you, which files and directories:
+ls
+or
+ls -a
+Then type the mkdir command to create
+the Green directory(if you didn't create Green directory):
+mkdir Green
+Then go to the directory in Green6:
+cd Green6
+Then  copy the file GREEN6.txt to the Green:
+cp GREEN6.txt ../Green/
+Then check that you copied the file. GREEN6.txt to the Green directory using the command ls:
+ls ../Green/GREEN6.txt
+Then transfer the file GREEN6_ANSWER.txt to the Green:
+mv GREEN6_ANSWER.txt ../Green/
+Then delete the file GREEN6.txt using the rm command:
+rm GREEN6.txt
+or
+rm -i GREEN6.txt
+or
+rm -f GREEN6.txt
+Then exit this directory Green6:
+cd ..
+Then delete the Green6 directory:
+rm -r Green6
+After that, make sure that you have deleted the directory:
+ls
+or
+ls -a
+
+If you have already explored the Green3 directory, then we connect to postgres:
+sudo -u postgres psql postgres
+We enter the password from the postgres user that we created before
+
+Now let's look at which databases using the \l command:
+\l
+
+We see the demo and go to it using the \c command:
+\c demo
+
+Then you can see which tables are in the demo database.:
+\dt
+
+Then you can view more information about the table, for example bookings(columns and keys):
+\d bookings
+
+Then you can see more details about the table, for example tickets(columns and keys):
+\d tickets
+
+Пример 1: 
+-- 1) найти билеты, принадлежащие к бронированиям за период: 30 дней до указанной даты. Например, выбрать билеты для бронирований за 2016-08-01 и за 30 дней до этой даты.
+SELECT
+t.ticket_no,
+t.passenger_name,
+t.book_ref,
+b.book_date,
+b.total_amount
+FROM
+tickets AS t
+JOIN
+bookings AS b ON t.book_ref = b.book_ref
+WHERE
+b.book_date >= TIMESTAMP '2016-08-01' - INTERVAL '30 days'
+AND b.book_date <= TIMESTAMP '2016-08-01'
+ORDER BY
+b.book_date DESC;
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запроса
+
+Пример 2: 
+-- 2) нахождения билетов, у которых билет относится к бронированию с наибольшей суммой за месяц.
+SELECT
+t.ticket_no,
+t.passenger_name,
+b.total_amount,
+b.book_date
+FROM
+tickets AS t
+JOIN
+bookings AS b ON t.book_ref = b.book_ref
+WHERE
+b.total_amount = (
+SELECT MAX(b2.total_amount)
+FROM bookings AS b2
+WHERE b2.book_ref = b.book_ref
+)
+ORDER BY
+b.book_date DESC;
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запрос
+
+Пример 3: Да Старина будь всегда аккуратен с подзапросами, потому что Базы Данных всегда ОГРОМНЫЕ и запрос может обрабатываться часами, днями и итак даллее, поэтому я ограничил запрос LIMIT 5,
+ чтобы показать тебе такой запрос:
+-- 3) добавить к каждому билету сумму и количество билетов на то же бронирование(Подзапрос в SELECT (короткий подзапрос, коррелированный)).
+SELECT
+t.ticket_no,
+t.passenger_name,
+t.book_ref,
+b.book_date,
+b.total_amount,
+(
+SELECT COUNT(*)
+FROM tickets AS t2
+WHERE t2.book_ref = t.book_ref
+) AS tickets_per_booking
+FROM
+tickets AS t
+JOIN
+bookings AS b ON t.book_ref = b.book_ref
+ORDER BY
+b.book_date DESC
+LIMIT 5;
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запрос
+
+Пример 4: 
+-- 4) подзапрос в FROM для агрегации по билетам внутри бронирований и последующего объединения(Коррелированные подзапросы в FROM).
+SELECT
+b.book_ref,
+b.book_date,
+b.total_amount,
+tp.total_tickets
+FROM
+bookings AS b
+JOIN (
+SELECT
+book_ref,
+COUNT(*) AS total_tickets
+FROM tickets
+GROUP BY book_ref
+) AS tp ON tp.book_ref = b.book_ref
+ORDER BY
+b.book_date DESC;
+После выполнения запроса нажми клавишу home или end или q для выхода из запрос
+
+After that, we exit the demo database.:
+\q
+
+Then follow another directory, for example Orange1:
+cd Orange1
