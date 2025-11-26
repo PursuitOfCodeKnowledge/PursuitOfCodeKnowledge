@@ -1,0 +1,354 @@
+Чтобы выполнить задание:
+Первое нужно посмотреть где ты находишься, используй команду pwd:
+pwd
+К примеру она тебе покажет путь /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Green4, получается ты сейчас находишься в Green4, 
+тебе нужно вернуться назад используй команду cd ..:
+cd ..
+После этого набери команду ls или ls -a и посмотри что находится вокруг тебя какие файлы и директории:
+ls
+или
+ls -a
+Затем набери команду mkdir чтобы создать директорию Green (в том случае если ещё не создавал директорию Green):
+mkdir Green
+Затем перейди директорию в Green4:
+cd Green4
+Потом скопируй файл GREEN4.txt в директорию Green:
+cp GREEN4.txt ../Green/
+Затем проверь что скопировал файл GREEN4.txt в директорию Green при помощи команды ls:
+ls ../Green/GREEN4.txt
+После перенеси  файл файл GREEN4_ANSWER.txt в директорию Green:
+mv GREEN4_ANSWER.txt ../Green/
+Потом удали файл GREEN4.txt при помощи команды rm:
+rm GREEN4.txt
+или
+rm -i GREEN4.txt
+или
+rm -f GREEN4.txt
+После выйди из этой директории Green4:
+cd ..
+Затем удали директорию Green4:
+rm -r Green4
+После убедись что удалил директорию:
+ls 
+или
+ls -a
+
+Если исследовал уже директорию Green3, то подключаемся к postgres: 
+sudo -u postgres psql postgres
+Вводим пароль от пользователя postgres, который мы создавали до этого
+
+Теперь посмотрим какие базы данных при помощи команды \l:
+\l
+
+Видим demo и переходим в неё при помощи команды \c:
+\c demo
+
+Потом можно посмотреть какие таблицы в базе данных demo:
+\dt
+
+Затем можно посмотреть подробнее о таблице, например bookings(столбцы и ключи):
+\d bookings
+
+Потом можно посмотреть подробнее о таблице, например tickets(столбцы и ключи):
+\d tickets
+
+Пример 1: 
+-- находить билеты вместе с их бронированиями, когда есть соответствие(INNER JOIN).
+SELECT
+b.book_ref,
+b.book_date,
+b.total_amount,
+t.ticket_no,
+t.passenger_name
+FROM bookings AS b
+INNER JOIN tickets AS t
+ON t.book_ref = b.book_ref
+ORDER BY b.book_ref, t.ticket_no;
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запроса
+Пример 2:
+-- показать все бронирования и привязанные к ним билеты, включая бронирования без билетов(LEFT JOIN).
+SELECT
+b.book_ref,
+b.book_date,
+b.total_amount,
+t.ticket_no,
+t.passenger_name
+FROM bookings AS b
+LEFT JOIN tickets AS t
+ON t.book_ref = b.book_ref
+ORDER BY b.book_ref, t.ticket_no;
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запроса
+Пример 3: 
+-- показать все билеты и связанность с бронированием; если вдруг билет не имеет соответствия в bookings(RIGHT JOIN).
+SELECT
+b.book_ref,
+b.book_date,
+b.total_amount,
+t.ticket_no,
+t.passenger_name
+FROM bookings AS b
+RIGHT JOIN tickets AS t
+ON t.book_ref = b.book_ref
+ORDER BY t.ticket_no;
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запроса
+Пример 4:
+-- полный обзор пар «бронирование – билет», включая редкие случаи без бронирования или без билета(FULL OUTER JOIN).
+ SELECT
+b.book_ref,
+b.book_date,
+b.total_amount,
+t.ticket_no,
+t.passenger_name
+FROM bookings AS b
+FULL OUTER JOIN tickets AS t
+ON t.book_ref = b.book_ref
+ORDER BY COALESCE(b.book_ref, t.book_ref), COALESCE(t.ticket_no, '' );
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запроса
+Пример 5:
+--  сколько билетов на каждое бронирование (INNER JOIN).
+SELECT
+b.book_ref,
+COUNT(t.ticket_no) AS tickets_count,
+SUM(b.total_amount) AS total_for_booking
+FROM bookings AS b
+INNER JOIN tickets AS t
+ON t.book_ref = b.book_ref
+GROUP BY b.book_ref
+ORDER BY b.book_ref;
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запроса.
+
+Пример 6:
+-- билеты без номера пассажира должны восприниматься как пропуски (использование COALESCE).
+SELECT
+b.book_ref,
+b.book_date,
+COALESCE(t.ticket_no, 'no_ticket') AS ticket_no,
+COALESCE(t.passenger_name, 'unknown') AS passenger_name
+FROM bookings AS b
+LEFT JOIN tickets AS t
+ON t.book_ref = b.book_ref
+ORDER BY b.book_ref;
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запроса.
+
+Пример 7:
+-- с фильтром по дате бронирования: только за последние 30 дней, вместе с их билетами (INNER JOIN).
+SELECT
+b.book_ref,
+b.book_date,
+b.total_amount,
+t.ticket_no,
+t.passenger_name
+FROM bookings AS b
+INNER JOIN tickets AS t
+ON t.book_ref = b.book_ref
+WHERE b.book_date >= NOW() - INTERVAL '30 days'
+ORDER BY b.book_date DESC;
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запроса.
+
+Пример 8:
+-- использование связанных таблиц для демонстрации FULL OUTER JOIN на иерархии.
+SELECT
+b.book_ref,
+b.book_date,
+b.total_amount,
+t.ticket_no,
+t.passenger_name
+FROM bookings AS b
+FULL OUTER JOIN tickets AS t
+ON t.book_ref = b.book_ref
+WHERE b.book_ref IS NULL OR t.ticket_no IS NULL
+ORDER BY b.book_ref NULLS FIRST, t.ticket_no NULLS FIRST;
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запроса.
+
+После этого выходим из базы данных demo:
+\q
+
+Потом дальше иследуй другую директорию, например Green5:
+cd Green5
+
+To complete the task:
+First you need to see where you are, use the pwd command:
+pwd
+For example, she'll show you the way  /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Green4
+ it turns out that you are currently in Green4,
+you need to go back using the cd .. :
+cd ..
+After that, type the command ls or ls -a and see what is around you, which files and directories:
+ls
+or
+ls -a
+Then type the mkdir command to create
+the Green directory(if you didn't create Green directory):
+mkdir Green
+Then go to the directory in Green4:
+cd Green4
+Then  copy the file GREEN4.txt to the Green:
+cp GREEN4.txt ../Green/
+Then check that you copied the file. GREEN4.txt to the Green directory using the command ls:
+ls ../Green/GREEN4.txt
+Then transfer the file GREEN4_ANSWER.txt to the Green:
+mv GREEN4_ANSWER.txt ../Green/
+Then delete the file GREEN4.txt using the rm command:
+rm GREEN4.txt
+or
+rm -i GREEN4.txt
+or
+rm -f GREEN4.txt
+Then exit this directory Green4:
+cd ..
+Then delete the Green4 directory:
+rm -r Green4
+After that, make sure that you have deleted the directory:
+ls
+or
+ls -a
+
+If you have already explored the Green3 directory, then we connect to postgres:
+sudo -u postgres psql postgres
+We enter the password from the postgres user that we created before
+
+Now let's look at which databases using the \l command:
+\l
+
+We see the demo and go to it using the \c command:
+\c demo
+
+Then you can see which tables are in the demo database.:
+\dt
+
+Then you can view more information about the table, for example bookings(columns and keys):
+\d bookings
+
+Then you can see more details about the table, for example tickets(columns and keys):
+\d tickets
+
+Пример 1: 
+-- находить билеты вместе с их бронированиями, когда есть соответствие(INNER JOIN).
+SELECT
+b.book_ref,
+b.book_date,
+b.total_amount,
+t.ticket_no,
+t.passenger_name
+FROM bookings AS b
+INNER JOIN tickets AS t
+ON t.book_ref = b.book_ref
+ORDER BY b.book_ref, t.ticket_no;
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запроса
+Пример 2:
+-- показать все бронирования и привязанные к ним билеты, включая бронирования без билетов(LEFT JOIN).
+SELECT
+b.book_ref,
+b.book_date,
+b.total_amount,
+t.ticket_no,
+t.passenger_name
+FROM bookings AS b
+LEFT JOIN tickets AS t
+ON t.book_ref = b.book_ref
+ORDER BY b.book_ref, t.ticket_no;
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запроса
+Пример 3: 
+-- показать все билеты и связанность с бронированием; если вдруг билет не имеет соответствия в bookings(RIGHT JOIN).
+SELECT
+b.book_ref,
+b.book_date,
+b.total_amount,
+t.ticket_no,
+t.passenger_name
+FROM bookings AS b
+RIGHT JOIN tickets AS t
+ON t.book_ref = b.book_ref
+ORDER BY t.ticket_no;
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запроса
+Пример 4:
+-- полный обзор пар «бронирование – билет», включая редкие случаи без бронирования или без билета(FULL OUTER JOIN).
+ SELECT
+b.book_ref,
+b.book_date,
+b.total_amount,
+t.ticket_no,
+t.passenger_name
+FROM bookings AS b
+FULL OUTER JOIN tickets AS t
+ON t.book_ref = b.book_ref
+ORDER BY COALESCE(b.book_ref, t.book_ref), COALESCE(t.ticket_no, '' );
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запроса
+Пример 5:
+--  сколько билетов на каждое бронирование (INNER JOIN).
+SELECT
+b.book_ref,
+COUNT(t.ticket_no) AS tickets_count,
+SUM(b.total_amount) AS total_for_booking
+FROM bookings AS b
+INNER JOIN tickets AS t
+ON t.book_ref = b.book_ref
+GROUP BY b.book_ref
+ORDER BY b.book_ref;
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запроса.
+
+Пример 6:
+-- билеты без номера пассажира должны восприниматься как пропуски (использование COALESCE).
+SELECT
+b.book_ref,
+b.book_date,
+COALESCE(t.ticket_no, 'no_ticket') AS ticket_no,
+COALESCE(t.passenger_name, 'unknown') AS passenger_name
+FROM bookings AS b
+LEFT JOIN tickets AS t
+ON t.book_ref = b.book_ref
+ORDER BY b.book_ref;
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запроса.
+
+Пример 7:
+-- с фильтром по дате бронирования: только за последние 30 дней, вместе с их билетами (INNER JOIN).
+SELECT
+b.book_ref,
+b.book_date,
+b.total_amount,
+t.ticket_no,
+t.passenger_name
+FROM bookings AS b
+INNER JOIN tickets AS t
+ON t.book_ref = b.book_ref
+WHERE b.book_date >= NOW() - INTERVAL '30 days'
+ORDER BY b.book_date DESC;
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запроса.
+
+Пример 8:
+-- использование связанных таблиц для демонстрации FULL OUTER JOIN на иерархии.
+SELECT
+b.book_ref,
+b.book_date,
+b.total_amount,
+t.ticket_no,
+t.passenger_name
+FROM bookings AS b
+FULL OUTER JOIN tickets AS t
+ON t.book_ref = b.book_ref
+WHERE b.book_ref IS NULL OR t.ticket_no IS NULL
+ORDER BY b.book_ref NULLS FIRST, t.ticket_no NULLS FIRST;
+
+После выполнения запроса нажми клавишу home или end или q для выхода из запроса.
+
+
+After that, we exit the demo database.:
+\q
+
+Then follow another directory, for example Green5:
+cd Green5
