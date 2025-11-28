@@ -1,0 +1,310 @@
+Чтобы выполнить задание:
+Первое нужно посмотреть где ты находишься, используй команду pwd:
+pwd
+К примеру она тебе покажет путь /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Green1, получается ты сейчас находишься в Green1, 
+тебе нужно вернуться назад используй команду cd ..:
+cd ..
+После этого набери команду ls или ls -a и посмотри что находится вокруг тебя какие файлы и директории:
+ls
+или
+ls -a
+Затем набери команду mkdir чтобы создать директорию Green (в том случае если ещё не создавал директорию Green):
+mkdir Green
+Затем перейди директорию в Green1:
+cd Green1
+Потом перенеси файл GREEN1.txt в директорию Green:
+mv GREEN1.txt ../Green/
+После скопируй файл файл GREEN1_ANSWER.txt в директорию Green:
+cp GREEN1_ANSWER.txt ../Green/
+Затем проверь что скопировал файл GREEN1_ANSWER.txt в директорию Green при помощи команды ls:
+ls ../Green/GREEN1_ANSWER.txt
+Потом удали файл GREEN1_ANSWER.txt при помощи команды rm:
+rm GREEN1_ANSWER.txt
+или
+rm -i GREEN1_ANSWER.txt
+или
+rm -f GREEN1_ANSWER.txt
+После выйди из этой директории Green1:
+cd ..
+Затем удали директорию Green1:
+rm -r Green1
+После убедись что удалил директорию:
+ls 
+или
+ls -a
+Если исследовал уже директорию Blue6, то заходим в своё окружение(смотри директорию Blue1):
+conda activate envlearnpython
+Затем заходим в свою директорию LearnPython:
+cd LearnPython
+Потом создай директорию ModulesAndPackages:
+mkdir ModulesAndPackages
+Затем перейди в эту директорию ModulesAndPackages:
+cd ModulesAndPackages
+Итак создай файл mathematical_functions.py:
+touch mathematical_functions.py
+Потом открой файл mathematical_functions.py:
+nano mathematical_functions.py
+Потом в файле импортируем math:
+import math
+#Затем пишем функцию квадратный корень из 64 sqrt(64) из пакета math:
+square_root = math.sqrt(64)
+print(square_root)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 mathematical_functions.py
+Должно появиться на экране 8.0
+Затем снова открываем файл mathematical_functions.py:
+nano mathematical_functions.py
+Удаляем всё что написали в файле и пишем новый код, импортируя из модуля math конкретные функции sqrt, pi и выводим на экран квадратный корень числа 49 и число Пи в терминале:
+from math import sqrt, pi
+#Затем пишем функцию квадратный корень из 49 sqrt(49) из пакета math:
+square_root = sqrt(49)
+PI = pi
+print(f"SQUARE_ROOT: {square_root} \nPI: {PI}")
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 mathematical_functions.py
+Должно появиться на экране:
+SQUARE_ROOT: 7.0 
+PI: 3.141592653589793
+Затем снова открываем файл mathematical_functions.py:
+nano mathematical_functions.py
+Удаляем всё что написали в файле и пишем новый код, импортируя модуль math с алиасом(псевдонимом) ma и выводим на экран квадратный корень числа 9:
+import math as ma
+#Затем пишем функцию квадратный корень из 9 sqrt(9) из пакета math:
+square_root = ma.sqrt(9)
+print(f"SQUARE_ROOT: {square_root}")
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 mathematical_functions.py
+Должно появиться на экране:
+SQUARE_ROOT: 3.0
+Затем создать в ModulesAndPackages директорию number_converter:
+mkdir number_converter
+Затем заходим в эту директорию number_converter:
+cd number_converter
+Потом в этой директории создать пустой файл __init__.py, examples.py и файл сonverter.py:
+touch __init__.py
+touch examples.py
+touch converter.py
+Затем открываем файл сonverter.py:
+nano сonverter.py
+И пишем в нём реализацию функции конвертации чисел в шестнадцатеричный формат(to_hex(number)) и бинарный формат(to_bin(number)):
+def to_hex(number):
+    """Конвертирует целое число в шестнадцатеричный формат."""
+    if not isinstance(number, int):
+        raise ValueError("Должно быть целое число")
+    return hex(number)
+
+def to_bin(number):
+    """Конвертирует целое число в бинарный формат."""
+    if not isinstance(number, int):
+        raise ValueError("Должно быть целое число")
+    return bin(number)
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x
+Потом открываем файл examples.py:
+nano examples.py
+И пишем в файле код:
+from .converter import to_hex, to_bin
+
+def run_examples():
+    numbers = [10, 255, 1024, 2048]
+    print("Конвертация чисел:")
+    for number in numbers:
+        hex_value = to_hex(number)
+        bin_value = to_bin(number)
+        print(f"Число: {number} -> Шестнадатеричное: {hex_value} -> Бинарное: {bin_value}")
+
+if __name__ == "__main__":
+    run_examples()
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x
+Затем открываем файл __init__.py:
+nano __init__.py
+И пишем в файле код:
+from .converter import to_hex, to_bin
+from .examples import run_examples
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x
+Теперь выходим из директории number_converter:
+cd ..
+Проверяем что мы вышли из директории number_converter:
+ls
+Должно появиться на экране:
+mathematical_functions.py number_converter
+Итак создаём файл main.py:
+touch main.py
+Затем открываем файл main.py:
+nano main.py
+И пишем такой код:
+from number_converter import run_examples
+
+if __name__ == "__main__":
+    run_examples()
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x
+И запускаем наш файл:
+python3 main.py
+И должно отобразиться на экране:
+Конвертация чисел:
+Число: 10 -> Шестнадатеричное: 0xa -> Бинарное: 0b1010
+Число: 255 -> Шестнадатеричное: 0xff -> Бинарное: 0b11111111
+Число: 1024 -> Шестнадатеричное: 0x400 -> Бинарное: 0b10000000000
+Число: 2048 -> Шестнадатеричное: 0x800 -> Бинарное: 0b100000000000
+После выходим из директории ModulesAndPackages:
+cd ..
+Дальше выйди из папки LearnPython:
+cd ..
+Потом иследуй другую директорию, например Green2
+cd Green2
+
+
+To complete the task:
+First you need to see where you are, use the pwd command:
+pwd
+For example, she'll show you the way  /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Green1
+ it turns out that you are currently in Green1,
+you need to go back using the cd .. :
+cd ..
+After that, type the command ls or ls -a and see what is around you, which files and directories:
+ls
+or
+ls -a
+Then type the mkdir command to create
+the Green directory (if you didn't create Green directory):
+ mkdir Green
+Then go to the directory in Green1:
+cd Green1
+Then transfer the file. GREEN1.txt to the Green: 
+mv GREEN1.txt ../Green/
+Then copy the file GREEN1_ANSWER.txt to the Green:
+ cp GREEN1_ANSWER.txt ../Green/
+Then check that you copied the file. GREEN1_ANSWER.txt to the Green directory using the command ls:
+ls ../Green/GREEN1_ANSWER.txt
+Then delete the file GREEN1_ANSWER.txt using the rm command:
+rm GREEN1_ANSWER.txt
+or
+rm -i GREEN1_ANSWER.txt
+or
+rm -f GREEN1_ANSWER.txt
+Then exit this directory Green1:
+cd ..
+Then delete the Green1 directory:
+rm -r Green1
+After that, make sure that you have deleted the directory:
+ls
+or
+ls -a
+If you have already explored the Blue6 directory, then we go into our environment (see the Blue1 directory):
+conda activate envlearnpython
+Then we go to our LearnPython directory:
+cd LearnPython
+Then create the ModulesAndPackages directory:
+mkdir ModulesAndPackages
+Then go to this ModulesAndPackages directory:
+cd ModulesAndPackages
+So create a file mathematical_functions.py :
+touch mathematical_functions.py
+Then open the file. mathematical_functions.py :
+nano mathematical_functions.py
+Then we import math in the file: 
+import math
+#Then we write the function square root of 64 sqrt(64) from the math package:
+square_root = math.sqrt(64)
+print(square_root)
+Press ctrl + o, then enter and exit the file with ctrl + x, then run the script:
+python3 mathematical_functions.py 
+It should appear on the 8.0 screen
+Then open the file again. mathematical_functions.py :
+nano mathematical_functions.py
+We delete everything that we wrote in the file and write new code by importing specific functions sqrt, pi from the math module and displaying the square root of 49 and Pi in the terminal.:
+from math import sqrt, pi
+#Then we write the square root function of 49 sqrt(49) from the math package:
+square_root = sqrt(49)
+PI= pi
+print(f"SQUARE_ROOT:{square_root}\nPI: {PI}")
+Press ctrl + o, then enter and exit the file with ctrl + x, then run the script:
+python3 mathematical_functions.py
+ It should appear on the screen:
+SQUARE_ROOT: 7.0
+PI: 3.141592653589793
+Then open the file again mathematical_functions.py :
+nano mathematical_functions.py
+We delete everything that we wrote in the file and write new code by importing the math module with the alias (alias) ma and displaying the square root of the number 9:
+import math as ma
+#Then we write the function square root of 9 sqrt(9) from the math package:
+square_root = ma.sqrt(9)
+print(f"SQUARE_ROOT: {square_root}")
+Press ctrl + o, then enter and exit the file with ctrl + x, then run the script:
+python3 mathematical_functions.py 
+It should appear on the screen:
+SQUARE_ROOT: 3.0
+Then create the number_converter directory in ModulesAndPackages:
+mkdir number_converter
+Then we go to this number_converter directory:
+cd number_converter
+Then create an empty __ file in this directory.init__.py , examples.py and file сonverter.py :
+touch __init__.py
+touch examples.py
+touch converter.py
+Then open the file сonverter.py :
+nano сonverter.py
+And we write in it the implementation of the function for converting numbers to hexadecimal format(to_hex(number)) and binary format(to_bin(number)):
+def to_hex(number):
+    """Converts an integer to hexadecimal format."""
+    if not isinstance(number, int):
+        raise ValueError("Must be an integer")
+    return hex(number)
+
+def to_bin(number):
+    """Converts an integer to binary format."""
+    if not isinstance(number, int):
+        raise ValueError("Must be an integer")
+    return bin(number)
+Press ctrl + o, then enter and exit the file with ctrl + x
+Then open the file examples.py :
+nano examples.py
+And we write the code in the file:
+from .converter import to_hex, to_bin
+
+def run_examples():
+    numbers = [10, 255, 1024, 2048]
+    print("Converting numbers:")
+    for number in numbers:
+        hex_value = to_hex(number)
+        bin_value = to_bin(number)
+        print(f"Number: {number} -> Hexadecimal: {hex_value} -> Binary: {bin_value}")
+
+if __name__ == "__main__":
+    run_examples()
+Press ctrl + o, then enter and exit the file with ctrl + x
+Then open the __init__.py:
+nano __init__.py
+And we write the code in the file:
+from .converter import to_hex, to_bin
+from .examples import run_examples
+Press ctrl + o, then enter and exit the file with ctrl + x
+Now exit the number_converter:
+cd directory..
+We check that we have exited the number_converter directory:
+ls
+Should appear on the screen:
+mathematical_functions.py number_converter
+So we create a file main.py :
+touch main.py
+Then open the file main.py :
+nano main.py
+And we write this code:
+from number_converter import run_examples
+
+if __name__ == "__main__":
+    run_examples()
+Press ctrl + o, then enter and exit the file with ctrl + x
+And we run our file:
+python3 main.py
+And it should be displayed on the screen:
+Converting numbers:
+Number: 10 -> Hexadecimal: 0xa -> Binary: 0b1010
+Number: 255 -> Hexadecimal: 0xff -> Binary: 0b11111111
+Number: 1024 -> Hexadecimal: 0x400 -> Binary: 0b10000000000
+Number: 2048 -> Hexadecimal: 0x800 -> Binary: 0b100000000000
+After that, we exit the ModulesAndPackages:
+cd directory..
+Next, exit the LearnPython:
+cd .. 
+Then follow another directory, for example Green2
+cd Green2
