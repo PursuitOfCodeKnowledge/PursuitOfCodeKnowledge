@@ -1,0 +1,216 @@
+Чтобы выполнить задание:
+Первое нужно посмотреть где ты находишься, используй команду pwd:
+pwd
+К примеру она тебе покажет путь /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/White6, получается ты сейчас находишься в White6, 
+тебе нужно вернуться назад используй команду cd ..:
+cd ..
+После этого набери команду ls или ls -a и посмотри что находится вокруг тебя какие файлы и директории:
+ls
+или
+ls -a
+Затем набери команду mkdir чтобы создать директорию White (в том случае если ещё не создавал директорию White):
+mkdir White
+Затем перейди директорию в White6:
+cd White6
+Потом скопируй файл WHITE6.txt в директорию White:
+cp WHITE6.txt ../White/
+Затем проверь что скопировал файл WHITE6.txt в директорию White при помощи команды ls:
+ls ../White/WHITE6.txt
+После перенеси  файл файл WHITE6_ANSWER.txt в директорию White:
+mv WHITE6_ANSWER.txt ../White/
+Потом удали файл WHITE6.txt при помощи команды rm:
+rm WHITE6.txt
+или
+rm -i WHITE6.txt
+или
+rm -f WHITE6.txt
+После выйди из этой директории White6:
+cd ..
+Затем удали директорию White6:
+rm -r White6
+После убедись что удалил директорию:
+ls 
+или
+ls -a
+
+Если исследовал уже директорию White5, то заходим в своё окружение(смотри директорию Blue1):
+conda activate envlearnpython
+Затем заходим в свою директорию LearnPython:
+cd LearnPython
+Потом создай директорию AlgorithmsAndDataStructures(в том случае если ещё не создавал директорию AlgorithmsAndDataStructures):
+mkdir AlgorithmsAndDataStructures
+Затем перейди в эту директорию AlgorithmsAndDataStructures:
+cd AlgorithmsAndDataStructures
+Итак создай файл dfs.py:
+touch dfs.py
+Потом открой файл dfs.py:
+nano dfs.py
+Пишем в файле:
+class Node:
+	def __init__(self, value):
+		self.value = value
+		self.left = None
+		self.right = None
+
+def dfs(node):
+	if node is not None:
+		print(node.value) # Обработка узла
+		dfs(node.left) # Рекурсивный обход левого поддерева
+		dfs(node.right) # Рекурсивный обход правого поддерева
+
+def dfs_with_nodes(node, parent_value = None):
+	if node is not None:
+		"""Печатаем значение узла и его родительский узел, если он есть"""
+		if parent_value is not None:
+			print(f"{parent_value} -> {node.value}")
+		else:
+			print(f"root -> {node.value}") # Корень дерева
+
+		dfs_with_nodes(node.left, node.value) # Рекурсивный обход левого поддерева
+		dfs_with_nodes(node.right, node.value) # Рекурсивный обход правого поддерева
+
+def print_tree(node, level = 0):
+	if node is not None:
+		print_tree(node.right, level + 1) # Сначала печатаем правое поддерево
+		print(' ' * 4 * level + f"-> {node.value}") # Печатаем текущий узел с отступами
+		print_tree(node.left, level + 1) # Затем печатаем левое поддерево
+
+if __name__ == "__main__":
+	root = Node(50)
+	root.left = Node(40)
+	root.right = Node(60)
+	root.left.left = Node(30)
+	root.left.right = Node(45)
+	root.right.left = Node(55)
+	root.right.right = Node(65)
+	root.left.left.left = Node(25)
+	root.left.left.right = Node(35)
+	root.left.right.left = Node(42)
+	root.left.right.right = Node(47)
+	root.right.right.left = Node(62)
+	root.right.right.right = Node(67)
+	print(f"root = Node(50)\nroot.left = Node(40)\nroot.right = Node(60)\nroot.left.left = Node(30)\nroot.left.right = Node(45)\nroot.right.left = Node(55)\nroot.right.right = Node(65)\nroot.left.left.left = Node(25)\nroot.left.left.right = Node(35)\nroot.left.right.left = Node(42)\nroot.left.right.right = Node(47)\nroot.right.right.left = Node(62)\nroot.right.right.right = Node(67)")
+	print_tree(root)
+	print("DFS обход дерева в глубину: ")
+	dfs(root)
+	dfs_with_nodes(root)
+
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 dfs.py
+
+После выходим из директории AlgorithmsAndDataStructures:
+cd ..
+Дальше выйди из папки LearnPython:
+cd ..
+
+Потом дальше иследуй другую директорию, например Yellow1:
+cd Yellow1
+
+To complete the task:
+First you need to see where you are, use the pwd command:
+pwd
+For example, she'll show you the way  /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/White6
+ it turns out that you are currently in White6,
+you need to go back using the cd .. :
+cd ..
+After that, type the command ls or ls -a and see what is around you, which files and directories:
+ls
+or
+ls -a
+Then type the mkdir command to create
+the White directory(if you didn't create White directory):
+mkdir White
+Then go to the directory in White6:
+cd White6
+Then  copy the file WHITE6.txt to the White:
+cp WHITE6.txt ../White/
+Then check that you copied the file WHITE6.txt to the White directory using the command ls:
+ls ../White/WHITE6.txt
+Then transfer the file WHITE6_ANSWER.txt to the White:
+mv WHITE6_ANSWER.txt ../White/
+Then delete the file WHITE6.txt using the rm command:
+rm WHITE6.txt
+or
+rm -i WHITE6.txt
+or
+rm -f WHITE6.txt
+Then exit this directory White6:
+cd ..
+Then delete the White6 directory:
+rm -r White6
+After that, make sure that you have deleted the directory:
+ls
+or
+ls -a
+
+If you have already explored the White5 directory, then we go into our environment (see the Blue1 directory):
+conda activate envlearnpython
+Then we go to our LearnPython directory:
+cd LearnPython
+Then create the  AlgorithmsAndDataStructures directory(if you didn't create AlgorithmsAndDataStructures directory):
+mkdir AlgorithmsAndDataStructures
+Then go to this  AlgorithmsAndDataStructures directory:
+cd AlgorithmsAndDataStructures
+So create a file dfs.py:
+touch dfs.py
+Then open the file dfs.py:
+nano dfs.py
+Write in file:
+class Node:
+	def __init__(self, value):
+		self.value = value
+		self.left = None
+		self.right = None
+
+def dfs(node):
+	if node is not None:
+		print(node.value) # Обработка узла
+		dfs(node.left) # Рекурсивный обход левого поддерева
+		dfs(node.right) # Рекурсивный обход правого поддерева
+
+def dfs_with_nodes(node, parent_value = None):
+	if node is not None:
+		"""Печатаем значение узла и его родительский узел, если он есть"""
+		if parent_value is not None:
+			print(f"{parent_value} -> {node.value}")
+		else:
+			print(f"root -> {node.value}") # Корень дерева
+
+		dfs_with_nodes(node.left, node.value) # Рекурсивный обход левого поддерева
+		dfs_with_nodes(node.right, node.value) # Рекурсивный обход правого поддерева
+
+def print_tree(node, level = 0):
+	if node is not None:
+		print_tree(node.right, level + 1) # Сначала печатаем правое поддерево
+		print(' ' * 4 * level + f"-> {node.value}") # Печатаем текущий узел с отступами
+		print_tree(node.left, level + 1) # Затем печатаем левое поддерево
+
+if __name__ == "__main__":
+	root = Node(50)
+	root.left = Node(40)
+	root.right = Node(60)
+	root.left.left = Node(30)
+	root.left.right = Node(45)
+	root.right.left = Node(55)
+	root.right.right = Node(65)
+	root.left.left.left = Node(25)
+	root.left.left.right = Node(35)
+	root.left.right.left = Node(42)
+	root.left.right.right = Node(47)
+	root.right.right.left = Node(62)
+	root.right.right.right = Node(67)
+	print(f"root = Node(50)\nroot.left = Node(40)\nroot.right = Node(60)\nroot.left.left = Node(30)\nroot.left.right = Node(45)\nroot.right.left = Node(55)\nroot.right.right = Node(65)\nroot.left.left.left = Node(25)\nroot.left.left.right = Node(35)\nroot.left.right.left = Node(42)\nroot.left.right.right = Node(47)\nroot.right.right.left = Node(62)\nroot.right.right.right = Node(67)")
+	print_tree(root)
+	print("DFS обход дерева в глубину: ")
+	dfs(root)
+	dfs_with_nodes(root)
+
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 dfs.py  
+ 
+After that, we exit the AlgorithmsAndDataStructures:
+cd ..
+Next, exit the LearnPython:
+cd ..
+Then follow another directory, for example Yellow1:
+cd Yellow1

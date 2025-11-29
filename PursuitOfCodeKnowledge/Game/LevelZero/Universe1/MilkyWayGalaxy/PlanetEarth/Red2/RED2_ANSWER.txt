@@ -1,0 +1,577 @@
+Чтобы выполнить задание:
+Первое нужно посмотреть где ты находишься, используй команду pwd:
+pwd
+К примеру она тебе покажет путь /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Red2, получается ты сейчас находишься в Red2, 
+тебе нужно вернуться назад используй команду cd ..:
+cd ..
+После этого набери команду ls или ls -a и посмотри что находится вокруг тебя какие файлы и директории:
+ls
+или
+ls -a
+Затем набери команду mkdir чтобы создать директорию Red (в том случае если ещё не создавал директорию Red):
+mkdir Red
+Затем перейди директорию в Red2:
+cd Red2
+Потом скопируй файл RED2.txt в директорию Red:
+cp RED2.txt ../Red/
+Затем проверь что скопировал файл RED2.txt в директорию Red при помощи команды ls:
+ls ../Red/RED2.txt
+После перенеси  файл файл RED2_ANSWER.txt в директорию Red:
+mv RED2_ANSWER.txt ../Red/
+Потом удали файл RED2.txt при помощи команды rm:
+rm RED2.txt
+или
+rm -i RED2.txt
+или
+rm -f RED2.txt
+После выйди из этой директории Red2:
+cd ..
+Затем удали директорию Red2:
+rm -r Red2
+После убедись что удалил директорию:
+ls 
+или
+ls -a
+
+Если исследовал уже директорию Red1, то подключаемся к postgres: 
+sudo -u postgres psql postgres
+Вводим пароль от пользователя postgres, который мы создавали до этого
+
+Теперь посмотрим какие базы данных при помощи команды \l:
+\l
+
+Видим demo и переходим в неё при помощи команды \c:
+\c demo
+
+Потом можно посмотреть какие таблицы в базе данных demo:
+\dt
+
+Затем можно посмотреть подробнее о таблице, например bookings(столбцы и ключи):
+\d bookings
+
+Потом можно посмотреть подробнее о таблице, например tickets(столбцы и ключи):
+\d tickets
+
+Потом можно посмотреть подробнее о таблице, например ticket_flights(столбцы и ключи):
+\d ticket_flights
+
+Потом можно посмотреть подробнее о таблице, например flights(столбцы и ключи):
+\d flights
+
+Теперь создаем функцию через команду:
+\ef
+После нам предложат выбрать редактор:
+Select an editor.  To change later, run 'select-editor'.
+  1. /bin/nano        <---- easiest
+  2. /usr/bin/vim.tiny
+Выбираем nano, нажимаем клавишу цифру 1 и нажимаем клавишу Enter.
+Итак мы находимся в файле, стираем в нём всё и копируем из примера 1 и вставляем в файл(используя клавиши ctrl+shift+v) 
+Пример 1:
+--1) Функция принимает ticket_no и возвращает итоговую сумму с применением скидки 10% для Business (используй IF и RAISE NOTICE для отладки).
+-- Создать функцию
+CREATE OR REPLACE FUNCTION bookings.get_adjusted_fare(p_ticket_no CHAR(13))
+RETURNS NUMERIC(10,2) LANGUAGE plpgsql AS $$
+DECLARE
+    v_fare NUMERIC(10,2);
+    v_fare_cond TEXT;
+    v_result NUMERIC(10,2);
+BEGIN
+    SELECT amount, fare_conditions
+    INTO v_fare, v_fare_cond
+    FROM bookings.ticket_flights
+    WHERE ticket_no = p_ticket_no
+    LIMIT 1;
+
+    IF v_fare IS NULL THEN
+        RAISE NOTICE 'Ticket % not found in ticket_flights', p_ticket_no;
+        RETURN NULL;
+    END IF;
+
+    -- Если Business -> скидка 10%
+    IF v_fare_cond = 'Business' THEN
+        v_result := ROUND(v_fare * 0.90, 2);  -- 10% off
+        RAISE NOTICE 'Business fare: original=%, discounted=%', v_fare, v_result;
+    ELSE
+        v_result := v_fare;
+        RAISE NOTICE 'No discount for fare_condition=%', v_fare_cond;
+    END IF;
+
+    RETURN v_result;
+END;
+$$;
+
+После нажимаем клавиши ctrl+o, затем нажимаем клавишу Enter, и затем выходим ctrl+x.
+Затем проверяем функцию:
+SELECT bookings.get_adjusted_fare('3333333333333');
+
+Теперь создаем функцию через команду:
+\ef
+После нам предложат выбрать редактор:
+Select an editor.  To change later, run 'select-editor'.
+  1. /bin/nano        <---- easiest
+  2. /usr/bin/vim.tiny
+Выбираем nano, нажимаем клавишу цифру 1 и нажимаем клавишу Enter.
+Итак мы находимся в файле, стираем в нём всё и копируем из примера 2 и вставляем в файл(используя клавиши ctrl+shift+v)
+Пример 2: 
+--2) Функция возвращает категорию тарифа для конкретной записи ticket_flights (используй CASE).
+CREATE OR REPLACE FUNCTION bookings.fare_category(p_ticket_no CHAR(13))
+RETURNS TEXT LANGUAGE plpgsql AS $$
+DECLARE
+    v_amount NUMERIC(10,2);
+    v_cat TEXT;
+BEGIN
+    SELECT amount INTO v_amount
+    FROM bookings.ticket_flights
+    WHERE ticket_no = p_ticket_no
+    LIMIT 1;
+
+    IF v_amount IS NULL THEN
+        RETURN 'UNKNOWN';
+    END IF;
+
+    v_cat := CASE
+        WHEN v_amount >= 100000 THEN 'High'
+        WHEN v_amount >= 50000 THEN 'Medium'
+        ELSE 'Low'
+    END;
+
+    RETURN v_cat;
+END;
+$$;
+
+После нажимаем клавиши ctrl+o, затем нажимаем клавишу Enter, и затем выходим ctrl+x.
+Затем проверяем функцию:
+SELECT ticket_no, bookings.fare_category(ticket_no) AS category
+           FROM bookings.ticket_flights
+           LIMIT 5;
+
+Теперь создаем процедуру через команду:
+\ef
+После нам предложат выбрать редактор:
+Select an editor.  To change later, run 'select-editor'.
+  1. /bin/nano        <---- easiest
+  2. /usr/bin/vim.tiny
+Выбираем nano, нажимаем клавишу цифру 1 и нажимаем клавишу Enter.
+Итак мы находимся в файле, стираем в нём всё и копируем из примера 3 и вставляем в файл(используя клавиши ctrl+shift+v)
+Пример 3: 
+--3) Процедура: пройти по всем билетам бронирования и вывести пассажиров + суммировать общую сумму(используй FOR ... IN ... LOOP, RAISE NOTICE).
+CREATE OR REPLACE PROCEDURE bookings.show_passengers_and_sum(p_book_ref CHAR(6))
+LANGUAGE plpgsql AS $$
+DECLARE
+    rec RECORD;
+    v_total NUMERIC(12,2) := 0;
+BEGIN
+    FOR rec IN
+        SELECT t.ticket_no, t.passenger_name, COALESCE(SUM(tf.amount),0) AS ticket_total
+        FROM bookings.tickets t
+        LEFT JOIN bookings.ticket_flights tf ON tf.ticket_no = t.ticket_no
+        WHERE t.book_ref = p_book_ref
+        GROUP BY t.ticket_no, t.passenger_name
+    LOOP
+        RAISE NOTICE 'Ticket=% Passenger=% TicketTotal=%', rec.ticket_no, rec.passenger_name, rec.ticket_total;
+        v_total := v_total + rec.ticket_total;
+    END LOOP;
+
+    RAISE NOTICE 'Booking % total computed = %', p_book_ref, v_total;
+END;
+$$;
+
+После нажимаем клавиши ctrl+o, затем нажимаем клавишу Enter, и затем выходим ctrl+x.
+Теперь вызываем процедуру:
+CALL bookings.show_passengers_and_sum('10F447');
+
+Теперь создаем функцию через команду:
+\ef
+После нам предложат выбрать редактор:
+Select an editor.  To change later, run 'select-editor'.
+  1. /bin/nano        <---- easiest
+  2. /usr/bin/vim.tiny
+Выбираем nano, нажимаем клавишу цифру 1 и нажимаем клавишу Enter.
+Итак мы находимся в файле, стираем в нём всё и копируем из примера 4 и вставляем в файл(используя клавиши ctrl+shift+v)
+Пример 4:
+--4) Функция обойти массив flight_id для заданного ticket_no и обновить локальную переменную(используй while).
+CREATE OR REPLACE FUNCTION bookings.process_flights_by_ticket(p_ticket_no CHAR(13))
+RETURNS INTEGER LANGUAGE plpgsql AS $$
+DECLARE
+    v_flights INT[] := ARRAY(SELECT flight_id FROM bookings.ticket_flights WHERE ticket_no = p_ticket_no ORDER BY flight_id);
+    i INT := 1;
+    v_count INT := COALESCE(array_length(v_flights,1), 0);
+    v_fid INT;
+BEGIN
+    IF v_count = 0 THEN
+        RAISE NOTICE 'No flights for ticket %', p_ticket_no;
+        RETURN 0;
+    END IF;
+
+    WHILE i <= v_count LOOP
+        v_fid := v_flights[i];
+        -- пример действия: просто печатаем и, например, помечаем (логика для примера)
+        RAISE NOTICE 'Processing flight #% (flight_id=%)', i, v_fid;
+        i := i + 1;
+    END LOOP;
+
+    RETURN v_count;
+END;
+$$;
+
+После нажимаем клавиши ctrl+o, затем нажимаем клавишу Enter, и затем выходим ctrl+x.
+Затем проверяем функцию:
+SELECT bookings.process_flights_by_ticket('1111111111111'); 
+
+Теперь создаем процедуру через команду:
+\ef
+После нам предложат выбрать редактор:
+Select an editor.  To change later, run 'select-editor'.
+  1. /bin/nano        <---- easiest
+  2. /usr/bin/vim.tiny
+Выбираем nano, нажимаем клавишу цифру 1 и нажимаем клавишу Enter.
+Итак мы находимся в файле, стираем в нём всё и копируем из примера 3 и вставляем в файл(используя клавиши ctrl+shift+v)
+Пример 5: 
+--5) Процедура: для каждого билета в бронировании проверяет, есть ли flights(используй IF, CASE, LOOP и WHILE вместе).
+CREATE OR REPLACE PROCEDURE bookings.audit_booking(p_book_ref CHAR(6))
+LANGUAGE plpgsql AS $$
+DECLARE
+    t_rec RECORD;
+    flight_ids INT[];
+    idx INT;
+    cnt INT;
+    ticket_sum NUMERIC(12,2);
+    cat TEXT;
+BEGIN
+    FOR t_rec IN
+        SELECT ticket_no FROM bookings.tickets WHERE book_ref = p_book_ref
+    LOOP
+        -- собрать flight_id для билета
+        SELECT ARRAY_AGG(flight_id ORDER BY flight_id) INTO flight_ids
+        FROM bookings.ticket_flights
+        WHERE ticket_no = t_rec.ticket_no;
+
+        IF flight_ids IS NULL THEN
+            RAISE NOTICE 'Ticket % has no flights', t_rec.ticket_no;
+            CONTINUE;
+        END IF;
+
+        cnt := COALESCE(array_length(flight_ids,1), 0);
+        idx := 1;
+        ticket_sum := 0;
+
+        -- WHILE по flight_ids
+        WHILE idx <= cnt LOOP
+            SELECT amount INTO STRICT ticket_sum
+            FROM bookings.ticket_flights
+            WHERE ticket_no = t_rec.ticket_no AND flight_id = flight_ids[idx];
+
+            -- Классифицируем
+            cat := CASE
+                WHEN ticket_sum >= 100000 THEN 'High'
+                WHEN ticket_sum >= 50000 THEN 'Medium'
+                ELSE 'Low'
+            END;
+
+            RAISE NOTICE 'Ticket % Flight %: amount=% category=%', t_rec.ticket_no, flight_ids[idx], ticket_sum, cat;
+
+            idx := idx + 1;
+        END LOOP;
+    END LOOP;
+END;
+$$;
+
+После нажимаем клавиши ctrl+o, затем нажимаем клавишу Enter, и затем выходим ctrl+x.
+Теперь вызываем процедуру:
+CALL bookings.audit_booking('10F447');
+
+После этого выходим из базы данных demo:
+\q
+
+Потом дальше иследуй другую директорию, например Red3:
+cd Red3
+
+To complete the task:
+First you need to see where you are, use the pwd command:
+pwd
+For example, she'll show you the way  /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Red2
+ it turns out that you are currently in Red2,
+you need to go back using the cd .. :
+cd ..
+After that, type the command ls or ls -a and see what is around you, which files and directories:
+ls
+or
+ls -a
+Then type the mkdir command to create
+the Red directory(if you didn't create Red directory):
+mkdir Red
+Then go to the directory in Red2:
+cd Red2
+Then  copy the file RED2.txt to the Red:
+cp RED2.txt ../Red/
+Then check that you copied the file. RED2.txt to the Red directory using the command ls:
+ls ../Red/RED2.txt
+Then transfer the file RED2_ANSWER.txt to the Red:
+mv RED2_ANSWER.txt ../Red/
+Then delete the file RED2.txt using the rm command:
+rm RED2.txt
+or
+rm -i RED2.txt
+or
+rm -f RED2.txt
+Then exit this directory Red2:
+cd ..
+Then delete the Red2 directory:
+rm -r Red2
+After that, make sure that you have deleted the directory:
+ls
+or
+ls -a
+
+If you have already explored the Red1 directory, then we connect to postgres:
+sudo -u postgres psql postgres
+We enter the password from the postgres user that we created before
+
+Now let's look at which databases using the \l command:
+\l
+
+We see the demo and go to it using the \c command:
+\c demo
+
+Then you can see which tables are in the demo database.:
+\dt
+
+Then you can view more information about the table, for example bookings(columns and keys):
+\d bookings
+
+Then you can see more details about the table, for example tickets(columns and keys):
+\d tickets
+
+Then you can see more details about the table, for example ticket_flights(columns and keys):
+\d ticket_flights
+
+Then you can see more details about the table, for example flights(columns and keys):
+\d flights
+
+Теперь создаем функцию через команду:
+\ef
+После нам предложат выбрать редактор:
+Select an editor.  To change later, run 'select-editor'.
+  1. /bin/nano        <---- easiest
+  2. /usr/bin/vim.tiny
+Выбираем nano, нажимаем клавишу цифру 1 и нажимаем клавишу Enter.
+Итак мы находимся в файле, стираем в нём всё и копируем из примера 1 и вставляем в файл(используя клавиши ctrl+shift+v) 
+Пример 1:
+--1) Функция принимает ticket_no и возвращает итоговую сумму с применением скидки 10% для Business (используй IF и RAISE NOTICE для отладки).
+-- Создать функцию
+CREATE OR REPLACE FUNCTION bookings.get_adjusted_fare(p_ticket_no CHAR(13))
+RETURNS NUMERIC(10,2) LANGUAGE plpgsql AS $$
+DECLARE
+    v_fare NUMERIC(10,2);
+    v_fare_cond TEXT;
+    v_result NUMERIC(10,2);
+BEGIN
+    SELECT amount, fare_conditions
+    INTO v_fare, v_fare_cond
+    FROM bookings.ticket_flights
+    WHERE ticket_no = p_ticket_no
+    LIMIT 1;
+
+    IF v_fare IS NULL THEN
+        RAISE NOTICE 'Ticket % not found in ticket_flights', p_ticket_no;
+        RETURN NULL;
+    END IF;
+
+    -- Если Business -> скидка 10%
+    IF v_fare_cond = 'Business' THEN
+        v_result := ROUND(v_fare * 0.90, 2);  -- 10% off
+        RAISE NOTICE 'Business fare: original=%, discounted=%', v_fare, v_result;
+    ELSE
+        v_result := v_fare;
+        RAISE NOTICE 'No discount for fare_condition=%', v_fare_cond;
+    END IF;
+
+    RETURN v_result;
+END;
+$$;
+
+После нажимаем клавиши ctrl+o, затем нажимаем клавишу Enter, и затем выходим ctrl+x.
+Затем проверяем функцию:
+SELECT bookings.get_adjusted_fare('3333333333333');
+
+Теперь создаем функцию через команду:
+\ef
+После нам предложат выбрать редактор:
+Select an editor.  To change later, run 'select-editor'.
+  1. /bin/nano        <---- easiest
+  2. /usr/bin/vim.tiny
+Выбираем nano, нажимаем клавишу цифру 1 и нажимаем клавишу Enter.
+Итак мы находимся в файле, стираем в нём всё и копируем из примера 2 и вставляем в файл(используя клавиши ctrl+shift+v)
+Пример 2: 
+--2) Функция возвращает категорию тарифа для конкретной записи ticket_flights (используй CASE).
+CREATE OR REPLACE FUNCTION bookings.fare_category(p_ticket_no CHAR(13))
+RETURNS TEXT LANGUAGE plpgsql AS $$
+DECLARE
+    v_amount NUMERIC(10,2);
+    v_cat TEXT;
+BEGIN
+    SELECT amount INTO v_amount
+    FROM bookings.ticket_flights
+    WHERE ticket_no = p_ticket_no
+    LIMIT 1;
+
+    IF v_amount IS NULL THEN
+        RETURN 'UNKNOWN';
+    END IF;
+
+    v_cat := CASE
+        WHEN v_amount >= 100000 THEN 'High'
+        WHEN v_amount >= 50000 THEN 'Medium'
+        ELSE 'Low'
+    END;
+
+    RETURN v_cat;
+END;
+$$;
+
+После нажимаем клавиши ctrl+o, затем нажимаем клавишу Enter, и затем выходим ctrl+x.
+Затем проверяем функцию:
+SELECT ticket_no, bookings.fare_category(ticket_no) AS category
+           FROM bookings.ticket_flights
+           LIMIT 5;
+
+Теперь создаем процедуру через команду:
+\ef
+После нам предложат выбрать редактор:
+Select an editor.  To change later, run 'select-editor'.
+  1. /bin/nano        <---- easiest
+  2. /usr/bin/vim.tiny
+Выбираем nano, нажимаем клавишу цифру 1 и нажимаем клавишу Enter.
+Итак мы находимся в файле, стираем в нём всё и копируем из примера 3 и вставляем в файл(используя клавиши ctrl+shift+v)
+Пример 3: 
+--3) Процедура: пройти по всем билетам бронирования и вывести пассажиров + суммировать общую сумму(используй FOR ... IN ... LOOP, RAISE NOTICE).
+CREATE OR REPLACE PROCEDURE bookings.show_passengers_and_sum(p_book_ref CHAR(6))
+LANGUAGE plpgsql AS $$
+DECLARE
+    rec RECORD;
+    v_total NUMERIC(12,2) := 0;
+BEGIN
+    FOR rec IN
+        SELECT t.ticket_no, t.passenger_name, COALESCE(SUM(tf.amount),0) AS ticket_total
+        FROM bookings.tickets t
+        LEFT JOIN bookings.ticket_flights tf ON tf.ticket_no = t.ticket_no
+        WHERE t.book_ref = p_book_ref
+        GROUP BY t.ticket_no, t.passenger_name
+    LOOP
+        RAISE NOTICE 'Ticket=% Passenger=% TicketTotal=%', rec.ticket_no, rec.passenger_name, rec.ticket_total;
+        v_total := v_total + rec.ticket_total;
+    END LOOP;
+
+    RAISE NOTICE 'Booking % total computed = %', p_book_ref, v_total;
+END;
+$$;
+
+После нажимаем клавиши ctrl+o, затем нажимаем клавишу Enter, и затем выходим ctrl+x.
+Теперь вызываем процедуру:
+CALL bookings.show_passengers_and_sum('10F447');
+
+Теперь создаем функцию через команду:
+\ef
+После нам предложат выбрать редактор:
+Select an editor.  To change later, run 'select-editor'.
+  1. /bin/nano        <---- easiest
+  2. /usr/bin/vim.tiny
+Выбираем nano, нажимаем клавишу цифру 1 и нажимаем клавишу Enter.
+Итак мы находимся в файле, стираем в нём всё и копируем из примера 4 и вставляем в файл(используя клавиши ctrl+shift+v)
+Пример 4:
+--4) Функция обойти массив flight_id для заданного ticket_no и обновить локальную переменную(используй while).
+CREATE OR REPLACE FUNCTION bookings.process_flights_by_ticket(p_ticket_no CHAR(13))
+RETURNS INTEGER LANGUAGE plpgsql AS $$
+DECLARE
+    v_flights INT[] := ARRAY(SELECT flight_id FROM bookings.ticket_flights WHERE ticket_no = p_ticket_no ORDER BY flight_id);
+    i INT := 1;
+    v_count INT := COALESCE(array_length(v_flights,1), 0);
+    v_fid INT;
+BEGIN
+    IF v_count = 0 THEN
+        RAISE NOTICE 'No flights for ticket %', p_ticket_no;
+        RETURN 0;
+    END IF;
+
+    WHILE i <= v_count LOOP
+        v_fid := v_flights[i];
+        -- пример действия: просто печатаем и, например, помечаем (логика для примера)
+        RAISE NOTICE 'Processing flight #% (flight_id=%)', i, v_fid;
+        i := i + 1;
+    END LOOP;
+
+    RETURN v_count;
+END;
+$$;
+
+После нажимаем клавиши ctrl+o, затем нажимаем клавишу Enter, и затем выходим ctrl+x.
+Затем проверяем функцию:
+SELECT bookings.process_flights_by_ticket('1111111111111'); 
+
+Теперь создаем процедуру через команду:
+\ef
+После нам предложат выбрать редактор:
+Select an editor.  To change later, run 'select-editor'.
+  1. /bin/nano        <---- easiest
+  2. /usr/bin/vim.tiny
+Выбираем nano, нажимаем клавишу цифру 1 и нажимаем клавишу Enter.
+Итак мы находимся в файле, стираем в нём всё и копируем из примера 3 и вставляем в файл(используя клавиши ctrl+shift+v)
+Пример 5: 
+--5) Процедура: для каждого билета в бронировании проверяет, есть ли flights(используй IF, CASE, LOOP и WHILE вместе).
+CREATE OR REPLACE PROCEDURE bookings.audit_booking(p_book_ref CHAR(6))
+LANGUAGE plpgsql AS $$
+DECLARE
+    t_rec RECORD;
+    flight_ids INT[];
+    idx INT;
+    cnt INT;
+    ticket_sum NUMERIC(12,2);
+    cat TEXT;
+BEGIN
+    FOR t_rec IN
+        SELECT ticket_no FROM bookings.tickets WHERE book_ref = p_book_ref
+    LOOP
+        -- собрать flight_id для билета
+        SELECT ARRAY_AGG(flight_id ORDER BY flight_id) INTO flight_ids
+        FROM bookings.ticket_flights
+        WHERE ticket_no = t_rec.ticket_no;
+
+        IF flight_ids IS NULL THEN
+            RAISE NOTICE 'Ticket % has no flights', t_rec.ticket_no;
+            CONTINUE;
+        END IF;
+
+        cnt := COALESCE(array_length(flight_ids,1), 0);
+        idx := 1;
+        ticket_sum := 0;
+
+        -- WHILE по flight_ids
+        WHILE idx <= cnt LOOP
+            SELECT amount INTO STRICT ticket_sum
+            FROM bookings.ticket_flights
+            WHERE ticket_no = t_rec.ticket_no AND flight_id = flight_ids[idx];
+
+            -- Классифицируем
+            cat := CASE
+                WHEN ticket_sum >= 100000 THEN 'High'
+                WHEN ticket_sum >= 50000 THEN 'Medium'
+                ELSE 'Low'
+            END;
+
+            RAISE NOTICE 'Ticket % Flight %: amount=% category=%', t_rec.ticket_no, flight_ids[idx], ticket_sum, cat;
+
+            idx := idx + 1;
+        END LOOP;
+    END LOOP;
+END;
+$$;
+
+После нажимаем клавиши ctrl+o, затем нажимаем клавишу Enter, и затем выходим ctrl+x.
+Теперь вызываем процедуру:
+CALL bookings.audit_booking('10F447');
+
+After that, we exit the demo database.:
+\q
+
+Then follow another directory, for example Red3:
+cd Red3
