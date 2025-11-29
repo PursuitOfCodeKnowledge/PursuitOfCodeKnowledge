@@ -1,0 +1,174 @@
+Чтобы выполнить задание:
+Первое нужно посмотреть где ты находишься, используй команду pwd:
+pwd
+К примеру она тебе покажет путь /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Yellow4, получается ты сейчас находишься в Yellow4, 
+тебе нужно вернуться назад используй команду cd ..:
+cd ..
+После этого набери команду ls или ls -a и посмотри что находится вокруг тебя какие файлы и директории:
+ls
+или
+ls -a
+Затем набери команду mkdir чтобы создать директорию Yellow (в том случае если ещё не создавал директорию Yellow):
+mkdir Yellow
+Затем перейди директорию в Yellow4:
+cd Yellow4
+Потом скопируй файл YELLOW4.txt в директорию Yellow:
+cp YELLOW4.txt ../Yellow/
+Затем проверь что скопировал файл YELLOW4.txt в директорию Yellow при помощи команды ls:
+ls ../Yellow/YELLOW4.txt
+После перенеси  файл файл YELLOW4_ANSWER.txt в директорию Yellow:
+mv YELLOW4_ANSWER.txt ../Yellow/
+Потом удали файл YELLOW4.txt при помощи команды rm:
+rm YELLOW4.txt
+или
+rm -i YELLOW4.txt
+или
+rm -f YELLOW4.txt
+После выйди из этой директории Yellow4:
+cd ..
+Затем удали директорию Yellow4:
+rm -r Yellow4
+После убедись что удалил директорию:
+ls 
+или
+ls -a
+
+Если исследовал уже директорию Yellow3, то заходим в своё окружение(смотри директорию Blue1):
+conda activate envlearnpython
+Затем заходим в свою директорию LearnPython:
+cd LearnPython
+Потом создай директорию AlgorithmsAndDataStructures(в том случае если ещё не создавал директорию AlgorithmsAndDataStructures):
+mkdir AlgorithmsAndDataStructures
+Затем перейди в эту директорию AlgorithmsAndDataStructures:
+cd AlgorithmsAndDataStructures
+Итак создай файл graph_with_cycle.py:
+touch graph_with_cycle.py
+Потом открой файл graph_with_cycle.py:
+nano graph_with_cycle.py
+Пишем в файле:
+import networkx as nx
+import matplotlib.pyplot as plt
+
+def graph_with_cycle():
+	# Создание графа с циклом
+	graph = nx.Graph()
+	# Добавление узлов
+	graph.add_nodes_from([1, 2, 3, 4])
+	# Добавление рёбер с циклом
+	graph.add_edges_from([(1, 2), (2, 3), (3, 4), (4, 1)])
+	return graph
+
+def print_graph_with_cycle(graph):
+	print("Граф с циклом")
+	for edge in graph.edges():
+		print(f"{edge[0]} -> {edge[1]}")
+
+def graph_with_cycle_visualization(graph):
+	# Визуализация графа
+	nx.draw(graph, with_labels=True, node_color='salmon', node_size=700, font_size=16)
+	plt.title("Граф с циклом:")
+	plt.show()
+
+if __name__ == "__main__":
+	graph = graph_with_cycle()
+	print_graph_with_cycle(graph)
+	graph_with_cycle_visualization(graph)
+
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 graph_with_cycle.py
+
+После выходим из директории AlgorithmsAndDataStructures:
+cd ..
+Дальше выйди из папки LearnPython:
+cd ..
+
+Потом дальше иследуй другую директорию, например Yellow5:
+cd Yellow5
+
+To complete the task:
+First you need to see where you are, use the pwd command:
+pwd
+For example, she'll show you the way  /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/Yellow4
+ it turns out that you are currently in Yellow4,
+you need to go back using the cd .. :
+cd ..
+After that, type the command ls or ls -a and see what is around you, which files and directories:
+ls
+or
+ls -a
+Then type the mkdir command to create
+the Yellow directory(if you didn't create Yellow directory):
+mkdir Yellow
+Then go to the directory in Yellow4:
+cd Yellow4
+Then  copy the file YELLOW4.txt to the Yellow:
+cp YELLOW4.txt ../Yellow/
+Then check that you copied the file YELLOW2.txt to the Yellow directory using the command ls:
+ls ../Yellow/YELLOW4.txt
+Then transfer the file YELLOW4_ANSWER.txt to the Yellow:
+mv YELLOW4_ANSWER.txt ../Yellow/
+Then delete the file YELLOW4.txt using the rm command:
+rm YELLOW4.txt
+or
+rm -i YELLOW4.txt
+or
+rm -f YELLOW4.txt
+Then exit this directory Yellow4:
+cd ..
+Then delete the Yellow4 directory:
+rm -r Yellow4
+After that, make sure that you have deleted the directory:
+ls
+or
+ls -a
+
+If you have already explored the Yellow3 directory, then we go into our environment (see the Blue1 directory):
+conda activate envlearnpython
+Then we go to our LearnPython directory:
+cd LearnPython
+Then create the  AlgorithmsAndDataStructures directory(if you didn't create AlgorithmsAndDataStructures directory):
+mkdir AlgorithmsAndDataStructures
+Then go to this  AlgorithmsAndDataStructures directory:
+cd AlgorithmsAndDataStructures
+So create a file graph_with_cycle.py:
+touch graph_with_cycle.py
+Then open the file graph_with_cycle.py:
+nano graph_with_cycle.py
+Write in file:
+import networkx as nx
+import matplotlib.pyplot as plt
+
+def graph_with_cycle():
+	# Создание графа с циклом
+	graph = nx.Graph()
+	# Добавление узлов
+	graph.add_nodes_from([1, 2, 3, 4])
+	# Добавление рёбер с циклом
+	graph.add_edges_from([(1, 2), (2, 3), (3, 4), (4, 1)])
+	return graph
+
+def print_graph_with_cycle(graph):
+	print("Граф с циклом")
+	for edge in graph.edges():
+		print(f"{edge[0]} -> {edge[1]}")
+
+def graph_with_cycle_visualization(graph):
+	# Визуализация графа
+	nx.draw(graph, with_labels=True, node_color='salmon', node_size=700, font_size=16)
+	plt.title("Граф с циклом:")
+	plt.show()
+
+if __name__ == "__main__":
+	graph = graph_with_cycle()
+	print_graph_with_cycle(graph)
+	graph_with_cycle_visualization(graph)
+
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 graph_with_cycle.py  
+ 
+After that, we exit the AlgorithmsAndDataStructures:
+cd ..
+Next, exit the LearnPython:
+cd ..
+Then follow another directory, for example Yellow5:
+cd Yellow5
