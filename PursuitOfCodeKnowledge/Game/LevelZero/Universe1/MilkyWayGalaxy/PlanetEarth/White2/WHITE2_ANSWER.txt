@@ -1,0 +1,164 @@
+Чтобы выполнить задание:
+Первое нужно посмотреть где ты находишься, используй команду pwd:
+pwd
+К примеру она тебе покажет путь /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/White2, получается ты сейчас находишься в White2, 
+тебе нужно вернуться назад используй команду cd ..:
+cd ..
+После этого набери команду ls или ls -a и посмотри что находится вокруг тебя какие файлы и директории:
+ls
+или
+ls -a
+Затем набери команду mkdir чтобы создать директорию White (в том случае если ещё не создавал директорию White):
+mkdir White
+Затем перейди директорию в White2:
+cd White2
+Потом скопируй файл WHITE2.txt в директорию White:
+cp WHITE2.txt ../White/
+Затем проверь что скопировал файл WHITE2.txt в директорию White при помощи команды ls:
+ls ../White/WHITE2.txt
+После перенеси  файл файл WHITE2_ANSWER.txt в директорию White:
+mv WHITE2_ANSWER.txt ../White/
+Потом удали файл WHITE2.txt при помощи команды rm:
+rm WHITE2.txt
+или
+rm -i WHITE2.txt
+или
+rm -f WHITE2.txt
+После выйди из этой директории White2:
+cd ..
+Затем удали директорию White2:
+rm -r White2
+После убедись что удалил директорию:
+ls 
+или
+ls -a
+
+Если исследовал уже директорию White1, то заходим в своё окружение(смотри директорию Blue1):
+conda activate envlearnpython
+Затем заходим в свою директорию LearnPython:
+cd LearnPython
+Потом создай директорию AlgorithmsAndDataStructures(в том случае если ещё не создавал директорию AlgorithmsAndDataStructures):
+mkdir AlgorithmsAndDataStructures
+Затем перейди в эту директорию AlgorithmsAndDataStructures:
+cd AlgorithmsAndDataStructures
+Итак создай файл queue_deque.py:
+touch queue_deque.py
+Потом открой файл queue_deque.py:
+nano queue_deque.py
+Пишем в файле:
+from collections import deque
+if __name__ == "__main__":
+  queue = deque()
+  for i in range(10):
+    queue.append(i)
+
+  print(f"Очередь: {queue}")
+  print(f"Вершина очереди: {queue[-1]}")
+  print(f"Первый элемент очереди: {queue[0]}")
+  print(f"Удаленный элемент: {queue.popleft()}")
+  print(f"Очередь: {queue}")
+  print(f"Вершина очереди: {queue[-1]}")
+  print(f"Первый элемент очереди: {queue[0]}")
+  print(f"Вставка вначала очереди числа 9:")
+  queue.insert(0,9)
+  print(f"Очередь: {queue}")
+  print(f"Вершина очереди: {queue[-1]}")
+  print(f"Первый элемент очереди: {queue[0]}")
+  print(f"Удаленный элемент с конца: {queue.pop()}")
+  print(f"Очередь: {queue}")
+  print(f"Вершина очереди: {queue[-1]}")
+  print(f"Первый элемент очереди: {queue[0]}")
+
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 queue_deque.py
+
+После выходим из директории AlgorithmsAndDataStructures:
+cd ..
+Дальше выйди из папки LearnPython:
+cd ..
+
+Потом дальше иследуй другую директорию, например White3:
+cd White3
+
+To complete the task:
+First you need to see where you are, use the pwd command:
+pwd
+For example, she'll show you the way  /home/sergey/Desktop/PursuitOfCodeKnowledge.git/PursuitOfCodeKnowledge/Game/LevelZero/Universe1/MilkyWayGalaxy/PlanetEarth/White2
+ it turns out that you are currently in White2,
+you need to go back using the cd .. :
+cd ..
+After that, type the command ls or ls -a and see what is around you, which files and directories:
+ls
+or
+ls -a
+Then type the mkdir command to create
+the White directory(if you didn't create White directory):
+mkdir White
+Then go to the directory in White2:
+cd White2
+Then  copy the file WHITE2.txt to the White:
+cp WHITE2.txt ../White/
+Then check that you copied the file WHITE2.txt to the White directory using the command ls:
+ls ../White/WHITE2.txt
+Then transfer the file WHITE2_ANSWER.txt to the White:
+mv WHITE2_ANSWER.txt ../White/
+Then delete the file WHITE2.txt using the rm command:
+rm WHITE2.txt
+or
+rm -i WHITE2.txt
+or
+rm -f WHITE2.txt
+Then exit this directory White2:
+cd ..
+Then delete the White2 directory:
+rm -r White2
+After that, make sure that you have deleted the directory:
+ls
+or
+ls -a
+
+If you have already explored the White1 directory, then we go into our environment (see the Blue1 directory):
+conda activate envlearnpython
+Then we go to our LearnPython directory:
+cd LearnPython
+Then create the  AlgorithmsAndDataStructures directory(if you didn't create AlgorithmsAndDataStructures directory):
+mkdir AlgorithmsAndDataStructures
+Then go to this  AlgorithmsAndDataStructures directory:
+cd AlgorithmsAndDataStructures
+So create a file queue_deque.py:
+touch queue_deque.py
+Then open the file queue_deque.py:
+nano queue_deque.py
+Write in file:
+from collections import deque
+if __name__ == "__main__":
+  queue = deque()
+  for i in range(10):
+    queue.append(i)
+
+  print(f"Очередь: {queue}")
+  print(f"Вершина очереди: {queue[-1]}")
+  print(f"Первый элемент очереди: {queue[0]}")
+  print(f"Удаленный элемент: {queue.popleft()}")
+  print(f"Очередь: {queue}")
+  print(f"Вершина очереди: {queue[-1]}")
+  print(f"Первый элемент очереди: {queue[0]}")
+  print(f"Вставка вначала очереди числа 9:")
+  queue.insert(0,9)
+  print(f"Очередь: {queue}")
+  print(f"Вершина очереди: {queue[-1]}")
+  print(f"Первый элемент очереди: {queue[0]}")
+  print(f"Удаленный элемент с конца: {queue.pop()}")
+  print(f"Очередь: {queue}")
+  print(f"Вершина очереди: {queue[-1]}")
+  print(f"Первый элемент очереди: {queue[0]}")
+ 
+Нажимаем ctrl + o, затем enter и выходим из файла ctrl + x, после запускаем скрипт:
+python3 queue_deque.py  
+
+After that, we exit the AlgorithmsAndDataStructures:
+cd ..
+Next, exit the LearnPython:
+cd ..
+Then follow another directory, for example White3:
+cd White3
